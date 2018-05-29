@@ -11,7 +11,6 @@ namespace QL_ThuVien.Controllers
         // GET: Default
         public ActionResult Index()
         {
-            ViewBag.a = "a";
             return View();
         }
     }
