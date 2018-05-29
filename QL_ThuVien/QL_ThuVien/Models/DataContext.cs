@@ -34,10 +34,6 @@ namespace QL_ThuVien.Models
                 .Property(e => e.BD_Email)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<HinhAnhHoatDong>()
-                .Property(e => e.HA_Links)
-                .IsUnicode(false);
-
             modelBuilder.Entity<NhanVien>()
                 .Property(e => e.NV_ID)
                 .IsUnicode(false);
@@ -68,10 +64,6 @@ namespace QL_ThuVien.Models
 
             modelBuilder.Entity<TaiLieu>()
                 .Property(e => e.TL_KhoSach)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TaiLieu>()
-                .Property(e => e.TL_HinhAnh)
                 .IsUnicode(false);
         }
     }

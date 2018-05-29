@@ -63,6 +63,9 @@ namespace QL_ThuVien.Models
 
         public DateTime? BD_NgayCap { get; set; }
 
+        [Column(TypeName = "image")]
+        public byte[] BD_HinhAnh { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuYeuCau> PhieuYeuCaus { get; set; }
     }

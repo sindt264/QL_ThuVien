@@ -151,6 +151,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\HoatDongController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -168,6 +169,42 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\HoatDong\css\font-awesome.min.css" />
+    <Content Include="Content\HoatDong\css\ie\backgroundsize.min.htc" />
+    <Content Include="Content\HoatDong\css\ie\html5shiv.js" />
+    <Content Include="Content\HoatDong\css\ie\PIE.htc" />
+    <Content Include="Content\HoatDong\css\ie\v8.css" />
+    <Content Include="Content\HoatDong\css\ie\v9.css" />
+    <Content Include="Content\HoatDong\css\images\overlay.png" />
+    <Content Include="Content\HoatDong\css\skel.css" />
+    <Content Include="Content\HoatDong\css\style-large.css" />
+    <Content Include="Content\HoatDong\css\style-medium.css" />
+    <Content Include="Content\HoatDong\css\style-small.css" />
+    <Content Include="Content\HoatDong\css\style-xlarge.css" />
+    <Content Include="Content\HoatDong\css\style-xsmall.css" />
+    <Content Include="Content\HoatDong\css\style.css" />
+    <Content Include="Content\HoatDong\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\HoatDong\images\banner.jpg" />
+    <Content Include="Content\HoatDong\images\pic01.jpg" />
+    <Content Include="Content\HoatDong\images\pic02.jpg" />
+    <Content Include="Content\HoatDong\images\pic03.jpg" />
+    <Content Include="Content\HoatDong\images\pic04.jpg" />
+    <Content Include="Content\HoatDong\images\pic05.jpg" />
+    <Content Include="Content\HoatDong\images\pic06.jpg" />
+    <Content Include="Content\HoatDong\images\pic07.jpg" />
+    <Content Include="Content\HoatDong\images\pic08.jpg" />
+    <Content Include="Content\HoatDong\images\pic09.jpg" />
+    <Content Include="Content\HoatDong\images\slide01.jpg" />
+    <Content Include="Content\HoatDong\images\slide02.jpg" />
+    <Content Include="Content\HoatDong\images\slide03.jpg" />
+    <Content Include="Content\HoatDong\js\init.js" />
+    <Content Include="Content\HoatDong\js\jquery.dropotron.min.js" />
+    <Content Include="Content\HoatDong\js\jquery.min.js" />
+    <Content Include="Content\HoatDong\js\jquery.scrollgress.min.js" />
+    <Content Include="Content\HoatDong\js\jquery.scrolly.min.js" />
+    <Content Include="Content\HoatDong\js\jquery.slidertron.min.js" />
+    <Content Include="Content\HoatDong\js\skel-layers.min.js" />
+    <Content Include="Content\HoatDong\js\skel.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -177,6 +214,20 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\HoatDong\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\HoatDong\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\HoatDong\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\HoatDong\fonts\FontAwesome.otf" />
+    <Content Include="Content\HoatDong\sass\ie\v8.scss" />
+    <Content Include="Content\HoatDong\sass\ie\v9.scss" />
+    <Content Include="Content\HoatDong\sass\style-large.scss" />
+    <Content Include="Content\HoatDong\sass\style-medium.scss" />
+    <Content Include="Content\HoatDong\sass\style-small.scss" />
+    <Content Include="Content\HoatDong\sass\style-xlarge.scss" />
+    <Content Include="Content\HoatDong\sass\style-xsmall.scss" />
+    <Content Include="Content\HoatDong\sass\style.scss" />
+    <Content Include="Content\HoatDong\sass\_mixins.scss" />
+    <Content Include="Content\HoatDong\sass\_vars.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -202,6 +253,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutHoatDong.cshtml" />
+    <Content Include="Views\HoatDong\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
