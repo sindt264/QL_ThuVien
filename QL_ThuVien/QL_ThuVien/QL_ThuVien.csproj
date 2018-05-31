@@ -151,6 +151,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\HinhAnhHoatDongsController.cs" />
     <Compile Include="Controllers\HoatDongController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -255,6 +256,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutHoatDong.cshtml" />
     <Content Include="Views\HoatDong\Index.cshtml" />
+    <Content Include="Views\HoatDong\Create.cshtml" />
+    <Content Include="Views\HoatDong\Delete.cshtml" />
+    <Content Include="Views\HoatDong\Details.cshtml" />
+    <Content Include="Views\HoatDong\Edit.cshtml" />
+    <Content Include="Views\HinhAnhHoatDongs\Create.cshtml" />
+    <Content Include="Views\HinhAnhHoatDongs\Delete.cshtml" />
+    <Content Include="Views\HinhAnhHoatDongs\Details.cshtml" />
+    <Content Include="Views\HinhAnhHoatDongs\Edit.cshtml" />
+    <Content Include="Views\HinhAnhHoatDongs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

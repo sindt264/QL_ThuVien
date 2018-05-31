@@ -1,0 +1,52 @@
+﻿@model IEnumerable<QL_ThuVien.Models.HinhAnhHoatDong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHoatDong.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HoatDong.HD_ChuDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HA_ChuThich)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HA_NoiDung)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoatDong.HD_ChuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HA_ChuThich)
+            </td>
+            <td>
+            <td>
+
+                <asp:Repeater runat="server" id="myRepeater">
+                    <ItemTemplate>
+                        <img src="/HinhAnhHoatDongs/getImage/@item.HD_IDHoatDong" alt="" width="300" height="300" style="float:left" />
+                    </ItemTemplate>
+                </asp:Repeater>
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.HA_IDHinhAnh }) |
+                @Html.ActionLink("Details", "Details", new { id = item.HA_IDHinhAnh }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.HA_IDHinhAnh })
+            </td>
+        </tr>
+    }
+
+</table>
