@@ -154,6 +154,7 @@
     <Compile Include="Controllers\HinhAnhHoatDongsController.cs" />
     <Compile Include="Controllers\HoatDongController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhieuYeuCausController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,6 +266,11 @@
     <Content Include="Views\HinhAnhHoatDongs\Details.cshtml" />
     <Content Include="Views\HinhAnhHoatDongs\Edit.cshtml" />
     <Content Include="Views\HinhAnhHoatDongs\Index.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\Create.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\Delete.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\Details.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\Edit.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

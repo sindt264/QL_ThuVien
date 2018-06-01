@@ -1,0 +1,67 @@
+﻿@model IEnumerable<QL_ThuVien.Models.PhieuYeuCau>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" ng-app="myapp">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaiLieu.TL_TieuDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PYC_NgayMuon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PYC_NgayTra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PYC_Tre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaiLieu.TL_TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_NgayTra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_Tre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PYC_IDPhieuYeuCau }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PYC_IDPhieuYeuCau }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PYC_IDPhieuYeuCau })
+            </td>
+        </tr>
+    }
+
+</table>

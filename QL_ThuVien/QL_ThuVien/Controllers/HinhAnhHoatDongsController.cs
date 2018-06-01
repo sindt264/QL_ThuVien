@@ -74,13 +74,14 @@ namespace QL_ThuVien.Controllers
             if (int.TryParse(id, out ID))
             {
                 //var ha = db.HinhAnhHoatDongs.Where(h => h.HD_IDHoatDong == ID).FirstOrDefault();
-                var ha = from p in db.HinhAnhHoatDongs where p.HD_IDHoatDong == ID select p;
+                var ha = from p in db.HinhAnhHoatDongs where p.HA_IDHinhAnh == ID select p;
                 foreach(var i in ha) { 
                 if (i == null || i.HA_NoiDung == null)
                 {
                     ModelState.AddModelError("", "Loi");
 
                 }
+                    ViewBag.ha = i.HA_NoiDung;
                 //Response.ContentType = "image/jpeg";
                 Response.OutputStream.Write(i.HA_NoiDung.ToArray(), 0, i.HA_NoiDung.Length);
                 Response.Flush();}

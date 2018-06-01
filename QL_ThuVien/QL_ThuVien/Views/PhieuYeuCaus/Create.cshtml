@@ -1,0 +1,78 @@
+﻿@model QL_ThuVien.Models.PhieuYeuCau
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+<script>
+    var a = new Date()
+            angular.module('myapp', [])
+                .controller('DateController', ['$scope', function ($scope) {
+                    $scope.value = new Date();
+                    $scope.value1 = new Date(a.getFullYear(), a.getMonth(), a.getDate() +7);
+        }]);
+    
+</script>
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal" ng-app="myapp">
+    <h4>PhieuYeuCau</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BD_SoThe, "BD_SoThe", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("BD_SoThe", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.BD_SoThe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TL_SoDangKyCaBiet, "TL_SoDangKyCaBiet", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("TL_SoDangKyCaBiet", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TL_SoDangKyCaBiet, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NV_ID, "NV_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("NV_ID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NV_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" name="myForm" ng-controller="DateController">
+        @Html.LabelFor(model => model.PYC_NgayMuon, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="date" name="PYC_NgayMuon" ng-model="value" id="PYC_NgayMuon" class="form-control" />
+            @Html.ValidationMessageFor(model => model.PYC_NgayMuon, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" name="myForm" ng-controller="DateController">
+        @Html.LabelFor(model => model.PYC_NgayTra, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="date" name="PYC_NgayTra" ng-model="value1" id="PYC_NgayTra" class="form-control" />
+            @Html.ValidationMessageFor(model => model.PYC_NgayTra, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

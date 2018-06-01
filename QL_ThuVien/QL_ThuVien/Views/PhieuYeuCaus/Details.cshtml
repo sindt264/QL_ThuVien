@@ -1,0 +1,67 @@
+﻿@model QL_ThuVien.Models.PhieuYeuCau
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PhieuYeuCau</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BanDoc.BD_HoVaTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanVien.NV_HOTEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaiLieu.TL_TieuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaiLieu.TL_TieuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PYC_NgayMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PYC_NgayMuon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PYC_NgayTra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PYC_NgayTra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PYC_Tre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PYC_Tre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PYC_IDPhieuYeuCau }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

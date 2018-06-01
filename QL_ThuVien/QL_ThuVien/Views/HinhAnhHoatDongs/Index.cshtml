@@ -36,11 +36,11 @@
 
                 <asp:Repeater runat="server" id="myRepeater">
                     <ItemTemplate>
-                        <img src="/HinhAnhHoatDongs/getImage/@item.HD_IDHoatDong" alt="" width="300" height="300" style="float:left" />
+                        <img src="/HinhAnhHoatDongs/getImage/@item.HA_IDHinhAnh" alt="" width="300" height="300" />
                     </ItemTemplate>
                 </asp:Repeater>
             </td>
-
+           
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.HA_IDHinhAnh }) |
                 @Html.ActionLink("Details", "Details", new { id = item.HA_IDHinhAnh }) |
