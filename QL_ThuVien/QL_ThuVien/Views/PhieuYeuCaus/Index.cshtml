@@ -2,7 +2,8 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
 }
 
 <h2>Index</h2>
@@ -29,7 +30,7 @@
             @Html.DisplayNameFor(model => model.PYC_NgayTra)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PYC_Tre)
+            @Html.Display("Trễ")
         </th>
         <th></th>
     </tr>
@@ -54,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.PYC_NgayTra)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PYC_Tre)
+               @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.PYC_IDPhieuYeuCau }) |

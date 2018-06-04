@@ -50,13 +50,13 @@ namespace QL_ThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "HA_IDHinhAnh,HD_IDHoatDong,HA_ChuThich,HA_NoiDung")] HinhAnhHoatDong hinhAnhHoatDong)
         {
-            int datalength = (int)Request.Files["image"].InputStream.Length;
-            byte[] _byteArr = new byte[datalength];
-            Request.Files[0].InputStream.Read(_byteArr, 0, datalength);
+            //int datalength = (int)Request.Files["image"].InputStream.Length;
+            //byte[] _byteArr = new byte[datalength];
+            //Request.Files[0].InputStream.Read(_byteArr, 0, datalength);
 
             if (ModelState.IsValid)
             {
-                hinhAnhHoatDong.HA_NoiDung = _byteArr;
+                //hinhAnhHoatDong.HA_NoiDung = _byteArr;
                 db.HinhAnhHoatDongs.Add(hinhAnhHoatDong);
                 db.SaveChanges();
                 //ModelState.AddModelError("", "Xong");
@@ -67,28 +67,28 @@ namespace QL_ThuVien.Controllers
             return View(hinhAnhHoatDong);
         }
 
-        public ActionResult getImage(string id)
-        {
-            string strID = Request.QueryString["ID"];
-            int ID = -1;
-            if (int.TryParse(id, out ID))
-            {
-                //var ha = db.HinhAnhHoatDongs.Where(h => h.HD_IDHoatDong == ID).FirstOrDefault();
-                var ha = from p in db.HinhAnhHoatDongs where p.HA_IDHinhAnh == ID select p;
-                foreach(var i in ha) { 
-                if (i == null || i.HA_NoiDung == null)
-                {
-                    ModelState.AddModelError("", "Loi");
+        //public ActionResult getImage(string id)
+        //{
+        //    string strID = Request.QueryString["ID"];
+        //    int ID = -1;
+        //    if (int.TryParse(id, out ID))
+        //    {
+        //        //var ha = db.HinhAnhHoatDongs.Where(h => h.HD_IDHoatDong == ID).FirstOrDefault();
+        //        var ha = from p in db.HinhAnhHoatDongs where p.HA_IDHinhAnh == ID select p;
+        //        foreach(var i in ha) { 
+        //        if (i == null || i.HA_NoiDung == null)
+        //        {
+        //            ModelState.AddModelError("", "Loi");
 
-                }
-                    ViewBag.ha = i.HA_NoiDung;
-                //Response.ContentType = "image/jpeg";
-                Response.OutputStream.Write(i.HA_NoiDung.ToArray(), 0, i.HA_NoiDung.Length);
-                Response.Flush();}
-            }
+        //        }
+        //            ViewBag.ha = i.HA_NoiDung;
+        //        //Response.ContentType = "image/jpeg";
+        //        Response.OutputStream.Write(i.HA_NoiDung.ToArray(), 0, i.HA_NoiDung.Length);
+        //        Response.Flush();}
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
         // GET: HinhAnhHoatDongs/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using QL_ThuVien.Models;
+using System.Data.Sql;
 
 namespace QL_ThuVien.Controllers
 {
@@ -52,11 +54,11 @@ namespace QL_ThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra")] PhieuYeuCau phieuYeuCau)
         {
+            ViewBag.min = DateTime.Now;
             var sl = from p in db.PhieuYeuCaus select p;
             if (ModelState.IsValid)
             {
                 phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
-                phieuYeuCau.PYC_Tre = 0;
                 db.PhieuYeuCaus.Add(phieuYeuCau);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -71,18 +73,18 @@ namespace QL_ThuVien.Controllers
         int autoMaPYC(int sl)
         {
             var i = from p in db.PhieuYeuCaus where p.PYC_IDPhieuYeuCau == sl select p;
-            if(i.Count() >= 1)
+            if (i.Count() >= 1)
             {
                 return autoMaPYC(sl + 1);
             }
             return sl;
         }
 
-       
+
         // GET: PhieuYeuCaus/Edit/5
         public ActionResult Edit(int? id)
         {
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,17 +107,13 @@ namespace QL_ThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PYC_IDPhieuYeuCau,BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra,PYC_Tre")] PhieuYeuCau phieuYeuCau)
         {
-            //int id = Convert.ToInt32(Request["PYC_IDPhieuYeuCau"]);
-            //var select = db.PhieuYeuCaus.Where(p => p.PYC_IDPhieuYeuCau == id);
-            //foreach (var i in select)
-            //{
-            //    int kq = Convert.ToInt32(db.PhieuYeuCaus.Where(p => DbFunctions.DiffDays(i.PYC_NgayTra, DateTime.Now) == 0));
-            //    phieuYeuCau.PYC_Tre = kq;
-            //}
-             
+            string id = Request["PYC_IDPhieuYeuCau"];
+            //int tre = SoNgayTre(id);
+            //if (tre >= 1)
+            //    phieuYeuCau.PYC_Tre = tre;
+            //else phieuYeuCau.PYC_Tre = 0;
             if (ModelState.IsValid)
             {
-               
                 db.Entry(phieuYeuCau).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -152,6 +150,7 @@ namespace QL_ThuVien.Controllers
             return RedirectToAction("Index");
         }
 
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -159,6 +158,14 @@ namespace QL_ThuVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public  int SoNgayTre(int id)
+        {
+            int tre = db.Database.SqlQuery<int>("select datediff(day,PhieuYeuCau.PYC_NgayTra,GETDATE()) from PhieuYeuCau where PYC_IDPhieuYeuCau ='" + id + "'").FirstOrDefault();
+            if (tre >= 1)
+                return tre;
+            else return 0;
         }
     }
 }

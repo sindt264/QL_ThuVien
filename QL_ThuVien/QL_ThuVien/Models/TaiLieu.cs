@@ -44,8 +44,8 @@ namespace QL_ThuVien.Models
 
         public short? TL_TrangThai { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] TL_HinhAnh { get; set; }
+        [StringLength(255)]
+        public string TL_HinhAnh { get; set; }
 
         public DateTime? TL_NgayNhap { get; set; }
 

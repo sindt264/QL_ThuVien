@@ -207,6 +207,31 @@
     <Content Include="Content\HoatDong\js\jquery.slidertron.min.js" />
     <Content Include="Content\HoatDong\js\skel-layers.min.js" />
     <Content Include="Content\HoatDong\js\skel.min.js" />
+    <Content Include="Content\PhieuYeuCau\css\plugin.css" />
+    <Content Include="Content\PhieuYeuCau\css\style.css" />
+    <Content Include="Content\PhieuYeuCau\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\PhieuYeuCau\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Content\PhieuYeuCau\images\bg\call-to-action.png" />
+    <Content Include="Content\PhieuYeuCau\images\bg\footer-bg.png" />
+    <Content Include="Content\PhieuYeuCau\images\bg\pattern-bg.png" />
+    <Content Include="Content\PhieuYeuCau\images\bg\profile.png" />
+    <Content Include="Content\PhieuYeuCau\images\bg\statistics.jpg" />
+    <Content Include="Content\PhieuYeuCau\images\bg\subscribe-pattern.png" />
+    <Content Include="Content\PhieuYeuCau\images\favicon\apple-touch-icon.png" />
+    <Content Include="Content\PhieuYeuCau\images\favicon\favicon.ico" />
+    <Content Include="Content\PhieuYeuCau\images\owl-carousel\grabbing.png" />
+    <Content Include="Content\PhieuYeuCau\images\portfolio\1.jpg" />
+    <Content Include="Content\PhieuYeuCau\images\portfolio\2.jpg" />
+    <Content Include="Content\PhieuYeuCau\images\portfolio\3.jpg" />
+    <Content Include="Content\PhieuYeuCau\images\portfolio\4.jpg" />
+    <Content Include="Content\PhieuYeuCau\images\portfolio\5.jpg" />
+    <Content Include="Content\PhieuYeuCau\images\portfolio\6.jpg" />
+    <Content Include="Content\PhieuYeuCau\images\testimonial\1.png" />
+    <Content Include="Content\PhieuYeuCau\images\testimonial\2.png" />
+    <Content Include="Content\PhieuYeuCau\images\testimonial\3.png" />
+    <Content Include="Content\PhieuYeuCau\js\jquery.min.js" />
+    <Content Include="Content\PhieuYeuCau\js\plugin.js" />
+    <Content Include="Content\PhieuYeuCau\js\scripts.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -230,6 +255,15 @@
     <Content Include="Content\HoatDong\sass\style.scss" />
     <Content Include="Content\HoatDong\sass\_mixins.scss" />
     <Content Include="Content\HoatDong\sass\_vars.scss" />
+    <Content Include="Content\PhieuYeuCau\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\PhieuYeuCau\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\PhieuYeuCau\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\PhieuYeuCau\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\PhieuYeuCau\fonts\FontAwesome.otf" />
+    <Content Include="Content\PhieuYeuCau\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Content\PhieuYeuCau\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Content\PhieuYeuCau\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Content\PhieuYeuCau\fonts\Simple-Line-Icons.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -271,6 +305,8 @@
     <Content Include="Views\PhieuYeuCaus\Details.cshtml" />
     <Content Include="Views\PhieuYeuCaus\Edit.cshtml" />
     <Content Include="Views\PhieuYeuCaus\Index.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\EditTre.cshtml" />
+    <Content Include="Views\Shared\_LayOutPhieuYeuCau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
