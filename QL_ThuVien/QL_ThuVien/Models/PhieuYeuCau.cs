@@ -15,11 +15,13 @@
         public int PYC_IDPhieuYeuCau { get; set; }
 
         [StringLength(10)]
+        [Required(ErrorMessage ="Trường không thể rỗng !")]
         [Display(Name = "Số thẻ")]
         public string BD_SoThe { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Số đăng ký cá biệt")]
+        [Required(ErrorMessage = "Trường không thể rỗng !")]
         public string TL_SoDangKyCaBiet { get; set; }
 
         [StringLength(20)]

@@ -19,10 +19,14 @@ namespace QL_ThuVien.Controllers
         // GET: PhieuYeuCaus
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult getList()
+        {
             var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
             return View(phieuYeuCaus.ToList());
         }
-
         // GET: PhieuYeuCaus/Details/5
         public ActionResult Details(int? id)
         {
@@ -54,16 +58,30 @@ namespace QL_ThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra")] PhieuYeuCau phieuYeuCau)
         {
-            ViewBag.min = DateTime.Now;
-            var sl = from p in db.PhieuYeuCaus select p;
-            if (ModelState.IsValid)
+            string SoThe = Request["BD_SoThe"];
+            string SDKCB = Request["TL_SoDangKyCaBiet"];
+            if ((SoThe.Length ==0) || (SDKCB.Length ==0))
             {
-                phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
-                db.PhieuYeuCaus.Add(phieuYeuCau);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.AddModelError("", "Số thể và số đăng ký cá biệt không được rỗng");
             }
-
+            else
+            {
+                string KTSoThe = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
+                string KTMaSach = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
+                if (KTMaSach != null && KTSoThe != null)
+                {
+                    ViewBag.min = DateTime.Now;
+                    var sl = from p in db.PhieuYeuCaus select p;
+                    if (ModelState.IsValid)
+                    {
+                        phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
+                        db.PhieuYeuCaus.Add(phieuYeuCau);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
+            }
             ViewBag.BD_SoThe = new SelectList(db.BanDocs, "BD_SoThe", "BD_HoVaTen", phieuYeuCau.BD_SoThe);
             ViewBag.NV_ID = new SelectList(db.NhanViens, "NV_ID", "NV_HOTEN", phieuYeuCau.NV_ID);
             ViewBag.TL_SoDangKyCaBiet = new SelectList(db.TaiLieux, "TL_SoDangKyCaBiet", "TL_TieuDe", phieuYeuCau.TL_SoDangKyCaBiet);
@@ -108,15 +126,26 @@ namespace QL_ThuVien.Controllers
         public ActionResult Edit([Bind(Include = "PYC_IDPhieuYeuCau,BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra,PYC_Tre")] PhieuYeuCau phieuYeuCau)
         {
             string id = Request["PYC_IDPhieuYeuCau"];
-            //int tre = SoNgayTre(id);
-            //if (tre >= 1)
-            //    phieuYeuCau.PYC_Tre = tre;
-            //else phieuYeuCau.PYC_Tre = 0;
-            if (ModelState.IsValid)
+            string SoThe = Request["BD_SoThe"];
+            string SDKCB = Request["TL_SoDangKyCaBiet"];
+            if ((SoThe.Length == 0) || (SDKCB.Length == 0))
             {
-                db.Entry(phieuYeuCau).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.AddModelError("", "Số thể và số đăng ký cá biệt không được rỗng");
+            }
+            else
+            {
+                string KTSoThe = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
+                string KTMaSach = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
+                if (KTMaSach != null && KTSoThe != null)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(phieuYeuCau).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
             }
             ViewBag.BD_SoThe = new SelectList(db.BanDocs, "BD_SoThe", "BD_HoVaTen", phieuYeuCau.BD_SoThe);
             ViewBag.NV_ID = new SelectList(db.NhanViens, "NV_ID", "NV_HOTEN", phieuYeuCau.NV_ID);
@@ -136,10 +165,11 @@ namespace QL_ThuVien.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(phieuYeuCau);
         }
 
-        // POST: PhieuYeuCaus/Delete/5
+        //POST: PhieuYeuCaus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -150,7 +180,13 @@ namespace QL_ThuVien.Controllers
             return RedirectToAction("Index");
         }
 
-       
+        public ActionResult SearchPYC(int id)
+        {
+            var result = from p in db.PhieuYeuCaus where p.PYC_IDPhieuYeuCau == id select p;
+            return View(result);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -160,7 +196,7 @@ namespace QL_ThuVien.Controllers
             base.Dispose(disposing);
         }
 
-        public  int SoNgayTre(int id)
+        public int SoNgayTre(int id)
         {
             int tre = db.Database.SqlQuery<int>("select datediff(day,PhieuYeuCau.PYC_NgayTra,GETDATE()) from PhieuYeuCau where PYC_IDPhieuYeuCau ='" + id + "'").FirstOrDefault();
             if (tre >= 1)
