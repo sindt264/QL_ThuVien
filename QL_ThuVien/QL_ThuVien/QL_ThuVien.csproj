@@ -56,6 +56,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -150,6 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BanDocsController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HinhAnhHoatDongsController.cs" />
     <Compile Include="Controllers\HoatDongController.cs" />
@@ -210,6 +217,7 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-1.11.3.min.js" />
     <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\PhieuYeuCau\css\cssprivate.css" />
     <Content Include="Content\PhieuYeuCau\css\demo.css" />
     <Content Include="Content\PhieuYeuCau\css\fonts.css" />
@@ -639,6 +647,11 @@
     <Content Include="Views\Shared\_LayOutPhieuYeuCau.cshtml" />
     <Content Include="Views\PhieuYeuCaus\getList.cshtml" />
     <Content Include="Views\PhieuYeuCaus\SearchPYC.cshtml" />
+    <Content Include="Views\BanDocs\Create.cshtml" />
+    <Content Include="Views\BanDocs\Delete.cshtml" />
+    <Content Include="Views\BanDocs\Details.cshtml" />
+    <Content Include="Views\BanDocs\Edit.cshtml" />
+    <Content Include="Views\BanDocs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -671,7 +684,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52927</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
