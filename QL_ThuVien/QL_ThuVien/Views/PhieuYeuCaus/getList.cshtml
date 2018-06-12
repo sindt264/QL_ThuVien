@@ -5,37 +5,41 @@
     Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 
 }
-<script type="text/javascript">
-    $(document).ready(function () {
+@*<script type="text/javascript">
+        $(document).ready(function () {
 
-        $('#TK1').click(function () {
-            var cmb = document.getElementById("SoThe")
-            $.ajax({
-                type: "GET",
-                url: '/PhieuYeuCaus/SearchSoThe/',
-                data: { 'id': cmb.value },
-                success: function (result) {
-                    $('#ViewST').html(result)
-                }
+            $('#TK1').click(function () {
+                var cmb = document.getElementById("SoThe")
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSoThe/',
+                    data: { 'id': cmb.value },
+                    success: function (result) {
+                        $('#ViewST').html(result)
+                    }
+                })
             })
+
+
+            $('#TK2').click(function () {
+                var cmb = document.getElementById("SDKCB")
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSDKCB/',
+                    data: { 'id': cmb.value },
+                    success: function (result) {
+                        $('#ViewSDKCB').html(result)
+                    }
+                })
+            })
+
+            $('#Muon1').click(function () {
+                alert("Chưa nhập mã thẻ hoặc mã đăng ký cá biệt")
+            })
+
         })
 
-
-        $('#TK2').click(function () {
-            var cmb = document.getElementById("SDKCB")
-            $.ajax({
-                type: "GET",
-                url: '/PhieuYeuCaus/SearchSDKCB/',
-                data: { 'id': cmb.value },
-                success: function (result) {
-                    $('#ViewSDKCB').html(result)
-                }
-            })
-        })
-
-    })
-
-</script>
+    </script>*@
 
 
 <div class="col-sm-1"></div>
@@ -55,7 +59,14 @@
         <br />
         <h2 class="tieude text-center">Mã sách</h2>
         <div class="col-sm-5"><b class="khonghinhnen"></b><br /><input type="text" id="SDKCB" placeholder="M00001" class="form-control" /> <input type="button" id="TK2" value="Tim Kiem" /></div>
-        <a href="/PhieuYeuCaus/CreatePYC/"><input type="button" class="btn btn-success" value="Mượn" id="Muon" /></a>
+        @if (Session["SoThe"] == null || Session["SDKCB"] == null)
+        {
+            <input type="button" class="btn btn-success" value="Mượn" id="Muon1" />
+        }
+        else
+        {
+            <a href="/PhieuYeuCaus/CreatePYC/"><input type="button" class="btn btn-success" value="Mượn" id="Muon" /></a>
+        }
         <br /><br />
         <span id="ViewSDKCB"></span>
 
@@ -64,5 +75,5 @@
             </p>*@
         <table class="table" ng-app="myapp"></table>
     </div>
-    </div>
-    <div class="col-sm-1"></div>
+</div>
+<div class="col-sm-1"></div>
