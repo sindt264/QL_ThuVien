@@ -25,10 +25,24 @@ namespace QL_ThuVien.Controllers
 
         public ActionResult getList()
         {
-            ViewData["SoThe"] = Session["SoThe"];
-            ViewData["SDKCB"] = Session["SDKCB"];
-            var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
+            Session["SoThe"] = "";
+            Session["SDKCB"] = "";
+             var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
             return View(phieuYeuCaus.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult getList(string id)
+        {
+            if (Session["SoThe"].ToString().Length > 0 && Session["SDKCB"].ToString().Length > 0)
+            {
+                return RedirectToAction("CreatePYC");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Mã thẻ hoặc mã sách chưa được điền");
+            }
+            return View();
         }
         // GET: PhieuYeuCaus/Details/5
         public ActionResult Details(int? id)
@@ -93,12 +107,12 @@ namespace QL_ThuVien.Controllers
             ViewBag.TL_SoDangKyCaBiet = new SelectList(db.TaiLieux, "TL_SoDangKyCaBiet", "TL_TieuDe", phieuYeuCau.TL_SoDangKyCaBiet);
             return View(phieuYeuCau);
         }
-        public ActionResult CreatePYC()
-        {
-            return View();
-        }
+        //public ActionResult CreatePYC()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult CreatePYC([Bind(Include = "BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra")] PhieuYeuCau phieuYeuCau)
         {ViewBag.ST = Session["SoThe"];
             ViewBag.SDK = Session["SDKCB"];
@@ -122,6 +136,8 @@ namespace QL_ThuVien.Controllers
                     var sl = from p in db.PhieuYeuCaus select p;
                     if (ModelState.IsValid)
                     {
+                        phieuYeuCau.PYC_NgayMuon = DateTime.Now;
+                        phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
                         phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
                         phieuYeuCau.BD_SoThe = SoThe;
                         phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
