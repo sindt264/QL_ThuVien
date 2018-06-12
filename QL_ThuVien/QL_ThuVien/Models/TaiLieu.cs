@@ -16,10 +16,11 @@ namespace QL_ThuVien.Models
         }
 
         [Key]
-        [StringLength(20)]
+        [StringLength(200)]
         public string TL_SoDangKyCaBiet { get; set; }
 
-        public int? LTL_IDTheLoai { get; set; }
+        [StringLength(500)]
+        public string TL_ChuDe { get; set; }
 
         [StringLength(250)]
         public string TL_TieuDe { get; set; }
@@ -40,16 +41,12 @@ namespace QL_ThuVien.Models
         [StringLength(50)]
         public string TL_KhoSach { get; set; }
 
-        public short? TL_DuocMuon { get; set; }
-
         public short? TL_TrangThai { get; set; }
 
-        [StringLength(255)]
+        [StringLength(500)]
         public string TL_HinhAnh { get; set; }
 
         public DateTime? TL_NgayNhap { get; set; }
-
-        public virtual LoaiTaiLieu LoaiTaiLieu { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuYeuCau> PhieuYeuCaus { get; set; }

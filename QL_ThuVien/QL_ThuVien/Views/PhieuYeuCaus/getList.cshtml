@@ -3,96 +3,66 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
-    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
+
 }
-
-
 <script type="text/javascript">
     $(document).ready(function () {
 
-            $('#TK').click(function () {
-                var cmb = document.getElementById("search")
-                alert(cmb.value)
-                    $.ajax({
-                        type: 'POST',
-                        url: '/PhieuYeuCaus/SearchPYC/',
-                        data: { 'id': cmb.value },
-                        dataType: 'html',
-                        success: function (result) {
-                            $('#View').html(result)
-                        }
-
-                    })
+        $('#TK1').click(function () {
+            var cmb = document.getElementById("SoThe")
+            $.ajax({
+                type: "GET",
+                url: '/PhieuYeuCaus/SearchSoThe/',
+                data: { 'id': cmb.value },
+                success: function (result) {
+                    $('#ViewST').html(result)
+                }
             })
         })
-    
+
+
+        $('#TK2').click(function () {
+            var cmb = document.getElementById("SDKCB")
+            $.ajax({
+                type: "GET",
+                url: '/PhieuYeuCaus/SearchSDKCB/',
+                data: { 'id': cmb.value },
+                success: function (result) {
+                    $('#ViewSDKCB').html(result)
+                }
+            })
+        })
+
+    })
+
 </script>
 
 
-<div class="col-sm-1 "><b class="khonghinhnen">Tìm kiếm</b><br /><input type="text" id="search" value="0" /><input type="bu" id="TK" value="Tìm" /> </div>
-
-<div class="col-sm-10 khonghinhnen" id="View">
-    <br />
-    <br />
-    <h2 class="tieude text-center">Danh sách</h2>
-
-
-    <p>
-        <a href="/PhieuyeuCaus/Create"><input type="button" value="Tạo phiếu mới" class="btn btn-success" /></a>
-    </p>
-    <table class="table" ng-app="myapp">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaiLieu.TL_TieuDe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PYC_NgayMuon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PYC_NgayTra)
-            </th>
-            <th>
-                <b>Trễ</b>
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaiLieu.TL_TieuDe)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PYC_NgayTra)
-                </td>
-                <td>
-                    @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
-                </td>
-                <td>
-                    <a href="/PhieuyeuCaus/Edit/@item.PYC_IDPhieuYeuCau"><input type="button" value="Sửa" class="btn btn-info" /></a>
-
-                    <a href="/PhieuyeuCaus/Delete/@item.PYC_IDPhieuYeuCau"><input type="button" value="Xóa" class="btn btn-danger" /></a>
-                </td>
-            </tr>
-        }
-
-    </table>
-</div>
 <div class="col-sm-1"></div>
+
+<div class="col-sm-10 khonghinhnen">
+    <div class="col-sm-5 khonghinhnen">
+        <br />
+        <h2 class="tieude text-center">Mã thẻ</h2>
+        <div class="col-sm-5"><b class="khonghinhnen"></b><br /><input type="text" id="SoThe" value="TV00001" class="form-control" /><input type="button" id="TK1" value="Tim Kiem" /></div>
+        <br /><br /> <span id="ViewST"></span>
+        @*<p>
+                <a href="/PhieuyeuCaus/Create"><input type="button" value="Tạo phiếu mới" class="btn btn-success" /></a>
+            </p>*@
+        <table class="table" ng-app="myapp"></table>
+    </div>
+    <div class="col-sm-5 khonghinhnen">
+        <br />
+        <h2 class="tieude text-center">Mã sách</h2>
+        <div class="col-sm-5"><b class="khonghinhnen"></b><br /><input type="text" id="SDKCB" value="M00001" class="form-control" /> <input type="button" id="TK2" value="Tim Kiem" /></div>
+        <a href="/PhieuYeuCaus/CreatePYC/"><input type="button" class="btn btn-success" value="Mượn" id="Muon" /></a>
+        <br /><br />
+        <span id="ViewSDKCB"></span>
+
+        @*<p>
+                <a href="/PhieuyeuCaus/Create"><input type="button" value="Tạo phiếu mới" class="btn btn-success" /></a>
+            </p>*@
+        <table class="table" ng-app="myapp"></table>
+    </div>
+    </div>
+    <div class="col-sm-1"></div>

@@ -19,11 +19,14 @@ namespace QL_ThuVien.Controllers
         // GET: PhieuYeuCaus
         public ActionResult Index()
         {
-            return View();
+            var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
+            return View(phieuYeuCaus);
         }
 
         public ActionResult getList()
         {
+            ViewData["SoThe"] = Session["SoThe"];
+            ViewData["SDKCB"] = Session["SDKCB"];
             var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
             return View(phieuYeuCaus.ToList());
         }
@@ -58,16 +61,17 @@ namespace QL_ThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra")] PhieuYeuCau phieuYeuCau)
         {
+            string SDKKB = Request["TL_SoDangKyCaBiet"];
             string SoThe = Request["BD_SoThe"];
-            string SDKCB = Request["TL_SoDangKyCaBiet"];
-            if ((SoThe.Length ==0) || (SDKCB.Length ==0))
+            //string SDKCB = Request["TL_SoDangKyCaBiet"];
+            if ((SoThe.Length == 0) || (SDKKB.Length == 0))
             {
                 ModelState.AddModelError("", "Số thể và số đăng ký cá biệt không được rỗng");
             }
             else
             {
-                string KTSoThe = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
-                string KTMaSach = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
+                string KTSoThe = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe ='" + SoThe + "'").FirstOrDefault();
+                string KTMaSach = db.Database.SqlQuery<string>("select TL_SoDangKyCaBiet from TaiLieu where TL_SoDangKyCaBiet ='" + SDKKB + "'").FirstOrDefault();
                 if (KTMaSach != null && KTSoThe != null)
                 {
                     ViewBag.min = DateTime.Now;
@@ -75,6 +79,8 @@ namespace QL_ThuVien.Controllers
                     if (ModelState.IsValid)
                     {
                         phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
+                        phieuYeuCau.BD_SoThe = SoThe;
+                        phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
                         db.PhieuYeuCaus.Add(phieuYeuCau);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -87,7 +93,50 @@ namespace QL_ThuVien.Controllers
             ViewBag.TL_SoDangKyCaBiet = new SelectList(db.TaiLieux, "TL_SoDangKyCaBiet", "TL_TieuDe", phieuYeuCau.TL_SoDangKyCaBiet);
             return View(phieuYeuCau);
         }
+        public ActionResult CreatePYC()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult CreatePYC([Bind(Include = "BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra")] PhieuYeuCau phieuYeuCau)
+        {ViewBag.ST = Session["SoThe"];
+            ViewBag.SDK = Session["SDKCB"];
+            string SDKKB = ViewBag.SDK;
+            string SoThe = ViewBag.ST;
+
+            if (SDKKB == null || SoThe == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            //string SDKCB = Request["TL_SoDangKyCaBiet"];
+            if ((SoThe.Length == 0) || (SDKKB.Length == 0))
+            {
+                ModelState.AddModelError("", "Số thể và số đăng ký cá biệt không được rỗng");
+            }
+            else
+            {
+                
+                    ViewBag.min = DateTime.Now;
+                    var sl = from p in db.PhieuYeuCaus select p;
+                    if (ModelState.IsValid)
+                    {
+                        phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
+                        phieuYeuCau.BD_SoThe = SoThe;
+                        phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
+                        db.PhieuYeuCaus.Add(phieuYeuCau);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    
+                }
+                else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
+            }
+            ViewBag.BD_SoThe = new SelectList(db.BanDocs, "BD_SoThe", "BD_HoVaTen", phieuYeuCau.BD_SoThe);
+            ViewBag.NV_ID = new SelectList(db.NhanViens, "NV_ID", "NV_HOTEN", phieuYeuCau.NV_ID);
+            ViewBag.TL_SoDangKyCaBiet = new SelectList(db.TaiLieux, "TL_SoDangKyCaBiet", "TL_TieuDe", phieuYeuCau.TL_SoDangKyCaBiet);
+            return View();
+        }
         int autoMaPYC(int sl)
         {
             var i = from p in db.PhieuYeuCaus where p.PYC_IDPhieuYeuCau == sl select p;
@@ -185,7 +234,45 @@ namespace QL_ThuVien.Controllers
             var result = from p in db.PhieuYeuCaus where p.PYC_IDPhieuYeuCau == id select p;
             return View(result);
         }
-
+        public ActionResult SearchSDKCB(string id)
+        {
+            ViewBag.SDKCB = Session["SDKCB"];
+           
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TaiLieu result = db.TaiLieux.Find(id);
+            if (result != null)
+            {
+                Session["SDKCB"] = id;
+                return View(result);
+            }
+            else {
+                ViewBag.info = "Không tìm thấy mã đăng ký cá biệt !";
+                return View();
+            }
+        }
+        public ActionResult SearchSoThe(string id)
+        {
+            ViewBag.SoThe = Session["SoThe"];
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            BanDoc result = db.BanDocs.Find(id);
+            if (result != null)
+            {
+                Session["SoThe"] = id;
+                return View(result);
+            }
+            else {
+                ViewBag.info = "Không tìm thấy dữ liệu bạn đọc !";
+                return View();
+            }
+            
+            
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -203,5 +290,7 @@ namespace QL_ThuVien.Controllers
                 return tre;
             else return 0;
         }
+
+      
     }
 }

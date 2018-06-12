@@ -18,7 +18,7 @@ namespace QL_ThuVien.Models
         [StringLength(255)]
         public string HA_ChuThich { get; set; }
 
-        [StringLength(255)]
+        [StringLength(500)]
         public string HA_NoiDung { get; set; }
 
         public virtual HoatDong HoatDong { get; set; }

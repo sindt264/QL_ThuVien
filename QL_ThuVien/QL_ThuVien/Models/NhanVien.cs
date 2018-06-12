@@ -37,7 +37,7 @@ namespace QL_ThuVien.Models
         [StringLength(255)]
         public string NV_MATKHAU { get; set; }
 
-        [StringLength(255)]
+        [StringLength(500)]
         public string NV_HINHANH { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

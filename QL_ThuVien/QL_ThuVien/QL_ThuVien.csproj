@@ -172,6 +172,7 @@
     <Compile Include="Models\LoaiTaiLieu.cs" />
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Models\PhieuYeuCau.cs" />
+    <Compile Include="Models\SessionPYC.cs" />
     <Compile Include="Models\TaiLieu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -652,6 +653,9 @@
     <Content Include="Views\BanDocs\Details.cshtml" />
     <Content Include="Views\BanDocs\Edit.cshtml" />
     <Content Include="Views\BanDocs\Index.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\SearchSDKCB.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\SearchSoThe.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\CreatePYC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

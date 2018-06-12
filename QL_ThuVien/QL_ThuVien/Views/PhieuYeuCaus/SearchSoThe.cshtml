@@ -1,0 +1,200 @@
+﻿@model QL_ThuVien.Models.BanDoc
+
+@{
+    ViewBag.Title = "SearchSoThe";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#TK1').click(function () {
+            var cmb = document.getElementById("SoThe")
+            //alert(cmb.value)
+            $.ajax({
+                type: "GET",
+                url: '/PhieuYeuCaus/SearchSoThe/',
+                data: { 'id': cmb.value },
+                success: function (result) {
+                    $('#ViewST').html(result)
+                }
+            })
+        })
+
+
+        $('#TK2').click(function () {
+            var cmb = document.getElementById("SDKCB")
+            //alert(cmb.value)
+            $.ajax({
+                type: "GET",
+                url: '/PhieuYeuCaus/SearchSDKCB/',
+                data: { 'id': cmb.value },
+                success: function (result) {
+                    $('#ViewSDKCB').html(result)
+                }
+            })
+        })
+
+
+    })
+
+</script>
+@if (ViewBag.info != null)
+{
+
+    @Html.Raw(ViewBag.info)
+}
+else
+{
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_HoVaTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_HoVaTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_SoCMND)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_SoCMND)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_CapNgay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_CapNgay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_NoiCap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_NoiCap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_TrinhDo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_TrinhDo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_NoiCongTacHocTap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_NoiCongTacHocTap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_NgheNghiep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_NgheNghiep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_HopDongLaoDong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_HopDongLaoDong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_DiaChiNoiLamViec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_DiaChiNoiLamViec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_DTDIDong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_DTDIDong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_ChoOHienTai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_ChoOHienTai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_GioiHanMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_GioiHanMuon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_HinhAnh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_HinhAnh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_NgayCapThe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_NgayCapThe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_THSDThe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_THSDThe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BD_ThoiGianMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BD_ThoiGianMuon)
+        </dd>
+
+    </dl>
+</div>
+}
