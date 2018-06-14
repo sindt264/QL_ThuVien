@@ -18,7 +18,8 @@ namespace QL_ThuVien.Controllers
         public ActionResult Index()
         {
             var hinhAnhHoatDongs = db.HinhAnhHoatDongs.Include(h => h.HoatDong);
-            return View(hinhAnhHoatDongs.ToList());
+            
+            return View(hinhAnhHoatDongs);
         }
 
         // GET: HinhAnhHoatDongs/Details/5
@@ -53,9 +54,15 @@ namespace QL_ThuVien.Controllers
             //int datalength = (int)Request.Files["image"].InputStream.Length;
             //byte[] _byteArr = new byte[datalength];
             //Request.Files[0].InputStream.Read(_byteArr, 0, datalength);
-
+            var Image = Request.Files["Image"];
+            var path = Server.MapPath("~/Images/" + Image.FileName);
+            Image.SaveAs(path);
+            var sl = from p in db.HinhAnhHoatDongs select p;
+            int a = KTTT(sl.Count());
             if (ModelState.IsValid)
             {
+                hinhAnhHoatDong.HA_IDHinhAnh = a;
+                hinhAnhHoatDong.HA_NoiDung = "/Images/" + Image.FileName;
                 //hinhAnhHoatDong.HA_NoiDung = _byteArr;
                 db.HinhAnhHoatDongs.Add(hinhAnhHoatDong);
                 db.SaveChanges();
@@ -65,6 +72,18 @@ namespace QL_ThuVien.Controllers
 
             ViewBag.HD_IDHoatDong = new SelectList(db.HoatDongs, "HD_IDHoatDong", "HD_ChuDe", hinhAnhHoatDong.HD_IDHoatDong);
             return View(hinhAnhHoatDong);
+        }
+        int KTTT(int sl)
+        {
+            var i = from p in db.HinhAnhHoatDongs where p.HA_IDHinhAnh == sl select p;
+            if (i.Count() >= 1)
+            {
+                return KTTT(sl + 1);
+            }
+            else
+            {
+                return sl;
+            }
         }
 
         //public ActionResult getImage(string id)

@@ -20,6 +20,11 @@ namespace QL_ThuVien.Controllers
             return View(db.HoatDongs.ToList());
         }
 
+        public string getImage(int id)
+        {
+            string HA = db.Database.SqlQuery<string>("select top 1 HA_NoiDung from HinhAnhHoatDong where HD_IDHoatDong =" + id + "").FirstOrDefault();
+            return HA;
+        }
         // GET: HoatDong/Details/5
         public ActionResult Details(int? id)
         {

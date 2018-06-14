@@ -32,13 +32,12 @@
                 @Html.DisplayFor(modelItem => item.HA_ChuThich)
             </td>
             <td>
-            <td>
-
-                <asp:Repeater runat="server" id="myRepeater">
-                    <ItemTemplate>
-                        <img src="/HinhAnhHoatDongs/getImage/@item.HA_IDHinhAnh" alt="" width="300" height="300" />
-                    </ItemTemplate>
-                </asp:Repeater>
+                
+                @*<asp:Repeater runat="server" id="myRepeater">
+                    <ItemTemplate>*@
+                        <img src="@item.HA_NoiDung" width="300" height="300" />
+                    @*</ItemTemplate>
+                </asp:Repeater>*@
             </td>
            
             <td>
