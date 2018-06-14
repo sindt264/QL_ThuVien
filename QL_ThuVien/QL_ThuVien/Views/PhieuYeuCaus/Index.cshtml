@@ -1,65 +1,46 @@
 ﻿@model IEnumerable<QL_ThuVien.Models.PhieuYeuCau>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
-    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+
 }
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<h2>Index</h2>
+    <div class="col-sm-1"></div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table khonghinhnen">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PYC_NgayMuon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PYC_NgayTra)
-        </th>
-        <th>
-            @Html.DisplayName("Trễ")
-        </th>
-        <th></th>
-    </tr>
+    <div class="col-sm-10 khonghinhnen">
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PYC_NgayTra)
-        </td>
-        <td>
-            @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PYC_IDPhieuYeuCau }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PYC_IDPhieuYeuCau }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PYC_IDPhieuYeuCau })
-        </td>
-    </tr>
+        <div class="col-sm-5 khonghinhnen">
+            <br />
+            <h2 class="tieude text-center">Mã thẻ</h2>
+            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SoThe" value="@Session["SoThe"]" class="form-control" /><input type="button" id="TK1" value="Tim Kiem" /></div>
+            <br /><br /> <span id="ViewST"></span>
+
+            @*<p>
+                    <a href="/PhieuyeuCaus/Create"><input type="button" value="Tạo phiếu mới" class="btn btn-success" /></a>
+                </p>*@
+            <table class="table" ng-app="myapp"></table>
+        </div>
+        <div class="col-sm-5 khonghinhnen">
+            <br />
+            <h2 class="tieude text-center">Mã sách</h2>
+            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SDKCB" value="@Session["SDKCB"]" class="form-control" /> <input type="button" id="TK2" value="Tim Kiem" /></div>
+
+            <br /><br />
+            <span id="ViewSDKCB"></span>
+
+            @*<p>
+                    <a href="/PhieuyeuCaus/Create"><input type="button" value="Tạo phiếu mới" class="btn btn-success" /></a>
+                </p>*@
+
+        </div>
+        <div class="col-sm-2"><br /><br /><br /><br /><br /><input type="submit" class="btn btn-success" value="Mượn" id="Muon" /></div>
+    </div><table class="table" ng-app="myapp"></table>
+    <div class="col-sm-1"></div>
 }
-
-</table>

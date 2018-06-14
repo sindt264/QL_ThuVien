@@ -2,46 +2,8 @@
 
 @{
     ViewBag.Title = "SearchSoThe";
-    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+    Layout = null;
 }
-
-
-@*<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#TK1').click(function () {
-            var cmb = document.getElementById("SoThe")
-            //alert(cmb.value)
-            $.ajax({
-                type: "GET",
-                url: '/PhieuYeuCaus/SearchSoThe/',
-                data: { 'id': cmb.value },
-                success: function (result) {
-                    $('#ViewST').html(result)
-                }
-            })
-        })
-
-
-        $('#TK2').click(function () {
-            var cmb = document.getElementById("SDKCB")
-            //alert(cmb.value)
-            $.ajax({
-                type: "GET",
-                url: '/PhieuYeuCaus/SearchSDKCB/',
-                data: { 'id': cmb.value },
-                success: function (result) {
-                    $('#ViewSDKCB').html(result)
-                }
-            })
-        })
-
-        $('#Muon1').click(function () {
-            alert("Chưa nhập mã thẻ hoặc mã đăng ký cá biệt")
-        })
-    })
-
-</script>*@
 
 @if (ViewBag.info != null)
 {

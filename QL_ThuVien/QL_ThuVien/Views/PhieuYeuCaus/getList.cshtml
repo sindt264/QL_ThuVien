@@ -1,80 +1,66 @@
-﻿@model IEnumerable<QL_ThuVien.Models.PhieuYeuCau>
-
+﻿@model IPagedList<QL_ThuVien.Models.PhieuYeuCau>
+@using PagedList
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
-
+    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
 }
-@*<script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#TK1').click(function () {
-                var cmb = document.getElementById("SoThe")
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/SearchSoThe/',
-                    data: { 'id': cmb.value },
-                    success: function (result) {
-                        $('#ViewST').html(result)
-                    }
-                })
-            })
 
 
-            $('#TK2').click(function () {
-                var cmb = document.getElementById("SDKCB")
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/SearchSDKCB/',
-                    data: { 'id': cmb.value },
-                    success: function (result) {
-                        $('#ViewSDKCB').html(result)
-                    }
-                })
-            })
+<table class="table khonghinhnen">
+    <tr>
+        <th>
+            @Html.DisplayName("Tên bạn đọc")
+        </th>
+        <th>
+            @Html.DisplayName("Tên nhân viên")
+        </th>
+        <th>
+            @Html.DisplayName("Số ĐK cá biệt")
+        </th>
+        <th>
+            @Html.DisplayName("Ngày mượn")
+        </th>
+        <th>
+            @Html.DisplayName("Ngày trả")
+        </th>
+        <th>
+            @Html.DisplayName("Trễ")
+        </th>
+        <th></th>
+    </tr>
 
-            $('#Muon1').click(function () {
-                alert("Chưa nhập mã thẻ hoặc mã đăng ký cá biệt")
-            })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_NgayTra)
+            </td>
+            <td>
+                @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PYC_IDPhieuYeuCau }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PYC_IDPhieuYeuCau }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PYC_IDPhieuYeuCau })
+            </td>
+        </tr>
+    }
 
-        })
-
-    </script>*@
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="col-sm-1"></div>
-
-    <div class="col-sm-10 khonghinhnen">
-        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
-        
-        <div class="col-sm-5 khonghinhnen">
-            <br />
-            <h2 class="tieude text-center">Mã thẻ</h2>
-            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SoThe" placeholder="TV00001" value="TV00001" class="form-control" /><input type="button" id="TK1" value="Tim Kiem" /></div>
-            <br /><br /> <span id="ViewST"></span>
-
-            @*<p>
-                <a href="/PhieuyeuCaus/Create"><input type="button" value="Tạo phiếu mới" class="btn btn-success" /></a>
-            </p>*@
-            <table class="table" ng-app="myapp"></table>
-        </div>
-        <div class="col-sm-5 khonghinhnen">
-            <br />
-            <h2 class="tieude text-center">Mã sách</h2>
-            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SDKCB" placeholder="M00001" value="M00001" class="form-control" /> <input type="button" id="TK2" value="Tim Kiem" /></div>
-
-            <br /><br />
-            <span id="ViewSDKCB"></span>
-
-            @*<p>
-                <a href="/PhieuyeuCaus/Create"><input type="button" value="Tạo phiếu mới" class="btn btn-success" /></a>
-            </p>*@
-
-        </div>
-        <div class="col-sm-2"><br /><br /><br /><br /><br /><input type="submit" class="btn btn-success" value="Mượn" id="Muon" /></div>
-    </div><table class="table" ng-app="myapp"></table>
-    <div class="col-sm-1"></div>
-}
+</table>
+<div class="col-md-12 text-center">
+    @Html.PagedListPager(Model, sotrang => Url.Action("getList", new { page = sotrang }))
+</div>

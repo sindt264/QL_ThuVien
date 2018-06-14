@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using QL_ThuVien.Models;
 using System.Data.Sql;
+using PagedList;
+using PagedList.Mvc;
 
 namespace QL_ThuVien.Controllers
 {
@@ -17,13 +19,13 @@ namespace QL_ThuVien.Controllers
         private DataContext db = new DataContext();
 
         // GET: PhieuYeuCaus
-        public ActionResult Index()
+        public ActionResult getList(int? page)
         {
-            var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
+            var phieuYeuCaus = db.PhieuYeuCaus.OrderByDescending(n => n.PYC_NgayMuon).ToPagedList(page ?? 1, 4);
             return View(phieuYeuCaus);
         }
 
-        public ActionResult getList()
+        public ActionResult Index()
         {
             Session["SoThe"] = "";
             Session["SDKCB"] = "";
@@ -32,7 +34,7 @@ namespace QL_ThuVien.Controllers
         }
 
         [HttpPost]
-        public ActionResult getList(string id)
+        public ActionResult Index(string id)
         {
             if (Session["SoThe"].ToString().Length > 0 && Session["SDKCB"].ToString().Length > 0)
             {
@@ -97,7 +99,7 @@ namespace QL_ThuVien.Controllers
                         phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
                         db.PhieuYeuCaus.Add(phieuYeuCau);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("getList");
                     }
                 }
                 else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
@@ -114,7 +116,8 @@ namespace QL_ThuVien.Controllers
 
         //[HttpPost]
         public ActionResult CreatePYC([Bind(Include = "BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra")] PhieuYeuCau phieuYeuCau)
-        {ViewBag.ST = Session["SoThe"];
+        {
+            ViewBag.ST = Session["SoThe"];
             ViewBag.SDK = Session["SDKCB"];
             string SDKKB = ViewBag.SDK;
             string SoThe = ViewBag.ST;
@@ -143,7 +146,7 @@ namespace QL_ThuVien.Controllers
                         phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
                         db.PhieuYeuCaus.Add(phieuYeuCau);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("getList");
                     
                 }
                 else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
@@ -207,7 +210,7 @@ namespace QL_ThuVien.Controllers
                     {
                         db.Entry(phieuYeuCau).State = EntityState.Modified;
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("getList");
                     }
                 }
                 else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
