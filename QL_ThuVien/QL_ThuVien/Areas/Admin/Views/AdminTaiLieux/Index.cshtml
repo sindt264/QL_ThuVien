@@ -1,0 +1,94 @@
+﻿@model IEnumerable<QL_ThuVien.Models.TaiLieu>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Chủ đề
+        </th>
+        <th>
+            Tiêu đề
+        </th>
+        <th>
+            Tác giả
+        </th>
+        <th>
+            Nhà sản xuất
+        </th>
+        <th>
+            Năm sản xuất
+        </th>
+        <th>
+            Số trang
+        </th>
+        <th>
+            Tóm tắt
+        </th>
+        <th>
+            Khổ sách
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th>
+            Ngày nhập
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_ChuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_TacGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_NhaXuatBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_NamSanXuat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_SoTrang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_TomTat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_KhoSach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_TrangThai)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/Image/" + item.TL_HinhAnh)" width="100" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_NgayNhap)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TL_SoDangKyCaBiet }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TL_SoDangKyCaBiet }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TL_SoDangKyCaBiet })
+            </td>
+        </tr>
+    }
+
+</table>

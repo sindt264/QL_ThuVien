@@ -11,6 +11,7 @@ using QL_ThuVien.Models;
 using System.Data.Sql;
 using PagedList;
 using PagedList.Mvc;
+using QL_ThuVien.Areas.Admin.Controllers;
 
 namespace QL_ThuVien.Controllers
 {
@@ -27,6 +28,7 @@ namespace QL_ThuVien.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.v = Session["MaNV"];
             Session["SoThe"] = "";
             Session["SDKCB"] = "";
              var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
@@ -36,6 +38,7 @@ namespace QL_ThuVien.Controllers
         [HttpPost]
         public ActionResult Index(string id)
         {
+
             if (Session["SoThe"].ToString().Length > 0 && Session["SDKCB"].ToString().Length > 0)
             {
                 return RedirectToAction("CreatePYC");
@@ -88,12 +91,14 @@ namespace QL_ThuVien.Controllers
             {
                 string KTSoThe = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe ='" + SoThe + "'").FirstOrDefault();
                 string KTMaSach = db.Database.SqlQuery<string>("select TL_SoDangKyCaBiet from TaiLieu where TL_SoDangKyCaBiet ='" + SDKKB + "'").FirstOrDefault();
+                string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
                 if (KTMaSach != null && KTSoThe != null)
                 {
                     ViewBag.min = DateTime.Now;
                     var sl = from p in db.PhieuYeuCaus select p;
                     if (ModelState.IsValid)
                     {
+                        phieuYeuCau.NV_ID = selectIDNV;
                         phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
                         phieuYeuCau.BD_SoThe = SoThe;
                         phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
@@ -121,6 +126,7 @@ namespace QL_ThuVien.Controllers
             ViewBag.SDK = Session["SDKCB"];
             string SDKKB = ViewBag.SDK;
             string SoThe = ViewBag.ST;
+            string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
 
             if (SDKKB == null || SoThe == null)
             {
@@ -139,6 +145,7 @@ namespace QL_ThuVien.Controllers
                     var sl = from p in db.PhieuYeuCaus select p;
                     if (ModelState.IsValid)
                     {
+                    phieuYeuCau.NV_ID = selectIDNV;
                         phieuYeuCau.PYC_NgayMuon = DateTime.Now;
                         phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
                         phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
@@ -196,18 +203,21 @@ namespace QL_ThuVien.Controllers
             string id = Request["PYC_IDPhieuYeuCau"];
             string SoThe = Request["BD_SoThe"];
             string SDKCB = Request["TL_SoDangKyCaBiet"];
+            string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
+
             if ((SoThe.Length == 0) || (SDKCB.Length == 0))
             {
                 ModelState.AddModelError("", "Số thể và số đăng ký cá biệt không được rỗng");
             }
             else
             {
-                string KTSoThe = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
-                string KTMaSach = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe =" + SoThe + "").FirstOrDefault();
+                string KTSoThe = db.Database.SqlQuery<string>("select BD_SoThe from BanDoc where BD_SoThe ='" + SoThe + "'").FirstOrDefault();
+                string KTMaSach = db.Database.SqlQuery<string>("select TL_SoDangKyCaBiet from TaiLieu where TL_SoDangKyCaBiet ='" + SDKCB + "'").FirstOrDefault();
                 if (KTMaSach != null && KTSoThe != null)
                 {
                     if (ModelState.IsValid)
                     {
+                        phieuYeuCau.NV_ID = selectIDNV;
                         db.Entry(phieuYeuCau).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("getList");

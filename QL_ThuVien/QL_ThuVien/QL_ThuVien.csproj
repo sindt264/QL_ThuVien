@@ -156,6 +156,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminTaiLieuxController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhanViensController.cs" />
+    <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Controllers\BanDocsController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HinhAnhHoatDongsController.cs" />
@@ -603,6 +608,18 @@
     <Content Include="Content\PhieuYeuCau\src\skins\purple.scss" />
     <Content Include="Content\PhieuYeuCau\src\style.scss" />
     <Content Include="Content\PhieuYeuCau\src\variable.scss" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\AdminTaiLieux\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminTaiLieux\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminTaiLieux\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminTaiLieux\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminTaiLieux\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhanViens\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NhanViens\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NhanViens\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NhanViens\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhanViens\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -659,6 +676,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Images\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>

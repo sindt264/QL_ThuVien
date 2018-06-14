@@ -1,0 +1,89 @@
+﻿@model QL_ThuVien.Models.NhanVien
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>NhanVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_HOTEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_HOTEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_NGAYSINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_NGAYSINH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_GIOITINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_GIOITINH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_SDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_SDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_QUEQUAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_QUEQUAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_MATKHAU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_MATKHAU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_HINHANH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_HINHANH)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

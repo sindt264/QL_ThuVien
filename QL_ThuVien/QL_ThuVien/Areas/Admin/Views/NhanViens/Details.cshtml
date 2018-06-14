@@ -1,0 +1,83 @@
+﻿@model QL_ThuVien.Models.NhanVien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NhanVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_HOTEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_HOTEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_NGAYSINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_NGAYSINH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_GIOITINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_GIOITINH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_SDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_SDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_QUEQUAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_QUEQUAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_MATKHAU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_MATKHAU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NV_HINHANH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NV_HINHANH)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NV_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
