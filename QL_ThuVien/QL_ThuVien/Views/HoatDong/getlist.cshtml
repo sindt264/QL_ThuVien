@@ -1,0 +1,52 @@
+﻿@model IEnumerable<QL_ThuVien.Models.HoatDong>
+
+@{
+    ViewBag.Title = "getlist";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+}
+
+<h2>getlist</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table khonghinhnen">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HD_ChuDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HD_NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HD_NgayHoatDong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HD_NgayKetThuc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HD_ChuDe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HD_NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HD_NgayHoatDong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HD_NgayKetThuc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.HD_IDHoatDong }) |
+            @Html.ActionLink("Details", "Details", new { id=item.HD_IDHoatDong }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.HD_IDHoatDong })
+        </td>
+    </tr>
+}
+
+</table>

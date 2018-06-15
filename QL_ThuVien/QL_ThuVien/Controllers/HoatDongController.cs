@@ -17,9 +17,19 @@ namespace QL_ThuVien.Controllers
         // GET: HoatDong
         public ActionResult Index()
         {
+            var data = (from p in db.HoatDongs select p).OrderByDescending(x => x.HD_NgayHoatDong).Take(3);
+            ViewBag.data = data;
+
+            var data1 = (from p in db.HoatDongs select p).OrderByDescending(x => x.HD_NgayHoatDong).Take(6);
+            ViewBag.data1 = data1;
+
             return View(db.HoatDongs.ToList());
         }
 
+        public ActionResult getlist()
+        {
+            return View(db.HoatDongs.ToList());
+        }
         public string getImage(int id)
         {
             string HA = db.Database.SqlQuery<string>("select top 1 HA_NoiDung from HinhAnhHoatDong where HD_IDHoatDong =" + id + "").FirstOrDefault();
@@ -57,7 +67,7 @@ namespace QL_ThuVien.Controllers
             {
                 db.HoatDongs.Add(hoatDong);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("getlist");
             }
 
             return View(hoatDong);
@@ -89,7 +99,7 @@ namespace QL_ThuVien.Controllers
             {
                 db.Entry(hoatDong).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("getlist");
             }
             return View(hoatDong);
         }
@@ -117,7 +127,7 @@ namespace QL_ThuVien.Controllers
             HoatDong hoatDong = db.HoatDongs.Find(id);
             db.HoatDongs.Remove(hoatDong);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("getlist");
         }
 
         protected override void Dispose(bool disposing)

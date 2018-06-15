@@ -184,6 +184,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\HoatDong\css\cssHoatDong.css" />
     <Content Include="Content\HoatDong\css\font-awesome.min.css" />
     <Content Include="Content\HoatDong\css\ie\backgroundsize.min.htc" />
     <Content Include="Content\HoatDong\css\ie\html5shiv.js" />
@@ -673,6 +674,7 @@
     <Content Include="Views\PhieuYeuCaus\SearchSDKCB.cshtml" />
     <Content Include="Views\PhieuYeuCaus\SearchSoThe.cshtml" />
     <Content Include="Views\PhieuYeuCaus\CreatePYC.cshtml" />
+    <Content Include="Views\HoatDong\getlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
