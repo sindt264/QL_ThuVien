@@ -675,6 +675,7 @@
     <Content Include="Views\PhieuYeuCaus\SearchSoThe.cshtml" />
     <Content Include="Views\PhieuYeuCaus\CreatePYC.cshtml" />
     <Content Include="Views\HoatDong\getlist.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\TimKiemSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

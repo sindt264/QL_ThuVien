@@ -23,6 +23,8 @@ namespace QL_ThuVien.Controllers
             var data1 = (from p in db.HoatDongs select p).OrderByDescending(x => x.HD_NgayHoatDong).Take(6);
             ViewBag.data1 = data1;
 
+            var sachmoi = (from p in db.TaiLieux select p).OrderByDescending(s => s.TL_NgayNhap).Take(6);
+            ViewBag.sachmoi = sachmoi;
             return View(db.HoatDongs.ToList());
         }
 

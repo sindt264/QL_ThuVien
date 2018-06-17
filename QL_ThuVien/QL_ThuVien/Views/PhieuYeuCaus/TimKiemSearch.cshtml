@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QL_ThuVien.Models.PhieuYeuCau>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TimKiemSearch</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table khonghinhnen">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PYC_NgayMuon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PYC_NgayTra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PYC_Tre)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_NgayTra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PYC_Tre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.PYC_IDPhieuYeuCau }) |
+                @Html.ActionLink("Details", "Details", new { id=item.PYC_IDPhieuYeuCau }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PYC_IDPhieuYeuCau })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

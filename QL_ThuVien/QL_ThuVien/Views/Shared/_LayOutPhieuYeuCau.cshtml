@@ -49,9 +49,15 @@
                         <form class="search" autocomplete="off">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" name="q" class="form-control" placeholder="Type something here">
+                                    <select class="form-control" id="valuesSearch">
+                                        <option value="0">---</option>
+                                        <option value="1">Tìm bằng mã đăng ký cá biệt</option>
+                                        <option value="2">Tìm bằng số thẻ</option>
+
+                                    </select>
+                                    <input type="text" name="q" class="form-control" id="GiaTriSearch" placeholder="Type something here">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-primary"><i class="ion-search"></i></button>
+                                        <input type="button" class="btn btn-primary" id="TK9" value="Search">
                                     </div>
                                 </div>
                             </div>
@@ -361,6 +367,20 @@
                         $('#ViewSDKCB').html(result)
                     }
                 })
+            })
+
+            $('#TK9').click(function () {
+                var cmb1 = document.getElementById("valuesSearch");
+                var cmb = document.getElementById("GiaTriSearch");               
+                    $.ajax({
+                        type: "GET",
+                        url: '/PhieuYeuCaus/TimKiemSearch/',
+                        data: { 'id': cmb.value,'id2':cmb1.value },
+                        success: function (result) {
+                            $('#View9').html(result)
+                        }
+                    })
+           
             })
 
         })

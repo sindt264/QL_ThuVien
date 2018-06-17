@@ -41,6 +41,12 @@ namespace QL_ThuVien.Controllers
 
             if (Session["SoThe"].ToString().Length > 0 && Session["SDKCB"].ToString().Length > 0)
             {
+                short MaTT = db.Database.SqlQuery<short>("select TL_TrangThai from TaiLieu where TL_SoDangKyCaBiet = '" + Session["SDKCB"] + "'").FirstOrDefault();
+                if (MaTT == 1)
+                {
+                    ModelState.AddModelError("", "Sách đã được mượn trước !");
+                }
+                else
                 return RedirectToAction("CreatePYC");
             }
             else
@@ -152,6 +158,7 @@ namespace QL_ThuVien.Controllers
                         phieuYeuCau.BD_SoThe = SoThe;
                         phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
                         db.PhieuYeuCaus.Add(phieuYeuCau);
+                        ChuyenTrangThai(SDKKB, 1);
                         db.SaveChanges();
                         return RedirectToAction("getList");
                     
@@ -320,6 +327,34 @@ namespace QL_ThuVien.Controllers
             else return 0;
         }
 
-      
+        public RedirectToRouteResult ChuyenTrangThai(string id,short trangthai)
+        {
+            // tìm carditem muon sua
+            TaiLieu taiLieu = db.TaiLieux.FirstOrDefault(m => m.TL_SoDangKyCaBiet == id);
+            if (taiLieu != null)
+            {
+                taiLieu.TL_TrangThai = trangthai;
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult TimKiemSearch(string id, int id2)
+        {
+            if(id2 == 1)
+            {
+                var a = from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id select p;
+                return View(a);
+            }
+            if (id2 == 2)
+            {
+                var a = from p in db.PhieuYeuCaus where p.BD_SoThe == id select p;
+                return View(a);
+            }
+            else
+            {
+                return View(db.PhieuYeuCaus.ToList());
+            }
+        }
+
     }
 }
