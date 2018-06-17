@@ -671,11 +671,11 @@
     <Content Include="Views\BanDocs\Details.cshtml" />
     <Content Include="Views\BanDocs\Edit.cshtml" />
     <Content Include="Views\BanDocs\Index.cshtml" />
-    <Content Include="Views\PhieuYeuCaus\SearchSDKCB.cshtml" />
-    <Content Include="Views\PhieuYeuCaus\SearchSoThe.cshtml" />
     <Content Include="Views\PhieuYeuCaus\CreatePYC.cshtml" />
     <Content Include="Views\HoatDong\getlist.cshtml" />
     <Content Include="Views\PhieuYeuCaus\TimKiemSearch.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\SearchSoThe.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\SearchSDKCB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

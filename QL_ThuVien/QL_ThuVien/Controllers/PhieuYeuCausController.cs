@@ -28,7 +28,6 @@ namespace QL_ThuVien.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.v = Session["MaNV"];
             Session["SoThe"] = "";
             Session["SDKCB"] = "";
              var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
@@ -44,7 +43,7 @@ namespace QL_ThuVien.Controllers
                 short MaTT = db.Database.SqlQuery<short>("select TL_TrangThai from TaiLieu where TL_SoDangKyCaBiet = '" + Session["SDKCB"] + "'").FirstOrDefault();
                 if (MaTT == 1)
                 {
-                    ModelState.AddModelError("", "Sách đã được mượn trước !");
+                    ModelState.AddModelError("", "Sách "+ Session["SDKCB"] +" đã được mượn trước !");
                 }
                 else
                 return RedirectToAction("CreatePYC");

@@ -1,4 +1,4 @@
-namespace QL_ThuVien.Models
+﻿namespace QL_ThuVien.Models
 {
     using System;
     using System.Collections.Generic;
@@ -14,18 +14,24 @@ namespace QL_ThuVien.Models
         public int PYC_IDPhieuYeuCau { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "Số thẻ")]
         public string BD_SoThe { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Số đăng ký cá biệt")]
         public string TL_SoDangKyCaBiet { get; set; }
 
         [StringLength(20)]
+        [Display(Name = "ID nhân viên")]
         public string NV_ID { get; set; }
 
+        [Display(Name = "Ngày mượn")]
         public DateTime? PYC_NgayMuon { get; set; }
 
+        [Display(Name = "Ngày trả")]
         public DateTime? PYC_NgayTra { get; set; }
 
+        [Display(Name = "Trễ")]
         public int? PYC_Tre { get; set; }
 
         public virtual BanDoc BanDoc { get; set; }

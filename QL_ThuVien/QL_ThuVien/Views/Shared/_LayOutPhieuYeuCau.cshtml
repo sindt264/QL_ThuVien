@@ -341,6 +341,17 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var cmbsothe = document.getElementById("SoThe");
+            if (cmbsothe.value != "") {
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSoThe/',
+                    data: { 'id': cmbsothe.value },
+                    success: function (result) {
+                        $('#ViewST').html(result)
+                    }
+                })
+            }
 
             $('#TK1').click(function () {
                 var cmb = document.getElementById("SoThe");
@@ -354,7 +365,17 @@
                     }
                 })
             })
-
+            var cmbsdkcb = document.getElementById("SDKCB");
+            if (cmbsdkcb.value != "") {
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSDKCB/',
+                    data: { 'id': cmbsdkcb.value },
+                    success: function (result) {
+                        $('#ViewSDKCB').html(result)
+                    }
+                })
+            }
 
             $('#TK2').click(function () {
                 var cmb = document.getElementById("SDKCB");
