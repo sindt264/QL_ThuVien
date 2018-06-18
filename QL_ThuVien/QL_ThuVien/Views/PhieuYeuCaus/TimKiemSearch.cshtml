@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
 }
 
 <!DOCTYPE html>
@@ -12,9 +13,6 @@
     <title>TimKiemSearch</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table khonghinhnen">
         <tr>
             <th>
@@ -34,6 +32,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PYC_Tre)
+            </th>
+            <th>
+                Trạng thái
             </th>
             <th></th>
         </tr>
@@ -56,12 +57,19 @@
                 @Html.DisplayFor(modelItem => item.PYC_NgayTra)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PYC_Tre)
+                @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
             </td>
+            @if (yeuCausController.GetTrangThai(item.PYC_IDPhieuYeuCau) == 0)
+            {
+                <td>Đã trả</td>
+            }
+            else
+            {
+                <td> <a href="@Url.Action("ChuyenTrangThai", new { id = item.PYC_IDPhieuYeuCau,id2 = 0})" onclick="return confirm('Xác nhận đã trả @item.TL_SoDangKyCaBiet !');">Trả</a></td>
+            }
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.PYC_IDPhieuYeuCau }) |
-                @Html.ActionLink("Details", "Details", new { id=item.PYC_IDPhieuYeuCau }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.PYC_IDPhieuYeuCau })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.PYC_IDPhieuYeuCau }) 
+
             </td>
         </tr>
     }

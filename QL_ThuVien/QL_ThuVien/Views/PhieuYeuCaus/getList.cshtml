@@ -28,6 +28,9 @@
         <th>
             @Html.DisplayName("Trễ")
         </th>
+        <th>
+            @Html.DisplayName("Trạng thái")
+        </th>
         <th></th>
     </tr>
 
@@ -52,10 +55,17 @@
             <td>
                 @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
             </td>
+            @if (yeuCausController.GetTrangThai(item.PYC_IDPhieuYeuCau) == 0)
+            {
+                <td>Đã trả</td>
+            }
+            else
+            {
+                <td>Chưa trả</td>
+            }
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PYC_IDPhieuYeuCau }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PYC_IDPhieuYeuCau }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PYC_IDPhieuYeuCau })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.PYC_IDPhieuYeuCau }) |
+                <a href="@Url.Action("ChuyenTrangThai", new { id = item.PYC_IDPhieuYeuCau,id2 = 0})" onclick="return confirm('Xác nhận đã trả !');" >Trả</a> 
             </td>
         </tr>
     }

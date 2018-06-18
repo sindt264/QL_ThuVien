@@ -16,7 +16,7 @@ else
     <div>
         <br />
         <hr />
-        <dl class="dl-horizontal">
+        <dl class="table dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
             </dt>
@@ -33,18 +33,7 @@ else
                 @Html.DisplayFor(model => model.TL_TieuDe)
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.TL_TrangThai)
-            </dt>
 
-
-            @if (Model.TL_TrangThai == 1)
-            {
-                <dd>Đã mượn</dd>
-            }
-            else
-            {
-                <dd>Chưa mượn</dd>}
         </dl>
     </div>
 }

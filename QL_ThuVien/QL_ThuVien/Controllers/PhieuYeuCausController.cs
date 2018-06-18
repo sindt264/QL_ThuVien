@@ -22,10 +22,15 @@ namespace QL_ThuVien.Controllers
         // GET: PhieuYeuCaus
         public ActionResult getList(int? page)
         {
-            var phieuYeuCaus = db.PhieuYeuCaus.OrderByDescending(n => n.PYC_NgayMuon).ToPagedList(page ?? 1, 4);
+            var phieuYeuCaus = db.PhieuYeuCaus.OrderByDescending(n => n.PYC_NgayMuon).ToPagedList(page ?? 1, 9);
             return View(phieuYeuCaus);
         }
 
+        public ActionResult getListDaMuon(string id)
+        {
+            var phieuYeuCaus = from p in db.PhieuYeuCaus where p.BD_SoThe == id && p.PYC_TrangThai == 1 select p;
+            return View(phieuYeuCaus);
+        }
         public ActionResult Index()
         {
             Session["SoThe"] = "";
@@ -38,20 +43,20 @@ namespace QL_ThuVien.Controllers
         public ActionResult Index(string id)
         {
 
-            if (Session["SoThe"].ToString().Length > 0 && Session["SDKCB"].ToString().Length > 0)
-            {
-                short MaTT = db.Database.SqlQuery<short>("select TL_TrangThai from TaiLieu where TL_SoDangKyCaBiet = '" + Session["SDKCB"] + "'").FirstOrDefault();
-                if (MaTT == 1)
-                {
-                    ModelState.AddModelError("", "Sách "+ Session["SDKCB"] +" đã được mượn trước !");
-                }
-                else
-                return RedirectToAction("CreatePYC");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Mã thẻ hoặc mã sách chưa được điền");
-            }
+            //if (Session["SoThe"].ToString() !="" && Session["SDKCB"].ToString() !="")
+            //{
+            //    short MaTT = db.Database.SqlQuery<short>("select PYC_TrangThai from PhieuYeuCau where TL_SoDangKyCaBiet = '" + Session["SDKCB"] + "'").FirstOrDefault();
+            //    if (MaTT == 1)
+            //    {
+            //        ModelState.AddModelError("", "Sách "+ Session["SDKCB"] +" đã được mượn trước !");
+            //    }
+            //    else
+            //    return RedirectToAction("CreatePYC");
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("", "Mã thẻ hoặc mã sách chưa được điền");
+            //}
             return View();
         }
         // GET: PhieuYeuCaus/Details/5
@@ -69,6 +74,24 @@ namespace QL_ThuVien.Controllers
             return View(phieuYeuCau);
         }
 
+        public ActionResult XacNhanTra(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PhieuYeuCau phieuYeuCau = db.PhieuYeuCaus.Find(id);
+            if (phieuYeuCau == null)
+            {
+                return HttpNotFound();
+            }
+            //string masach = db.Database.SqlQuery<string>("select TL_SoDangKyCaBiet from PhieuYeuCau where PYC_IDPhieuYeuCau ='" + id + "'").SingleOrDefault();
+            ChuyenTrangThai(phieuYeuCau.PYC_IDPhieuYeuCau, 0);
+            db.SaveChanges();
+            return RedirectToAction("getList");
+        }
+
+       
         // GET: PhieuYeuCaus/Create
         public ActionResult Create()
         {
@@ -109,7 +132,7 @@ namespace QL_ThuVien.Controllers
                         phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
                         db.PhieuYeuCaus.Add(phieuYeuCau);
                         db.SaveChanges();
-                        return RedirectToAction("getList");
+                        return RedirectToAction("Index");
                     }
                 }
                 else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
@@ -127,46 +150,51 @@ namespace QL_ThuVien.Controllers
         //[HttpPost]
         public ActionResult CreatePYC([Bind(Include = "BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra")] PhieuYeuCau phieuYeuCau)
         {
+
             ViewBag.ST = Session["SoThe"];
             ViewBag.SDK = Session["SDKCB"];
             string SDKKB = ViewBag.SDK;
             string SoThe = ViewBag.ST;
-            string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
 
-            if (SDKKB == null || SoThe == null)
+            if (SDKKB.Length > 0 && SoThe.Length > 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            
-            //string SDKCB = Request["TL_SoDangKyCaBiet"];
-            if ((SoThe.Length == 0) || (SDKKB.Length == 0))
-            {
-                ModelState.AddModelError("", "Số thể và số đăng ký cá biệt không được rỗng");
-            }
-            else
-            {
-                
-                    ViewBag.min = DateTime.Now;
-                    var sl = from p in db.PhieuYeuCaus select p;
-                    if (ModelState.IsValid)
-                    {
-                    phieuYeuCau.NV_ID = selectIDNV;
-                        phieuYeuCau.PYC_NgayMuon = DateTime.Now;
-                        phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
-                        phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
-                        phieuYeuCau.BD_SoThe = SoThe;
-                        phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
-                        db.PhieuYeuCaus.Add(phieuYeuCau);
-                        ChuyenTrangThai(SDKKB, 1);
-                        db.SaveChanges();
-                        return RedirectToAction("getList");
-                    
+                short MaTT = db.Database.SqlQuery<short>("select PYC_TrangThai from PhieuYeuCau where TL_SoDangKyCaBiet = '" + Session["SDKCB"] + "'").FirstOrDefault();
+                if (MaTT == 1)
+                {
+                    ModelState.AddModelError("", "Sách " + Session["SDKCB"] + " đã được mượn trước !");
                 }
-                else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
+                short SLCoTheMuon = db.Database.SqlQuery<short>("select BD_GioiHanMuon from BanDoc where BD_SoThe ='" + SoThe+"'").SingleOrDefault();
+
+                int SLDaMuon = db.Database.SqlQuery<int>("select count(*) from PhieuYeuCau where BD_SoThe ='"+SoThe+"' and PYC_TrangThai = 1").SingleOrDefault();
+
+                if(SLDaMuon >= SLCoTheMuon)
+                {
+                    ModelState.AddModelError("", "Bạn đã đạt giới hạn mượn");
+                }
+                string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
+
+
+
+                ViewBag.min = DateTime.Now;
+                var sl = from p in db.PhieuYeuCaus select p;
+                if (ModelState.IsValid)
+                {
+                    phieuYeuCau.NV_ID = selectIDNV;
+                    phieuYeuCau.PYC_NgayMuon = DateTime.Now;
+                    phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
+                    phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
+                    phieuYeuCau.BD_SoThe = SoThe;
+                    phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
+                    phieuYeuCau.PYC_TrangThai = 1;
+                    db.PhieuYeuCaus.Add(phieuYeuCau);
+                    db.SaveChanges();
+                    return RedirectToAction("getListDaMuon", new { id = SoThe });
+
+
+                }
+                //else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
             }
-            ViewBag.BD_SoThe = new SelectList(db.BanDocs, "BD_SoThe", "BD_HoVaTen", phieuYeuCau.BD_SoThe);
-            ViewBag.NV_ID = new SelectList(db.NhanViens, "NV_ID", "NV_HOTEN", phieuYeuCau.NV_ID);
-            ViewBag.TL_SoDangKyCaBiet = new SelectList(db.TaiLieux, "TL_SoDangKyCaBiet", "TL_TieuDe", phieuYeuCau.TL_SoDangKyCaBiet);
+            else ModelState.AddModelError("", "Số thể và mã sách không được rỗng !");
             return View();
         }
         int autoMaPYC(int sl)
@@ -226,7 +254,7 @@ namespace QL_ThuVien.Controllers
                         phieuYeuCau.NV_ID = selectIDNV;
                         db.Entry(phieuYeuCau).State = EntityState.Modified;
                         db.SaveChanges();
-                        return RedirectToAction("getList");
+                        return RedirectToAction("Index");
                     }
                 }
                 else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
@@ -258,6 +286,7 @@ namespace QL_ThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //ChuyenTrangThai(Request["TL_SoDangKyCaBiet"], 0);
             PhieuYeuCau phieuYeuCau = db.PhieuYeuCaus.Find(id);
             db.PhieuYeuCaus.Remove(phieuYeuCau);
             db.SaveChanges();
@@ -326,32 +355,39 @@ namespace QL_ThuVien.Controllers
             else return 0;
         }
 
-        public RedirectToRouteResult ChuyenTrangThai(string id,short trangthai)
+        public short GetTrangThai(int id)
         {
-            // tìm carditem muon sua
-            TaiLieu taiLieu = db.TaiLieux.FirstOrDefault(m => m.TL_SoDangKyCaBiet == id);
-            if (taiLieu != null)
+            return db.Database.SqlQuery<short>("select PYC_TrangThai from PhieuYeuCau where PYC_IDPhieuYeuCau = '" + id + "'").SingleOrDefault();
+        }
+        public RedirectToRouteResult ChuyenTrangThai(int id,short id2)
+        {
+            PhieuYeuCau phieuYeuCau = db.PhieuYeuCaus.FirstOrDefault(m => m.PYC_IDPhieuYeuCau == id);
+            if (phieuYeuCau != null)
             {
-                taiLieu.TL_TrangThai = trangthai;
+                phieuYeuCau.PYC_TrangThai = id2;
+                db.SaveChanges();
             }
             return RedirectToAction("Index");
         }
 
+
+
+
         public ActionResult TimKiemSearch(string id, int id2)
         {
-            if(id2 == 1)
+            if (id2 == 1)
             {
-                var a = from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id select p;
+                var a = (from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id select p).OrderByDescending(m => m.PYC_NgayMuon);
                 return View(a);
             }
             if (id2 == 2)
             {
-                var a = from p in db.PhieuYeuCaus where p.BD_SoThe == id select p;
+                var a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id select p).OrderByDescending(m =>m.PYC_NgayMuon);
                 return View(a);
             }
             else
             {
-                return View(db.PhieuYeuCaus.ToList());
+                return View(db.PhieuYeuCaus.ToList().OrderByDescending(m => m.PYC_NgayMuon));
             }
         }
 

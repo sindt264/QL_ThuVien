@@ -7,6 +7,20 @@
                 Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 
 }
+@Html.Raw(ViewBag.er)
+
+<div>
+    <select class="form-control" id="valuesSearch">
+        <option value="0">---</option>
+        <option value="1">Tìm bằng mã đăng ký cá biệt</option>
+        <option value="2">Tìm bằng số thẻ</option>
+
+    </select>
+    <input type="text" name="q" class="form-control" id="GiaTriSearch" placeholder="Type something here">
+    <div class="input-group-btn">
+        <input type="button" class="btn btn-primary" id="TK9" value="Bắt đầu tìm kiếm">
+    </div>
+</div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,7 +32,7 @@
         <div class="col-sm-5 khonghinhnen">
             <br />
             <h2 class="tieude text-center">Mã thẻ</h2>
-            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SoThe" value="@Session["SoThe"]" class="form-control" /><input type="button" id="TK1" value="Tim Kiem" /></div>
+            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SoThe" value="@Session["SoThe"]" class="form-control" />@*<input type="button" id="TK1" value="Tim Kiem" />*@</div>
             <br /><br /> <span id="ViewST"></span>
 
             @*<p>
@@ -29,7 +43,7 @@
         <div class="col-sm-5 khonghinhnen">
             <br />
             <h2 class="tieude text-center">Mã sách</h2>
-            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SDKCB" value="@Session["SDKCB"]" class="form-control" /> <input type="button" id="TK2" value="Tim Kiem" /></div>
+            <div class="col-sm-4"><b class="khonghinhnen"></b><br /><input type="text" id="SDKCB" value="@Session["SDKCB"]" class="form-control" /> @*<input type="button" id="TK2" value="Tim Kiem" />*@</div>
 
             <br /><br />
             <span id="ViewSDKCB"></span>
@@ -39,7 +53,9 @@
                 </p>*@
 
         </div>
-        <div class="col-sm-2"><br /><br /><br /><br /><br /><input type="submit" class="btn btn-success" value="Mượn" id="Muon" /></div>
+        <div class="col-sm-2"><br /><br /><br /><br /><br /><input type="button" class="btn btn-success" value="Mượn" id="Muon" /></div>
+
+        <div id="ViewList"></div>
     </div><table class="table" ng-app="myapp"></table>
     <div class="col-sm-1"></div>
 }

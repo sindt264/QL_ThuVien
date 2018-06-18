@@ -34,6 +34,9 @@
         [Display(Name = "Trễ")]
         public int? PYC_Tre { get; set; }
 
+        [Display(Name = "Trạng thái")]
+        public short? PYC_TrangThai { get; set; }
+
         public virtual BanDoc BanDoc { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }

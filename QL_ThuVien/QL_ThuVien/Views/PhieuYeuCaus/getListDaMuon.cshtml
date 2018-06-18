@@ -1,0 +1,126 @@
+﻿@model IEnumerable<QL_ThuVien.Models.PhieuYeuCau>
+
+@{
+    Layout = null;
+    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
+}
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            var cmbsothe = document.getElementById("SoThe");
+            if (cmbsothe.value != "") {
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSoThe/',
+                    data: { 'id': cmbsothe.value },
+                    success: function (result) {
+                        $('#ViewST').html(result)
+                    }
+                })
+            }
+
+            $('#SoThe').change(function () {
+                var cmb = document.getElementById("SoThe");
+                //alert(cmb.value)
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSoThe/',
+                    data: { 'id': cmb.value },
+                    success: function (result) {
+                        $('#ViewST').html(result)
+                    }
+                })
+            })
+            var cmbsdkcb = document.getElementById("SDKCB");
+            if (cmbsdkcb.value != "") {
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSDKCB/',
+                    data: { 'id': cmbsdkcb.value },
+                    success: function (result) {
+                        $('#ViewSDKCB').html(result)
+                    }
+                })
+            }
+
+            $('#SDKCB').change(function () {
+                var cmb = document.getElementById("SDKCB");
+                //alert(cmb.value)
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/SearchSDKCB/',
+                    data: { 'id': cmb.value },
+                    success: function (result) {
+                        $('#ViewSDKCB').html(result)
+                    }
+                })
+            })
+
+            $('#TK9').click(function () {
+                var cmb1 = document.getElementById("valuesSearch");
+                var cmb = document.getElementById("GiaTriSearch");
+                    $.ajax({
+                        type: "GET",
+                        url: '/PhieuYeuCaus/TimKiemSearch/',
+                        data: { 'id': cmb.value,'id2':cmb1.value },
+                        success: function (result) {
+                            $('#View9').html(result)
+                        }
+                    })
+
+            })
+
+            $('#Muon').click(function () {
+                var cmb1 = document.getElementById("SDKCB");
+                var cmb = document.getElementById("SoThe");
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/CreatePYC/',
+                    data: { 'id': cmb.value, 'id2': cmb1.value },
+                    success: function (result) {
+                        $('#ViewList').html(result)
+                    }
+                })
+            })
+
+
+        })
+
+</script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.PYC_Tre)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
+                </td>
+
+                <td>@yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)</td>
+
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

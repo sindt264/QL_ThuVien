@@ -494,6 +494,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\so-thong-thai.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -673,14 +674,15 @@
     <Content Include="Views\BanDocs\Index.cshtml" />
     <Content Include="Views\PhieuYeuCaus\CreatePYC.cshtml" />
     <Content Include="Views\HoatDong\getlist.cshtml" />
-    <Content Include="Views\PhieuYeuCaus\TimKiemSearch.cshtml" />
     <Content Include="Views\PhieuYeuCaus\SearchSoThe.cshtml" />
     <Content Include="Views\PhieuYeuCaus\SearchSDKCB.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\XacNhanTra.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\getListDaMuon.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\TimKiemSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Images\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
