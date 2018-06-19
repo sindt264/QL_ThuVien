@@ -178,13 +178,19 @@
             $('#TK9').click(function () {
                 var cmb1 = document.getElementById("valuesSearch");
                 var cmb = document.getElementById("GiaTriSearch");
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/TimKiemSearch/',
-                    data: { 'id': cmb.value, 'id2': cmb1.value },
-                    success: function (result) {
-                        $('#ViewList').html(result)
-                    }
+                if (cmb1.value <= 0) {
+                    alert("Vui lòng chọn tìm bằng gì trước :)");
+                } else if (cmb.value <= 0) {
+                    alert("Vui lòng nhập giá trị tìm kiếm :D");
+                }else
+                    $.ajax({
+                        type: "GET",
+                        url: '/PhieuYeuCaus/TimKiemSearch/',
+                        data: { 'id': cmb.value, 'id2': cmb1.value },
+                        success: function (result) {
+                            $('#ViewList').html(result)
+                        }
+                    
                 })
 
             })

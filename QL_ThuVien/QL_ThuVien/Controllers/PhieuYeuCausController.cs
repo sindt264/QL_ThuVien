@@ -377,18 +377,15 @@ namespace QL_ThuVien.Controllers
         {
             if (id2 == 1)
             {
-                var a = (from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id select p).OrderByDescending(m => m.PYC_NgayMuon);
+                var a = (from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id && p.PYC_TrangThai == 1 select p).OrderByDescending(m => m.PYC_NgayMuon);
                 return View(a);
             }
             if (id2 == 2)
             {
-                var a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id select p).OrderByDescending(m =>m.PYC_NgayMuon);
+                var a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id && p.PYC_TrangThai == 1 select p).OrderByDescending(m =>m.PYC_NgayMuon);
                 return View(a);
             }
-            else
-            {
-                return View(db.PhieuYeuCaus.ToList().OrderByDescending(m => m.PYC_NgayMuon));
-            }
+            return View();
         }
 
     }
