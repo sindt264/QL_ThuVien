@@ -161,7 +161,7 @@
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhanViensController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
-    <Compile Include="Controllers\BanDocsController.cs" />
+    <Compile Include="Controllers\BanDocController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HinhAnhHoatDongsController.cs" />
     <Compile Include="Controllers\HoatDongController.cs" />
@@ -667,11 +667,6 @@
     <Content Include="Views\Shared\_LayOutPhieuYeuCau.cshtml" />
     <Content Include="Views\PhieuYeuCaus\getList.cshtml" />
     <Content Include="Views\PhieuYeuCaus\SearchPYC.cshtml" />
-    <Content Include="Views\BanDocs\Create.cshtml" />
-    <Content Include="Views\BanDocs\Delete.cshtml" />
-    <Content Include="Views\BanDocs\Details.cshtml" />
-    <Content Include="Views\BanDocs\Edit.cshtml" />
-    <Content Include="Views\BanDocs\Index.cshtml" />
     <Content Include="Views\PhieuYeuCaus\CreatePYC.cshtml" />
     <Content Include="Views\HoatDong\getlist.cshtml" />
     <Content Include="Views\PhieuYeuCaus\SearchSoThe.cshtml" />
@@ -679,10 +674,16 @@
     <Content Include="Views\PhieuYeuCaus\XacNhanTra.cshtml" />
     <Content Include="Views\PhieuYeuCaus\getListDaMuon.cshtml" />
     <Content Include="Views\PhieuYeuCaus\TimKiemSearch.cshtml" />
+    <Content Include="Views\BanDoc\Create.cshtml" />
+    <Content Include="Views\BanDoc\Delete.cshtml" />
+    <Content Include="Views\BanDoc\Details.cshtml" />
+    <Content Include="Views\BanDoc\Edit.cshtml" />
+    <Content Include="Views\BanDoc\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Content\AvtBanDoc\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

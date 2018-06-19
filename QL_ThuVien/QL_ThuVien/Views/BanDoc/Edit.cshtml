@@ -1,53 +1,61 @@
 ﻿@model QL_ThuVien.Models.BanDoc
 
 @{
-    ViewBag.Title = "Tạo mới ";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Chỉnh sửa thông tin";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
 
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+<script language="javascript">
+            angular.module('myapp', [])
+                .controller('DateController', ['$scope', function ($scope) {
+                    $scope.value = new Date("@Model.BD_NgaySinh");
+                    $scope.value1 = new Date("@Model.BD_CapNgay");
+                    $scope.value2 = new Date("@Model.BD_HopDongLaoDong");
+                    $scope.value3 = new Date("@Model.BD_NgayCapThe");
+                    $scope.value4 = new Date("@Model.BD_THSDThe");
+                    $scope.value5 = new Date("@Model.BD_ThoiGianMuon");
+        }]);
+
+</script>
+<div class="col-sm-12 khonghinhnen" style="font-family:'Times New Roman', Times, serif">
+    <h2 style="font-family:'Times New Roman', Times, serif">Chỉnh sửa thông tin</h2>
 
 
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-<h2>Thêm bạn đọc mới</h2>
-@using (Html.BeginForm("Create", "BanDocs", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-{
-
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Nhập thông tin</h4>
-        <hr />
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-        <div class="row">
-            <div class="column">
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BD_SoThe, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-8">
-                        <input name="BD_SoThe" id="BD_SoThe" class="form-control" placeholder="Số thẻ" />
-                        <!--Html.EditorFor(model => model.BD_SoThe, new { htmlAttributes = new { class = "form-control", placeholder = "Số thẻ", name = "SoThe" } }) -->
-                        @Html.Raw(ViewBag.kq)
+        <div class="form-horizontal" style="font-family:'Times New Roman', Times, serif" ng-app="myapp">
+            <h4></h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="form-group col-xs-6  ">
+                    @Html.LabelFor(model => model.BD_SoThe, htmlAttributes: new { @class = " control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.BD_SoThe, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.BD_SoThe, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BD_HoVaTen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group col-xs-6  ">
+                    @Html.LabelFor(model => model.BD_HoVaTen, htmlAttributes: new { @class = " control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.BD_HoVaTen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Họ và tên" } })
+                        @Html.TextBoxFor(model => model.BD_HoVaTen, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.BD_HoVaTen, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6  " name="myForm" ng-controller="DateController">
                     @Html.LabelFor(model => model.BD_NgaySinh, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.BD_NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                        <input type="date" name="BD_NgaySinh" ng-model="value" id="BD_NgaySinh" class="form-control" />
                         @Html.ValidationMessageFor(model => model.BD_NgaySinh, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6 ">
                     @Html.LabelFor(model => model.BD_SoCMND, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_SoCMND, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số CMND" } })
@@ -55,15 +63,15 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6" name="myForm" ng-controller="DateController">
                     @Html.LabelFor(model => model.BD_CapNgay, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.BD_CapNgay, new { htmlAttributes = new { @class = "form-control" } })
+                        <input type="date" name="BD_CapNgay" ng-model="value1" id="BD_CapNgay" class="form-control" />
                         @Html.ValidationMessageFor(model => model.BD_CapNgay, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_NoiCap, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_NoiCap, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nơi cấp" } })
@@ -71,7 +79,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_TrinhDo, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_TrinhDo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Trình độ" } })
@@ -79,7 +87,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_NoiCongTacHocTap, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_NoiCongTacHocTap, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nơi công tác hoặc học tập" } })
@@ -87,33 +95,23 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_NgheNghiep, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_NgheNghiep, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nghề nghiệp" } })
                         @Html.ValidationMessageFor(model => model.BD_NgheNghiep, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BD_ChucVu, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.BD_ChucVu, new { htmlAttributes = new { @class = "form-control", @placeholder = "Chức vụ" } })
-                        @Html.ValidationMessageFor(model => model.BD_ChucVu, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-            </div>
 
 
-            <div class="column">
-                <div class="form-group">
+                <div class="form-group col-xs-6" name="myForm" ng-controller="DateController">
                     @Html.LabelFor(model => model.BD_HopDongLaoDong, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.BD_HopDongLaoDong, new { htmlAttributes = new { @class = "form-control" } })
+                        <input type="date" name="BD_NgaySinh" ng-model="value2" id="BD_NgaySinh" class="form-control" />
                         @Html.ValidationMessageFor(model => model.BD_HopDongLaoDong, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_DiaChiNoiLamViec, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_DiaChiNoiLamViec, new { htmlAttributes = new { @class = "form-control", @placeholder = "Địa chỉ hoặc nơi làm việc" } })
@@ -121,15 +119,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BD_DTCoQuan, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.BD_DTCoQuan, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điện thoại cơ quan" } })
-                        @Html.ValidationMessageFor(model => model.BD_DTCoQuan, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_DTDIDong, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_DTDIDong, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điên thoại di dộng" } })
@@ -137,7 +127,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_Email, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
@@ -145,7 +135,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     @Html.LabelFor(model => model.BD_ChoOHienTai, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_ChoOHienTai, new { htmlAttributes = new { @class = "form-control", @placeholder = "Chỗ ở hiện tại" } })
@@ -153,7 +143,17 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_HinhAnh, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <img src="@Url.Content("~/Content/AvtBanDoc/" + Model.BD_HinhAnh)" height="40" width="40" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 style="font-family:'Times New Roman', Times, serif; font-size:20px; margin-left:10px">Nhập thông tin thẻ</h4>
+                <hr />
+                <div class="form-group col-md-6">
                     @Html.LabelFor(model => model.BD_GioiHanMuon, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.BD_GioiHanMuon, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số lượng sách được mượn" } })
@@ -161,36 +161,38 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BD_NgayCap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group col-xs-6" name="myForm" ng-controller="DateController">
+                    @Html.LabelFor(model => model.BD_NgayCapThe, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.BD_NgayCap, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BD_NgayCap, "", new { @class = "text-danger" })
+                        <input type="date" name="BD_NgayCapThe" ng-model="value3" id="BD_NgayCapThe" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.BD_NgayCapThe, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BD_HinhAnh, new { @class = "control-label col-md-2" })
+                <div class="form-group col-xs-6" name="myForm" ng-controller="DateController">
+                    @Html.LabelFor(model => model.BD_THSDThe, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <input name="fileUpload" type="file" placeholder="Chọn hình ảnh đại diện" />
-                        @ViewBag.ThongBao
+                        <input type="date" name="BD_THSDThe" ng-model="value4" id="BD_THSDThe" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.BD_THSDThe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6" name="myForm" ng-controller="DateController">
+                    @Html.LabelFor(model => model.BD_ThoiGianMuon, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="date" name="BD_ThoiGianMuon" ng-model="value5" id="BD_ThoiGianMuon" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.BD_ThoiGianMuon, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-1 col-md-2">
-                <input type="submit" value="Tạo mới " class="btn btn-primary" />
-                <button class="btn btn-default"><a href="/BanDocs">Hủy bỏ</a></button>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-4">
+                    <input type="submit" value="Lưu" class="btn btn-primary" />
+                    <button class="btn btn-default"><a href="/BanDoc" style="text-decoration:none">Hủy bỏ</a></button>
+                </div>
             </div>
+
         </div>
-
-    </div>
-
-}
-
-
-
-
-
+    }
+</div>

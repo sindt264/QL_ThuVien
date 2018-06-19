@@ -12,22 +12,22 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
     <meta property="og:image" content="https://raw.githubusercontent.com/nauvalazhar/Magz/master/images/preview.png" />
-    <title>Phiếu yêu cầu</title>
+    <title>@ViewBag.Title</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/bootstrap/bootstrap.min.css">
     <!-- IonIcons -->
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/ionicons/css/ionicons.min.css">
     <!-- Toast -->
-    @*<link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/toast/jquery.toast.min.css">
-        <!-- OwlCarousel -->
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
-        <!-- Magnific Popup -->
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/magnific-popup/dist/magnific-popup.css">
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/sweetalert/dist/sweetalert.css">*@
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/toast/jquery.toast.min.css">
+    <!-- OwlCarousel -->
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/magnific-popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/sweetalert/dist/sweetalert.css">
     <!-- Custom style -->
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/style.css">
-    @*<link rel="stylesheet" href="~/Content/PhieuYeuCau/css/skins/all.css">*@
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/skins/all.css">
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/demo.css">
 
     <script src="@Url.Content("~/Content/js/jquery-1.11.3.min.js")"></script>
@@ -35,44 +35,43 @@
 </head>
 <body class="skin-orange canhle">
     <header class="primary">
-        @*<div class="firstbar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-12">
-                            <div class="brand">
-                                <a href="index.html">
-                                    <img src="~/Images/so-thong-thai.jpg" alt="Magz Logo">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <form class="search" autocomplete="off">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select class="form-control" id="valuesSearch">
-                                            <option value="0">---</option>
-                                            <option value="1">Tìm bằng mã đăng ký cá biệt</option>
-                                            <option value="2">Tìm bằng số thẻ</option>
-
-                                        </select>
-                                        <input type="text" name="q" class="form-control" id="GiaTriSearch" placeholder="Type something here">
-                                        <div class="input-group-btn">
-                                            <input type="button" class="btn btn-primary" id="TK9" value="Search">
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                        <div class="col-md-3 col-sm-12 text-right">
-                            <ul class="nav-icons">
-                                <li><a href="register.html"><i class="ion-person-add"></i><div>Register</div></a></li>
-                                <li><a href="/Admin/Login"><i class="ion-person"></i><div>Login</div></a></li>
-                            </ul>
+        <div class="firstbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="brand">
+                            <a href="index.html">
+                                <img src="images/logo.png" alt="Magz Logo">
+                            </a>
                         </div>
                     </div>
+                    <div class="col-md-6 col-sm-12">
+                        <form class="search" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select class="form-control" id="valuesSearch">
+                                        <option value="0">---</option>
+                                        <option value="1">Tìm bằng mã đăng ký cá biệt</option>
+                                        <option value="2">Tìm bằng số thẻ</option>
+
+                                    </select>
+                                    <input type="text" name="q" class="form-control" id="GiaTriSearch" placeholder="Type something here">
+                                    <div class="input-group-btn">
+                                        <input type="button" class="btn btn-primary" id="TK9" value="Search">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-3 col-sm-12 text-right">
+                        <ul class="nav-icons">
+                            <li><a href="register.html"><i class="ion-person-add"></i><div>Register</div></a></li>
+                            <li><a href="login.html"><i class="ion-person"></i><div>Login</div></a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>*@
+            </div>
+        </div>
         <!-- Start nav -->
         <nav class="menu">
             <div class="container">
@@ -94,9 +93,9 @@
                         <li class="for-tablet"><a href="register.html">Register</a></li>
                         <li><a href="#">Standard</a></li>
                         <li class="dropdown magz-dropdown">
-                            <a href="category.html">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
+                            <a href="category.html">Pages <i class="ion-ios-arrow-right"></i></a>
                             <ul class="dropdown-menu">
-
+                                <li><a href="/BanDoc">Bạn đoc</a></li>
                                 <li class="dropdown magz-dropdown">
                                     <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
                                     <ul class="dropdown-menu">
@@ -104,9 +103,31 @@
                                         <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown magz-dropdown">
+                                    <a href="#">Authentication <i class="ion-ios-arrow-right"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="forgot.html">Forgot Password</a></li>
+                                        <li><a href="reset.html">Reset Password</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="category.html">Category</a></li>
+                                <li><a href="single.html">Single</a></li>
+                                <li><a href="page.html">Page</a></li>
+                                <li><a href="search.html">Search</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li class="dropdown magz-dropdown">
+                                    <a href="#">Error <i class="ion-ios-arrow-right"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="403.html">403</a></li>
+                                        <li><a href="404.html">404</a></li>
+                                        <li><a href="500.html">500</a></li>
+                                        <li><a href="503.html">503</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -117,7 +138,6 @@
         <div class="container">
             <div class="row">
                 <span id="View9">
-                    
                     @RenderBody()
                 </span>
             </div>
@@ -138,7 +158,7 @@
                 })
             }
 
-            $('#SoThe').change(function () {
+            $('#TK1').click(function () {
                 var cmb = document.getElementById("SoThe");
                 //alert(cmb.value)
                 $.ajax({
@@ -162,7 +182,7 @@
                 })
             }
 
-            $('#SDKCB').change(function () {
+            $('#TK2').click(function () {
                 var cmb = document.getElementById("SDKCB");
                 //alert(cmb.value)
                 $.ajax({
@@ -183,27 +203,11 @@
                     url: '/PhieuYeuCaus/TimKiemSearch/',
                     data: { 'id': cmb.value, 'id2': cmb1.value },
                     success: function (result) {
-                        $('#ViewList').html(result)
+                        $('#View9').html(result)
                     }
                 })
 
             })
-
-          
-            $('#Muon').click(function () {
-                var cmb1 = document.getElementById("SDKCB");
-                var cmb = document.getElementById("SoThe");
-                
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/CreatePYC/',
-                    data: { 'id': cmb.value, 'id2': cmb1.value },
-                    success: function (result) {
-                        $('#ViewList').html(result)
-                    }
-                })
-            })
-
 
         })
 
