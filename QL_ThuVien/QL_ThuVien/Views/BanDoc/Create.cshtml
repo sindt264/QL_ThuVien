@@ -1,0 +1,194 @@
+﻿@model QL_ThuVien.Models.BanDoc
+
+@{
+    ViewBag.Title = "Tạo mới ";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+}
+
+
+
+<div class="col-sm-12 khonghinhnen" style="font-family:'Times New Roman', Times, serif">
+    <h2 style="font-family:'Times New Roman', Times, serif">Thêm bạn đọc mới</h2>
+    @using (Html.BeginForm("Create", "BanDoc", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="font-family:'Times New Roman', Times, serif">
+            <h4 style="font-family:'Times New Roman', Times, serif">Nhập thông tin cá nhân</h4>
+            <hr />
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="form-group col-xs-6  ">
+                    @Html.LabelFor(model => model.BD_SoThe, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input name="BD_SoThe" id="BD_SoThe" class="form-control" placeholder="Số thẻ" />
+                        <!--Html.EditorFor(model => model.BD_SoThe, new { htmlAttributes = new { class = "form-control", placeholder = "Số thẻ", name = "SoThe" } }) -->
+                        @Html.Raw(ViewBag.kq)
+                        @Html.ValidationMessageFor(model => model.BD_SoThe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6  ">
+                    @Html.LabelFor(model => model.BD_HoVaTen, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_HoVaTen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Họ và tên" } })
+                        @Html.ValidationMessageFor(model => model.BD_HoVaTen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6 ">
+                    @Html.LabelFor(model => model.BD_NgaySinh, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BD_NgaySinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6 ">
+                    @Html.LabelFor(model => model.BD_SoCMND, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_SoCMND, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số CMND" } })
+                        @Html.ValidationMessageFor(model => model.BD_SoCMND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_CapNgay, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_CapNgay, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BD_CapNgay, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_NoiCap, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_NoiCap, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nơi cấp" } })
+                        @Html.ValidationMessageFor(model => model.BD_NoiCap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_TrinhDo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_TrinhDo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Trình độ" } })
+                        @Html.ValidationMessageFor(model => model.BD_TrinhDo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_NoiCongTacHocTap, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_NoiCongTacHocTap, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nơi công tác hoặc học tập" } })
+                        @Html.ValidationMessageFor(model => model.BD_NoiCongTacHocTap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_NgheNghiep, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_NgheNghiep, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nghề nghiệp" } })
+                        @Html.ValidationMessageFor(model => model.BD_NgheNghiep, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_HopDongLaoDong, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_HopDongLaoDong, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BD_HopDongLaoDong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_DiaChiNoiLamViec, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_DiaChiNoiLamViec, new { htmlAttributes = new { @class = "form-control", @placeholder = "Địa chỉ hoặc nơi làm việc" } })
+                        @Html.ValidationMessageFor(model => model.BD_DiaChiNoiLamViec, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_DTDIDong, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_DTDIDong, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điên thoại di dộng" } })
+                        @Html.ValidationMessageFor(model => model.BD_DTDIDong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                        @Html.ValidationMessageFor(model => model.BD_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_ChoOHienTai, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_ChoOHienTai, new { htmlAttributes = new { @class = "form-control", @placeholder = "Chỗ ở hiện tại" } })
+                        @Html.ValidationMessageFor(model => model.BD_ChoOHienTai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_HinhAnh, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input name="fileUpload" class="form-control" type="file" placeholder="Chọn hình ảnh đại diện" />
+                        @Html.Raw(ViewBag.ThongBao)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 style="font-family:'Times New Roman', Times, serif; font-size:20px; margin-left:10px">Nhập thông tin thẻ</h4>
+                <hr />
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.BD_GioiHanMuon, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_GioiHanMuon, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số lượng sách được mượn" } })
+                        @Html.ValidationMessageFor(model => model.BD_GioiHanMuon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_NgayCapThe, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_NgayCapThe, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BD_NgayCapThe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_THSDThe, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_THSDThe, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BD_THSDThe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    @Html.LabelFor(model => model.BD_ThoiGianMuon, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BD_ThoiGianMuon, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BD_ThoiGianMuon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-4">
+                    <input type="submit" value="Tạo mới " class="btn btn-primary" />
+                    <button class="btn btn-default"><a href="/BanDoc" style="text-decoration:none">Hủy bỏ</a></button>
+                </div>
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+
+

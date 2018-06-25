@@ -1,0 +1,175 @@
+﻿@model PagedList.IPagedList<QL_ThuVien.Models.BanDoc>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Bạn đọc";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+}
+<div class="col-sm-12 khonghinhnen " style="width:auto ;font-family:'Times New Roman', Times, serif">
+    <h2 style="font-family:'Times New Roman', Times, serif">Danh sách bạn đọc</h2>
+
+    <p>
+        @using (Html.BeginForm("Index", "BanDoc", FormMethod.Get))
+        {
+            <div class="row form-group">
+                <div class="col-lg-10">
+                    <div class="col-md-4">
+                        <input type="text" value="@ViewBag.TimKiem" class="form-control" name="timkiem" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                        <a class="btn btn-primary" href="/BanDoc/Create">Thêm mới</a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </p>
+    <table class="table">
+        <tr style="font-size:15px">
+            <th>
+                Số thẻ
+            </th>
+            <th>
+                Họ và tên
+            </th>
+            <th>
+                Ngày sinh
+            </th>
+            <th>
+                Số CMND
+            </th>
+            <th>
+                Ngày cấp
+            </th>
+            <th>
+                Nơi cấp
+            </th>
+            <th>
+                Trình độ
+            </th>
+            <th>
+                Nơi công tác
+            </th>
+            <th>
+                Nghề nghiệp
+            </th>
+            <th>
+                Thời hạn lao động
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                SĐT di dộng
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Chổ ở hiện tại
+            </th>
+            <th>
+                Giới hạn sách mượn
+            </th>
+            <th>
+                Ngày cấp thẻ
+            </th>
+            <th>
+                Hạn sử dụng thẻ
+            </th>
+            <th>
+                Thời hạn mượn
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr style="width:auto;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_SoThe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_HoVaTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_SoCMND)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_CapNgay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_NoiCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_TrinhDo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_NoiCongTacHocTap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_NgheNghiep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_HopDongLaoDong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_DiaChiNoiLamViec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_DTDIDong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_ChoOHienTai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_GioiHanMuon)
+                </td>
+
+                @if (@item.BD_NgayCapThe == null)
+                {
+                    <td><a href="#" style="color:red;">Chờ duyệt</a></td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BD_NgayCapThe)
+                    </td>
+                }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_THSDThe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BD_ThoiGianMuon)
+                </td>
+                <td>
+                    <img src="@Url.Content("~/Content/AvtBanDoc/" + item.BD_HinhAnh)" height="40" width="40" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-md " style="width:100px "><a href="/BanDoc/Edit/@item.BD_SoThe" style="text-decoration:none;font-size:15px; ">Sửa</a></button>
+                    <button class="btn btn-default" style="width:100px "><a href="/BanDoc/Details/@item.BD_SoThe" style="text-decoration:none; font-size:15px;">Chi tiết</a></button>
+                    <button class="btn btn-default" style="width:100px "><a href="/BanDoc/Delete/@item.BD_SoThe" style="text-decoration:none; font-size:15px;">Xóa</a></button>
+                </td>
+            </tr>
+
+
+        }
+
+    </table>
+
+    <div style="margin-left:500px;">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

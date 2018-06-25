@@ -16,23 +16,30 @@
         }
 
         [Key]
-        [StringLength(10)]
         [Display(Name = "Số thẻ")]
+        [Required(ErrorMessage = "Số thể không được bỏ trống")]
+        [StringLength(10, ErrorMessage = "Số thể không được bỏ trống và độ dài lớn hớn {2}", MinimumLength = 4)]
         public string BD_SoThe { get; set; }
 
         [StringLength(200)]
-        [Display(Name = "Hẹ & Tên")]
+        [Required(ErrorMessage = "Họ & tên không được bỏ trống")]
+        [Display(Name = "Họ & Tên")]
         public string BD_HoVaTen { get; set; }
 
         [Display(Name = "Ngày sinh")]
-        public DateTime? BD_NgaySinh { get; set; }
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> BD_NgaySinh { get; set; }
 
-        [Column(TypeName = "numeric")]
         [Display(Name = "CMND")]
         public decimal? BD_SoCMND { get; set; }
 
         [Display(Name = "Ngày cấp")]
-        public DateTime? BD_CapNgay { get; set; }
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> BD_CapNgay { get; set; }
 
         [StringLength(100)]
         [Display(Name = "Nơi cấp")]
@@ -50,17 +57,25 @@
         [Display(Name = "Nghề nghiệp")]
         public string BD_NgheNghiep { get; set; }
 
-        public DateTime? BD_HopDongLaoDong { get; set; }
+        [Display(Name = "Thời hạn lao động")]
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> BD_HopDongLaoDong { get; set; }
 
         [StringLength(400)]
+        [Display(Name = "Điạ chỉ")]
         public string BD_DiaChiNoiLamViec { get; set; }
 
+        [Display(Name = "Số di động")]
         public long? BD_DTDIDong { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Email")]
         public string BD_Email { get; set; }
 
         [StringLength(400)]
+        [Display(Name = "Chổ ở hiện tại")]
         public string BD_ChoOHienTai { get; set; }
 
         [Display(Name = "Giới hạn mượn")]
@@ -71,13 +86,22 @@
         public string BD_HinhAnh { get; set; }
 
         [Display(Name = "Ngày cấp thẻ")]
-        public DateTime? BD_NgayCapThe { get; set; }
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> BD_NgayCapThe { get; set; }
 
         [Display(Name = "Thời hạn thẻ")]
-        public DateTime? BD_THSDThe { get; set; }
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> BD_THSDThe { get; set; }
 
         [Display(Name = "Thời gian mượn")]
-        public DateTime? BD_ThoiGianMuon { get; set; }
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> BD_ThoiGianMuon { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuYeuCau> PhieuYeuCaus { get; set; }

@@ -13,11 +13,11 @@ using QL_ThuVien.Models;
 
 namespace QL_ThuVien.Controllers
 {
-    public class BanDocsController : Controller
+    public class BanDocController : Controller
     {
         private DataContext db = new DataContext();
 
-        // GET: BanDocs
+        // GET: BanDoc
         public ActionResult Index(string timkiem, int page = 1, int pagesize = 5)
         {
             var model = ListAllPage(timkiem, page, pagesize);
@@ -25,7 +25,7 @@ namespace QL_ThuVien.Controllers
             return View(model);
         }
 
-        // GET: BanDocs/Details/5
+        // GET: BanDoc/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -40,18 +40,18 @@ namespace QL_ThuVien.Controllers
             return View(banDoc);
         }
 
-        // GET: BanDocs/Create
+        // GET: BanDoc/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BanDocs/Create
+        // POST: BanDoc/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BD_SoThe,BD_HoVaTen,BD_NgaySinh,BD_SoCMND,BD_CapNgay,BD_NoiCap,BD_TrinhDo,BD_NoiCongTacHocTap,BD_NgheNghiep,BD_ChucVu,BD_HopDongLaoDong,BD_DiaChiNoiLamViec,BD_DTCoQuan,BD_DTDIDong,BD_Email,BD_ChoOHienTai,BD_GioiHanMuon,BD_NgayCap,BD_HinhAnh")] BanDoc banDoc, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "BD_SoThe,BD_HoVaTen,BD_NgaySinh,BD_SoCMND,BD_CapNgay,BD_NoiCap,BD_TrinhDo,BD_NoiCongTacHocTap,BD_NgheNghiep,BD_HopDongLaoDong,BD_DiaChiNoiLamViec,BD_DTDIDong,BD_Email,BD_ChoOHienTai,BD_GioiHanMuon,BD_HinhAnh,BD_NgayCapThe,BD_THSDThe,BD_ThoiGianMuon")] BanDoc banDoc, HttpPostedFileBase fileUpload)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace QL_ThuVien.Controllers
                             //Upload file
                             var fileName = Path.GetFileName(fileUpload.FileName);
                             //Lưu đường dẫn file ảnh 
-                            var path = Path.Combine(Server.MapPath("~/Content/Image"), fileName);
+                            var path = Path.Combine(Server.MapPath("~/Content/AvtBanDoc"), fileName);
                             //Kiểm tra file đã tồn tại
                             if (System.IO.File.Exists(path))
                             {
@@ -85,8 +85,8 @@ namespace QL_ThuVien.Controllers
                             banDoc.BD_HinhAnh = fileUpload.FileName;
                         }
                         db.BanDocs.Add(banDoc);
-                        db.SaveChangesAsync();
-                        return RedirectToAction("Index");
+                        db.SaveChanges();
+                        return Redirect("/BanDoc");
                     }
                 }
             }
@@ -95,30 +95,33 @@ namespace QL_ThuVien.Controllers
                 ModelState.AddModelError("", "Error Save Data");
             }
             var list = from s in db.BanDocs select s;
-            return View();
+            return View(list);
         }
 
-        // GET: BanDocs/Edit/5
+        // GET: BanDoc/Edit/5
         public ActionResult Edit(string id)
         {
+            ViewBag.BD_SoThe = id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             BanDoc banDoc = db.BanDocs.Find(id);
+
             if (banDoc == null)
             {
                 return HttpNotFound();
             }
             return View(banDoc);
+
         }
 
-        // POST: BanDocs/Edit/5
+        // POST: BanDoc/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BD_SoThe,BD_HoVaTen,BD_NgaySinh,BD_SoCMND,BD_CapNgay,BD_NoiCap,BD_TrinhDo,BD_NoiCongTacHocTap,BD_NgheNghiep,BD_ChucVu,BD_HopDongLaoDong,BD_DiaChiNoiLamViec,BD_DTCoQuan,BD_DTDIDong,BD_Email,BD_ChoOHienTai,BD_GioiHanMuon,BD_NgayCap,BD_HinhAnh")] BanDoc banDoc)
+        public ActionResult Edit([Bind(Include = "BD_SoThe,BD_HoVaTen,BD_NgaySinh,BD_SoCMND,BD_CapNgay,BD_NoiCap,BD_TrinhDo,BD_NoiCongTacHocTap,BD_NgheNghiep,BD_HopDongLaoDong,BD_DiaChiNoiLamViec,BD_DTDIDong,BD_Email,BD_ChoOHienTai,BD_GioiHanMuon,BD_HinhAnh,BD_NgayCapThe,BD_THSDThe,BD_ThoiGianMuon")] BanDoc banDoc)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +132,7 @@ namespace QL_ThuVien.Controllers
             return View(banDoc);
         }
 
-        // GET: BanDocs/Delete/5
+        // GET: BanDoc/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -144,7 +147,7 @@ namespace QL_ThuVien.Controllers
             return View(banDoc);
         }
 
-        // POST: BanDocs/Delete/5
+        // POST: BanDoc/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
@@ -172,6 +175,25 @@ namespace QL_ThuVien.Controllers
                 model = model.Where(x => x.BD_HoVaTen.Contains(timkiem));
             }
             return model.OrderBy(b => b.BD_SoThe).ToPagedList(page, rowLimit);
+        }
+
+        public DateTime? ChangeStatus(string id)
+        {
+            var user = db.BanDocs.Find(id);
+            var thaydoingay = DateTime.Today;
+            user.BD_NgayCapThe = thaydoingay;
+            db.SaveChanges();
+            return user.BD_NgayCapThe;
+        }
+
+        [HttpPost]
+        public JsonResult ChangeStatusNgayCapThe(string id)
+        {
+            var result = ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }
