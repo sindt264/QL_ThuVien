@@ -18,16 +18,16 @@
     <!-- IonIcons -->
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/ionicons/css/ionicons.min.css">
     <!-- Toast -->
-    @*<link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/toast/jquery.toast.min.css">
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/toast/jquery.toast.min.css">
         <!-- OwlCarousel -->
         <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.carousel.min.css">
         <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
         <!-- Magnific Popup -->
         <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/magnific-popup/dist/magnific-popup.css">
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/sweetalert/dist/sweetalert.css">*@
+        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/sweetalert/dist/sweetalert.css">
     <!-- Custom style -->
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/style.css">
-    @*<link rel="stylesheet" href="~/Content/PhieuYeuCau/css/skins/all.css">*@
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/skins/all.css">
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/demo.css">
 
     <script src="@Url.Content("~/Content/js/jquery-1.11.3.min.js")"></script>
@@ -147,6 +147,14 @@
                     data: { 'id': cmb.value },
                     success: function (result) {
                         $('#ViewST').html(result)
+                    }
+                })
+                $.ajax({
+                    type: "GET",
+                    url: '/PhieuYeuCaus/TimKiemSearch/',
+                    data: { 'id': cmb.value,'id2':2 },
+                    success: function (result) {
+                        $('#ViewList').html(result)
                     }
                 })
             })

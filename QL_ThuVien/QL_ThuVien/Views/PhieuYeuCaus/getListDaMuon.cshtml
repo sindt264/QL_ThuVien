@@ -5,122 +5,90 @@
     QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
 }
 
-<script type="text/javascript">
-        $(document).ready(function () {
-            var cmbsothe = document.getElementById("SoThe");
-            if (cmbsothe.value != "") {
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/SearchSoThe/',
-                    data: { 'id': cmbsothe.value },
-                    success: function (result) {
-                        $('#ViewST').html(result)
-                    }
-                })
-            }
-
-            $('#SoThe').change(function () {
-                var cmb = document.getElementById("SoThe");
-                //alert(cmb.value)
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/SearchSoThe/',
-                    data: { 'id': cmb.value },
-                    success: function (result) {
-                        $('#ViewST').html(result)
-                    }
-                })
-            })
-            var cmbsdkcb = document.getElementById("SDKCB");
-            if (cmbsdkcb.value != "") {
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/SearchSDKCB/',
-                    data: { 'id': cmbsdkcb.value },
-                    success: function (result) {
-                        $('#ViewSDKCB').html(result)
-                    }
-                })
-            }
-
-            $('#SDKCB').change(function () {
-                var cmb = document.getElementById("SDKCB");
-                //alert(cmb.value)
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/SearchSDKCB/',
-                    data: { 'id': cmb.value },
-                    success: function (result) {
-                        $('#ViewSDKCB').html(result)
-                    }
-                })
-            })
-
-            $('#TK9').click(function () {
-                var cmb1 = document.getElementById("valuesSearch");
-                var cmb = document.getElementById("GiaTriSearch");
-                    $.ajax({
-                        type: "GET",
-                        url: '/PhieuYeuCaus/TimKiemSearch/',
-                        data: { 'id': cmb.value,'id2':cmb1.value },
-                        success: function (result) {
-                            $('#View9').html(result)
-                        }
-                    })
-
-            })
-
-            $('#Muon').click(function () {
-                var cmb1 = document.getElementById("SDKCB");
-                var cmb = document.getElementById("SoThe");
-                $.ajax({
-                    type: "GET",
-                    url: '/PhieuYeuCaus/CreatePYC/',
-                    data: { 'id': cmb.value, 'id2': cmb1.value },
-                    success: function (result) {
-                        $('#ViewList').html(result)
-                    }
-                })
-            })
-
-
-        })
-
-</script>
 <!DOCTYPE html>
 
-<html>
 <head>
     <meta name="viewport" content="width=device-width" />
 
 </head>
-<body>
-    <table class="table">
-        <tr>
-
-            <th>
-                @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.PYC_Tre)
-            </th>
-
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+<div id="return">
+    @if (Model.Count() > 0)
+    {
+        <table class="table khonghinhnen">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
-                </td>
-
-                <td>@yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)</td>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PYC_NgayMuon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PYC_NgayTra)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PYC_Tre)
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th></th>
             </tr>
-        }
 
-    </table>
-</body>
-</html>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PYC_NgayTra)
+                    </td>
+                    <td>
+                        @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
+                    </td>
+                    @if (yeuCausController.GetTrangThai(item.PYC_IDPhieuYeuCau) == 0)
+                    {
+                        <td>Đã trả</td>
+                    }
+                    else
+                    {
+                        <td> <a href="@Url.Action("ChuyenTrangThai", new { id = item.PYC_IDPhieuYeuCau, id2 = 0 })" onclick="return confirm('Xác nhận đã trả @item.TL_SoDangKyCaBiet !');">Trả</a></td>
+                        @*<td> <input type="button" class="btn-link" id="Tra" value="Trả" onclick="return confirm('Xác nhận đã trả @item.TL_SoDangKyCaBiet !');"></td>*@
+                        @*<td><button type="button" id="Tra1" value="@item.PYC_IDPhieuYeuCau" class="btn-link">Trả</button></td>*@
+                    }
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.PYC_IDPhieuYeuCau })
+
+                    </td>
+                </tr>
+
+            }
+
+
+
+
+
+        </table> }
+    else
+    {
+        <div class="col-md-10">
+            <b>Không tìm thấy dữ liệu để hiển thị.</b>
+        </div>
+    }
+</div>
