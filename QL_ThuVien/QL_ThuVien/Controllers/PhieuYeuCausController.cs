@@ -355,6 +355,11 @@ namespace QL_ThuVien.Controllers
             string a = db.Database.SqlQuery<string>("select BD_SoThe from PhieuYeuCau where TL_SoDangKyCaBiet ='"+Ma +"' and PYC_TrangThai =1").SingleOrDefault();
             return a;
         }
+        public DateTime nguoidangmuonngay(string Ma)
+        {
+            DateTime a = db.Database.SqlQuery<DateTime>("select PYC_NgayTra from PhieuYeuCau where TL_SoDangKyCaBiet ='"+Ma +"' and PYC_TrangThai =1").SingleOrDefault();
+            return a;
+        }
         public ActionResult SearchSoThe(string id)
         {
             ViewBag.SoThe = Session["SoThe"];
@@ -433,7 +438,7 @@ namespace QL_ThuVien.Controllers
 
             if (MaTT == 1)
             {
-                return "Sách đã được mượn bởi "+nguoidangmuon(MaSach);
+                return "Sách đã được mượn bởi "+nguoidangmuon(MaSach)+" đến ngày : "+nguoidangmuonngay(MaSach);
 
             }
             else { return "Sách có thể mượn"; }
