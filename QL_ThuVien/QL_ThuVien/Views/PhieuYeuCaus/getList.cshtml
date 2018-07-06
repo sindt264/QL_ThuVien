@@ -2,9 +2,22 @@
 @using PagedList
 @using PagedList.Mvc
 @{
+
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
     QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
+}
+
+
+
+@using (Html.BeginForm("GetList", "PhieuYeuCaus", FormMethod.Get, new { @class = "navbar-form navbar-right", role = "search", id = "search-form", onsubmit = "return empty();" }))
+{
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Tìm kiếm sách" name="SearchTerm" value="@ViewBag.SearchTerm" id="search-box">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success hidden-xs">Tìm</button>
+    </div>
 }
 
 
@@ -61,12 +74,9 @@
             }
             else
             {
-                <td>Chưa trả</td>
+                <td> <a href="@Url.Action("ChuyenTrangThai", new { id = item.PYC_IDPhieuYeuCau,id2 = 0})" onclick="return confirm('Xác nhận đã trả !');">Trả</a></td>
             }
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.PYC_IDPhieuYeuCau }) |
-                <a href="@Url.Action("ChuyenTrangThai", new { id = item.PYC_IDPhieuYeuCau,id2 = 0})" onclick="return confirm('Xác nhận đã trả !');" >Trả</a> 
-            </td>
+            
         </tr>
     }
 

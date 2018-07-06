@@ -20,11 +20,34 @@ namespace QL_ThuVien.Controllers
         private DataContext db = new DataContext();
 
         // GET: PhieuYeuCaus
-        public ActionResult getList(int? page)
+        public ActionResult getList(string searchTerm,int page =1, int pageSize = 11)
         {
-            var phieuYeuCaus = db.PhieuYeuCaus.OrderByDescending(n => n.PYC_NgayMuon).ToPagedList(page ?? 1, 9);
-            return View(phieuYeuCaus);
+
+            var phieuYeuCaus = new PhieuYeuCausController();
+            var mode = phieuYeuCaus.ListAllPaging(searchTerm, page, pageSize);
+            ViewBag.SearchTerm = searchTerm;
+            return View(mode);
         }
+        public IEnumerable<PhieuYeuCau> ListAllPaging(string searchTerm, int page, int pageSize)
+        {
+            IQueryable<PhieuYeuCau> model = db.PhieuYeuCaus;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                model = model.Where(x => x.BD_SoThe.Contains(searchTerm) || x.TL_SoDangKyCaBiet.Contains(searchTerm));
+
+            }
+
+            return model.OrderByDescending(x => x.PYC_NgayMuon).ToPagedList(page, pageSize);
+        }
+        //public ActionResult GetList(string searchTerm)
+        //{
+        //    var phieuYeuCaus = from p in db.PhieuYeuCaus select p;
+        //    if (!String.IsNullOrEmpty(searchTerm))
+        //    {
+        //        phieuYeuCaus = db.PhieuYeuCaus.Where(b => b.BD_SoThe.Contains(searchTerm));
+        //    }
+        //    return View(phieuYeuCaus);
+        //}
 
         public ActionResult getListDaMuon(string id)
         {
@@ -35,7 +58,7 @@ namespace QL_ThuVien.Controllers
         {
             Session["SoThe"] = "";
             Session["SDKCB"] = "";
-             var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
+            var phieuYeuCaus = db.PhieuYeuCaus.Include(p => p.BanDoc).Include(p => p.NhanVien).Include(p => p.TaiLieu);
             return View(phieuYeuCaus.ToList());
         }
 
@@ -74,7 +97,7 @@ namespace QL_ThuVien.Controllers
             return View(phieuYeuCau);
         }
 
-        public ActionResult XacNhanTra(int? id)
+        public ActionResult XacNhanTra(int? id, string id2)
         {
             if (id == null)
             {
@@ -86,12 +109,12 @@ namespace QL_ThuVien.Controllers
                 return HttpNotFound();
             }
             //string masach = db.Database.SqlQuery<string>("select TL_SoDangKyCaBiet from PhieuYeuCau where PYC_IDPhieuYeuCau ='" + id + "'").SingleOrDefault();
-            ChuyenTrangThai(phieuYeuCau.PYC_IDPhieuYeuCau, 0);
+            //ChuyenTrangThai(phieuYeuCau.PYC_IDPhieuYeuCau, 0, phieuYeuCau.);
             db.SaveChanges();
-            return RedirectToAction("getList");
+            return View();
         }
 
-       
+
         // GET: PhieuYeuCaus/Create
         public ActionResult Create()
         {
@@ -158,39 +181,46 @@ namespace QL_ThuVien.Controllers
 
             if (SDKKB.Length > 0 && SoThe.Length > 0)
             {
-                short MaTT = db.Database.SqlQuery<short>("select PYC_TrangThai from PhieuYeuCau where TL_SoDangKyCaBiet = '" + Session["SDKCB"] + "'").FirstOrDefault();
+                int MaTT = db.Database.SqlQuery<int>("select 1 from PhieuYeuCau where TL_SoDangKyCaBiet ='" + SDKKB +"' and PYC_TrangThai=1").FirstOrDefault();
+
                 if (MaTT == 1)
                 {
                     ModelState.AddModelError("", "Sách " + Session["SDKCB"] + " đã được mượn trước !");
+
                 }
-                short SLCoTheMuon = db.Database.SqlQuery<short>("select BD_GioiHanMuon from BanDoc where BD_SoThe ='" + SoThe+"'").SingleOrDefault();
-
-                int SLDaMuon = db.Database.SqlQuery<int>("select count(*) from PhieuYeuCau where BD_SoThe ='"+SoThe+"' and PYC_TrangThai = 1").SingleOrDefault();
-
-                if(SLDaMuon >= SLCoTheMuon)
+                else
                 {
-                    ModelState.AddModelError("", "Bạn đã đạt giới hạn mượn");
-                }
-                string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
+
+
+                    short SLCoTheMuon = db.Database.SqlQuery<short>("select BD_GioiHanMuon from BanDoc where BD_SoThe ='" + SoThe + "'").SingleOrDefault();
+
+                    int SLDaMuon = db.Database.SqlQuery<int>("select count(*) from PhieuYeuCau where BD_SoThe ='" + SoThe + "' and PYC_TrangThai = 1").SingleOrDefault();
+
+                    if (SLDaMuon >= SLCoTheMuon)
+                    {
+                        ModelState.AddModelError("", "Bạn đã đạt giới hạn mượn");
+                    }
+                    string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
 
 
 
-                ViewBag.min = DateTime.Now;
-                var sl = from p in db.PhieuYeuCaus select p;
-                if (ModelState.IsValid)
-                {
-                    phieuYeuCau.NV_ID = selectIDNV;
-                    phieuYeuCau.PYC_NgayMuon = DateTime.Now;
-                    phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
-                    phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
-                    phieuYeuCau.BD_SoThe = SoThe;
-                    phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
-                    phieuYeuCau.PYC_TrangThai = 1;
-                    db.PhieuYeuCaus.Add(phieuYeuCau);
-                    db.SaveChanges();
-                    return RedirectToAction("getListDaMuon", new { id = SoThe });
+                    ViewBag.min = DateTime.Now;
+                    var sl = from p in db.PhieuYeuCaus select p;
+                    if (ModelState.IsValid)
+                    {
+                        phieuYeuCau.NV_ID = selectIDNV;
+                        phieuYeuCau.PYC_NgayMuon = DateTime.Now;
+                        phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
+                        phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
+                        phieuYeuCau.BD_SoThe = SoThe;
+                        phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
+                        phieuYeuCau.PYC_TrangThai = 1;
+                        db.PhieuYeuCaus.Add(phieuYeuCau);
+                        db.SaveChanges();
+                        return RedirectToAction("getListDaMuon", new { id = SoThe });
 
 
+                    }
                 }
                 //else ModelState.AddModelError("", "Số thẻ hoặc số đăng ký cá biệt sai !");
             }
@@ -232,7 +262,7 @@ namespace QL_ThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PYC_IDPhieuYeuCau,BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra,PYC_Tre")] PhieuYeuCau phieuYeuCau)
+        public ActionResult Edit([Bind(Include = "PYC_IDPhieuYeuCau,BD_SoThe,TL_SoDangKyCaBiet,NV_ID,PYC_NgayMuon,PYC_NgayTra,PYC_Tre,PYC_TrangThai")] PhieuYeuCau phieuYeuCau)
         {
             string id = Request["PYC_IDPhieuYeuCau"];
             string SoThe = Request["BD_SoThe"];
@@ -301,7 +331,7 @@ namespace QL_ThuVien.Controllers
         public ActionResult SearchSDKCB(string id)
         {
             ViewBag.SDKCB = Session["SDKCB"];
-           
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -310,12 +340,20 @@ namespace QL_ThuVien.Controllers
             if (result != null)
             {
                 Session["SDKCB"] = id;
+                
                 return View(result);
             }
-            else {
+            else
+            {
                 ViewBag.info = "Không tìm thấy mã đăng ký cá biệt !";
                 return View();
             }
+        }
+
+        public string nguoidangmuon(string Ma)
+        {
+            string a = db.Database.SqlQuery<string>("select BD_SoThe from PhieuYeuCau where TL_SoDangKyCaBiet ='"+Ma +"' and PYC_TrangThai =1").SingleOrDefault();
+            return a;
         }
         public ActionResult SearchSoThe(string id)
         {
@@ -330,12 +368,13 @@ namespace QL_ThuVien.Controllers
                 Session["SoThe"] = id;
                 return View(result);
             }
-            else {
+            else
+            {
                 ViewBag.info = "Không tìm thấy dữ liệu bạn đọc !";
                 return View();
             }
-            
-            
+
+
         }
 
         protected override void Dispose(bool disposing)
@@ -349,7 +388,7 @@ namespace QL_ThuVien.Controllers
 
         public int SoNgayTre(int id)
         {
-            int tre = db.Database.SqlQuery<int>("select datediff(day,PhieuYeuCau.PYC_NgayTra,GETDATE()) from PhieuYeuCau where PYC_IDPhieuYeuCau ='" + id + "'").FirstOrDefault();
+            int tre = db.Database.SqlQuery<int>("select datediff(day,PhieuYeuCau.PYC_NgayTra,GETDATE()) from PhieuYeuCau where PYC_IDPhieuYeuCau ='" + id + "' and PYC_TrangThai = 1").FirstOrDefault();
             if (tre >= 1)
                 return tre;
             else return 0;
@@ -359,7 +398,7 @@ namespace QL_ThuVien.Controllers
         {
             return db.Database.SqlQuery<short>("select PYC_TrangThai from PhieuYeuCau where PYC_IDPhieuYeuCau = '" + id + "'").SingleOrDefault();
         }
-        public RedirectToRouteResult ChuyenTrangThai(int id,short id2)
+        public RedirectToRouteResult ChuyenTrangThai(int id, short id2,string id3)
         {
             PhieuYeuCau phieuYeuCau = db.PhieuYeuCaus.FirstOrDefault(m => m.PYC_IDPhieuYeuCau == id);
             if (phieuYeuCau != null)
@@ -367,7 +406,7 @@ namespace QL_ThuVien.Controllers
                 phieuYeuCau.PYC_TrangThai = id2;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("");
         }
 
 
@@ -377,19 +416,27 @@ namespace QL_ThuVien.Controllers
         {
             if (id2 == 1)
             {
-                var a = (from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id select p).OrderByDescending(m => m.PYC_NgayMuon);
+                var a = (from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id && p.PYC_TrangThai == 1 select p).OrderByDescending(m => m.PYC_NgayMuon);
                 return View(a);
             }
             if (id2 == 2)
             {
-                var a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id select p).OrderByDescending(m =>m.PYC_NgayMuon);
+                var a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id && p.PYC_TrangThai == 1 select p).OrderByDescending(m => m.PYC_NgayMuon);
                 return View(a);
             }
-            else
-            {
-                return View(db.PhieuYeuCaus.ToList().OrderByDescending(m => m.PYC_NgayMuon));
-            }
+            return View();
         }
 
+        public string KTSach(string MaSach)
+        {
+            int MaTT =  db.Database.SqlQuery<int>("select 1 from PhieuYeuCau where TL_SoDangKyCaBiet ='" + MaSach + "' and PYC_TrangThai=1").FirstOrDefault();
+
+            if (MaTT == 1)
+            {
+                return "Sách đã được mượn bởi "+nguoidangmuon(MaSach);
+
+            }
+            else { return "Sách có thể mượn"; }
+        }
     }
 }

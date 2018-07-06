@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "SearchSDKCB";
     Layout = null;
+    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
+
 }
 
 
@@ -32,7 +34,12 @@ else
             <dd>
                 @Html.DisplayFor(model => model.TL_TieuDe)
             </dd>
-
+            <dt>
+            @Html.DisplayName("Trạng thái")
+            </dt>
+            <dd>
+               @yeuCausController.KTSach(Model.TL_SoDangKyCaBiet)
+            </dd>
 
         </dl>
     </div>

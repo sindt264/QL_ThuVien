@@ -13,67 +13,82 @@
     <title>TimKiemSearch</title>
 </head>
 <body>
-    <table class="table khonghinhnen">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PYC_NgayMuon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PYC_NgayTra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PYC_Tre)
-            </th>
-            <th>
-                Trạng thái
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PYC_NgayTra)
-            </td>
-            <td>
-                @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
-            </td>
-            @if (yeuCausController.GetTrangThai(item.PYC_IDPhieuYeuCau) == 0)
-            {
-                <td>Đã trả</td>
-            }
-            else
-            {
-                <td> <a href="@Url.Action("ChuyenTrangThai", new { id = item.PYC_IDPhieuYeuCau,id2 = 0})" onclick="return confirm('Xác nhận đã trả @item.TL_SoDangKyCaBiet !');">Trả</a></td>
-            }
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.PYC_IDPhieuYeuCau }) 
+    @if (Model.Count() > 0)
+    {
+        <table class="table khonghinhnen">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BanDoc.BD_HoVaTen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NhanVien.NV_HOTEN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PYC_NgayMuon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PYC_NgayTra)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PYC_Tre)
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th></th>
+            </tr>
 
-            </td>
-        </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BanDoc.BD_HoVaTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NhanVien.NV_HOTEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PYC_NgayMuon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PYC_NgayTra)
+                    </td>
+                    <td>
+                        @yeuCausController.SoNgayTre(item.PYC_IDPhieuYeuCau)
+                    </td>
+                    @if (yeuCausController.GetTrangThai(item.PYC_IDPhieuYeuCau) == 0)
+                    {
+                        <td>Đã trả</td>
+                    }
+                    else
+                    {
+                        <td> <a href="@Url.Action("ChuyenTrangThai", new { id = item.PYC_IDPhieuYeuCau, id2 = 0 })" onclick="return confirm('Xác nhận đã trả @item.TL_SoDangKyCaBiet !');">Trả</a></td>
+                    }
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.PYC_IDPhieuYeuCau })
+
+                    </td>
+                </tr>
+
+            }
+
+
+
+
+
+        </table> }
+    else
+    {
+        <div class="col-md-10">
+            <b>Không tìm thấy dữ liệu để hiển thị.</b>
+        </div>
     }
-    
-    </table>
 </body>
 </html>
