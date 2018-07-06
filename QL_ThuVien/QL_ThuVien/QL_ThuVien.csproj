@@ -167,6 +167,7 @@
     <Compile Include="Controllers\HoatDongController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhieuYeuCausController.cs" />
+    <Compile Include="Controllers\RegisterBanDocController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,6 +178,7 @@
     <Compile Include="Models\LoaiTaiLieu.cs" />
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Models\PhieuYeuCau.cs" />
+    <Compile Include="Models\Register.cs" />
     <Compile Include="Models\SessionPYC.cs" />
     <Compile Include="Models\TaiLieu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -679,6 +681,8 @@
     <Content Include="Views\BanDoc\Details.cshtml" />
     <Content Include="Views\BanDoc\Edit.cshtml" />
     <Content Include="Views\BanDoc\Index.cshtml" />
+    <Content Include="Views\RegisterBanDoc\DangKy.cshtml" />
+    <Content Include="Views\RegisterBanDoc\ThanhCong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

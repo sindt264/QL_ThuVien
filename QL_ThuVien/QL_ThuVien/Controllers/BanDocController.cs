@@ -53,14 +53,17 @@ namespace QL_ThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BD_SoThe,BD_HoVaTen,BD_NgaySinh,BD_SoCMND,BD_CapNgay,BD_NoiCap,BD_TrinhDo,BD_NoiCongTacHocTap,BD_NgheNghiep,BD_HopDongLaoDong,BD_DiaChiNoiLamViec,BD_DTDIDong,BD_Email,BD_ChoOHienTai,BD_GioiHanMuon,BD_HinhAnh,BD_NgayCapThe,BD_THSDThe,BD_ThoiGianMuon")] BanDoc banDoc, HttpPostedFileBase fileUpload)
         {
+         
             try
             {
+                
                 if (ModelState.IsValid)
                 {
                     var fileimg = Request.Files["fileUpload"];
                     string sothe = Request["BD_SoThe"];
                     var listmathe = from s in db.BanDocs select s.BD_SoThe;
                     bool kq = listmathe.Contains(sothe);
+                    //bool success = false;
                     if (kq == true)
                     {
                         ViewBag.kq = "<div class ='text-danger'> Số thẻ đã tồn tại! </div>";
@@ -86,7 +89,8 @@ namespace QL_ThuVien.Controllers
                         }
                         db.BanDocs.Add(banDoc);
                         db.SaveChanges();
-                        return Redirect("/BanDoc");
+                        ViewBag.Success = "<div class='alert alert-success' id='success - alert'> <button type = 'button' class='close' data-dismiss='alert'>x</button><strong>Tạo thành công! </strong>Trở về trang chủ để xem lại danh sách. <a href='/BanDoc'>Nhấp vào đây</a></div>";
+                        //return Redirect("/BanDoc");
                     }
                 }
             }
@@ -95,7 +99,7 @@ namespace QL_ThuVien.Controllers
                 ModelState.AddModelError("", "Error Save Data");
             }
             var list = from s in db.BanDocs select s;
-            return View(list);
+            return View();
         }
 
         // GET: BanDoc/Edit/5
