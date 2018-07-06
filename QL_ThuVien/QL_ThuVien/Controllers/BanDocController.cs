@@ -136,6 +136,21 @@ namespace QL_ThuVien.Controllers
             return View(banDoc);
         }
 
+        // POST: BanDoc/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        public RedirectToRouteResult ChuyenTrangThai(string id)
+        {
+            BanDoc banDoc = db.BanDocs.FirstOrDefault(m => m.BD_SoThe == id);
+            if (banDoc != null)
+            {
+                banDoc.BD_NgayCapThe = DateTime.Now;
+                db.SaveChanges();
+            }
+            return RedirectToAction("");
+        }
+
         // GET: BanDoc/Delete/5
         public ActionResult Delete(string id)
         {

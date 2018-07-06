@@ -1228,18 +1228,18 @@
 
 /* Banner */
 
-	#banner {
-		background-attachment: scroll,						fixed;
-		background-color: #494d53;
-		background-image: url("images/overlay.png"), url("../images/1.jpg");
-		background-position: top left,					center center;
-		background-repeat: repeat,						no-repeat;
-		background-size: auto,						cover;
-		color: #d1d2d4;
-		padding: 16em 0;
-		position: relative;
-		text-align: center;
-	}
+#banner {
+    background-attachment: scroll, fixed;
+    background-color: #494d53;
+    background-image: url("images/overlay.png"), url('../images/1.jpg');
+    background-position: top left, center center;
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+    color: #d1d2d4;
+    padding: 16em 0;
+    position: relative;
+    text-align: center;
+}
 
 		#banner:after {
 			-moz-transition: opacity 2s ease-in-out;

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Admin Tài Liệu</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -74,9 +74,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TL_KhoSach)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TL_TrangThai)
-            </td>
+           @if (item.TL_TrangThai==0)
+           {
+            <td>Được mượn</td>
+           }
+           else
+           {
+            <td>Không được mượn</td>
+           }
             <td>
                 <img src="@Url.Content("~/Content/Image/" + item.TL_HinhAnh)" width="100" />
             </td>

@@ -20,6 +20,7 @@ namespace QL_ThuVien.Areas.Admin.Controllers
         // GET: Admin/AdminTaiLieux
         public ActionResult Index()
         {
+           
             return View(db.TaiLieux.ToList());
         }
 

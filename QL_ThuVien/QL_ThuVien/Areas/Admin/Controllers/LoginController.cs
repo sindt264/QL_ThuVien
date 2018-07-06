@@ -40,11 +40,8 @@ namespace QL_ThuVien.Areas.Admin.Controllers
                 //    }
                 //    else
                 {
-                    if (result.NV_MATKHAU == password) {
-                        
+                    if (result.NV_MATKHAU == password)
                         return 1;
-                        
-                    }
                     else
                         return -2;
                 }
@@ -103,7 +100,7 @@ namespace QL_ThuVien.Areas.Admin.Controllers
                 if (result == 1)
                 {
                     var NHANVIEN = dao.GetById(model.UserName);
-                    Session["MaNV"] = model.UserName;
+
                     var userSession = new UserLogin();
 
                     userSession.NV_MATKHAU = NHANVIEN.NV_MATKHAU;
