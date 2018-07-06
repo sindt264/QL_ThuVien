@@ -2,16 +2,16 @@
 
 @{
     ViewBag.Title = "Làm thẻ trực tuyến";
-    Layout = "~/Views/Shared/_LayOut.cshtml";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
 
-<h2>Làm thẻ thư viện trực tuyến</h2>
+<h2 class="khonghinhnen">Làm thẻ thư viện trực tuyến</h2>
 
 @using (Html.BeginForm("DangKy", "RegisterBanDoc", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
+<div class="form-horizontal khonghinhnen">
     <h4>Nhập thông tin</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

@@ -17,6 +17,7 @@ namespace QL_ThuVien.Areas.Admin.Controllers
         // GET: Admin/Login
         public ActionResult Index()
         {
+            Session["MaNV"] = "";
             return View();
         }
         public string Insert(NhanVien entity)
@@ -27,6 +28,7 @@ namespace QL_ThuVien.Areas.Admin.Controllers
         }
         public int Login(string userName, string password)
         {
+
             var result = db.NhanViens.SingleOrDefault(x => x.NV_EMAIL == userName);
             if (result == null)
             {
@@ -34,14 +36,16 @@ namespace QL_ThuVien.Areas.Admin.Controllers
             }
             else
             {
+                
                 //    if (result.Status == false)
                 //    {
                 //        return -1;
                 //    }
                 //    else
                 {
-                    if (result.NV_MATKHAU == password)
-                        return 1;
+                    if (result.NV_MATKHAU == password) { 
+                    return 1;
+                    }
                     else
                         return -2;
                 }
@@ -100,7 +104,7 @@ namespace QL_ThuVien.Areas.Admin.Controllers
                 if (result == 1)
                 {
                     var NHANVIEN = dao.GetById(model.UserName);
-
+                    Session["MaNV"] = model.UserName;
                     var userSession = new UserLogin();
 
                     userSession.NV_MATKHAU = NHANVIEN.NV_MATKHAU;

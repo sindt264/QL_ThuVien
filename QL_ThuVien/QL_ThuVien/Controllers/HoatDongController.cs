@@ -17,6 +17,7 @@ namespace QL_ThuVien.Controllers
         // GET: HoatDong
         public ActionResult Index()
         {
+            
             var data = (from p in db.HoatDongs select p).OrderByDescending(x => x.HD_NgayHoatDong).Take(3);
             ViewBag.data = data;
 

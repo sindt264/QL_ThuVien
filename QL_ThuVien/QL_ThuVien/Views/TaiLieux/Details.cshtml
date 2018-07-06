@@ -2,12 +2,12 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
 
 <h2>Details</h2>
 
-<div>
+<div class="khonghinhnen">
     <h4>TaiLieu</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -101,7 +101,7 @@
 
     </dl>
 </div>
-<p>
+<p class="khonghinhnen">
     @Html.ActionLink("Edit", "Edit", new { id = Model.TL_SoDangKyCaBiet }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

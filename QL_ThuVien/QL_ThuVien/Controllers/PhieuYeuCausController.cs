@@ -13,6 +13,7 @@ using PagedList;
 using PagedList.Mvc;
 using QL_ThuVien.Areas.Admin.Controllers;
 
+
 namespace QL_ThuVien.Controllers
 {
     public class PhieuYeuCausController : Controller
@@ -20,7 +21,7 @@ namespace QL_ThuVien.Controllers
         private DataContext db = new DataContext();
 
         // GET: PhieuYeuCaus
-        public ActionResult getList(string searchTerm,int page =1, int pageSize = 11)
+        public ActionResult getList(string searchTerm, int page = 1, int pageSize = 11)
         {
 
             var phieuYeuCaus = new PhieuYeuCausController();
@@ -181,7 +182,7 @@ namespace QL_ThuVien.Controllers
 
             if (SDKKB.Length > 0 && SoThe.Length > 0)
             {
-                int MaTT = db.Database.SqlQuery<int>("select 1 from PhieuYeuCau where TL_SoDangKyCaBiet ='" + SDKKB +"' and PYC_TrangThai=1").FirstOrDefault();
+                int MaTT = db.Database.SqlQuery<int>("select 1 from PhieuYeuCau where TL_SoDangKyCaBiet ='" + SDKKB + "' and PYC_TrangThai=1").FirstOrDefault();
 
                 if (MaTT == 1)
                 {
@@ -340,7 +341,6 @@ namespace QL_ThuVien.Controllers
             if (result != null)
             {
                 Session["SDKCB"] = id;
-                
                 return View(result);
             }
             else
@@ -348,17 +348,6 @@ namespace QL_ThuVien.Controllers
                 ViewBag.info = "Không tìm thấy mã đăng ký cá biệt !";
                 return View();
             }
-        }
-
-        public string nguoidangmuon(string Ma)
-        {
-            string a = db.Database.SqlQuery<string>("select BD_SoThe from PhieuYeuCau where TL_SoDangKyCaBiet ='"+Ma +"' and PYC_TrangThai =1").SingleOrDefault();
-            return a;
-        }
-        public DateTime nguoidangmuonngay(string Ma)
-        {
-            DateTime a = db.Database.SqlQuery<DateTime>("select PYC_NgayTra from PhieuYeuCau where TL_SoDangKyCaBiet ='"+Ma +"' and PYC_TrangThai =1").SingleOrDefault();
-            return a;
         }
         public ActionResult SearchSoThe(string id)
         {
@@ -403,7 +392,7 @@ namespace QL_ThuVien.Controllers
         {
             return db.Database.SqlQuery<short>("select PYC_TrangThai from PhieuYeuCau where PYC_IDPhieuYeuCau = '" + id + "'").SingleOrDefault();
         }
-        public RedirectToRouteResult ChuyenTrangThai(int id, short id2,string id3)
+        public RedirectToRouteResult ChuyenTrangThai(int id, short id2, string id3)
         {
             PhieuYeuCau phieuYeuCau = db.PhieuYeuCaus.FirstOrDefault(m => m.PYC_IDPhieuYeuCau == id);
             if (phieuYeuCau != null)
@@ -432,16 +421,28 @@ namespace QL_ThuVien.Controllers
             return View();
         }
 
+        public string nguoidangmuon(string Ma)
+        {
+            string a = db.Database.SqlQuery<string>("select BD_SoThe from PhieuYeuCau where TL_SoDangKyCaBiet ='" + Ma + "' and PYC_TrangThai =1").SingleOrDefault();
+            return a;
+        }
+        public DateTime nguoidangmuonngay(string Ma)
+        {
+            DateTime a = db.Database.SqlQuery<DateTime>("select PYC_NgayTra from PhieuYeuCau where TL_SoDangKyCaBiet ='" + Ma + "' and PYC_TrangThai =1").SingleOrDefault();
+            return a;
+        }
+
         public string KTSach(string MaSach)
         {
             int MaTT =  db.Database.SqlQuery<int>("select 1 from PhieuYeuCau where TL_SoDangKyCaBiet ='" + MaSach + "' and PYC_TrangThai=1").FirstOrDefault();
-
+           
             if (MaTT == 1)
             {
                 return "Sách đã được mượn bởi "+nguoidangmuon(MaSach)+" đến ngày : "+nguoidangmuonngay(MaSach);
 
             }
-            else { return "Sách có thể mượn"; }
+            else{ return "Sách chưa đưuọc mượn"; }
+           
         }
     }
 }

@@ -5,125 +5,133 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayOut.cshtml";
 }
 
 <br />
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Danh sách tài liệu
-            </div>
-            <div class="panel-body">
-                @using (Html.BeginForm("Index", "TaiLieux", FormMethod.Get))
-                {
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="col-md-6">
-                                <input type="text" value="@ViewBag.SearchString" name="searchString" new { placeholder = "Mời nhập từ khoá" }/>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="submit">Tìm kiếm</button>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Danh sách tài liệu
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Index", "TaiLieux", FormMethod.Get))
+                    {
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-md-6">
+                                    <input type="text" value="@ViewBag.SearchString" name="searchString" new { placeholder="Mời nhập từ khoá" } />
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit">Tìm kiếm</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table">
-    <tr>
-      
-        <th>
-            Chủ đề
-        </th>
-        <th>
-            Tiêu đề
-        </th>
-        <th>
-            Tác giả
-        </th>
-        <th>
-            Nhà sản xuất
-        </th>
-        <th>
-            Năm sản xuất
-        </th>
-        <th>
-            Số trang
-        </th>
-        <th>
-            Tóm tắt
-        </th>
-        <th>
-            Khổ sách
-        </th>
-        <th>
-            Trạng thái
-        </th>
-        <th>
-            Hình ảnh
-        </th>
-        <th>
-            Ngày nhập
-        </th>
-        @*<th></th>*@
-    </tr>
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <table class="table">
+        <tr>
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_ChuDe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_TieuDe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_TacGia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_NhaXuatBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_NamSanXuat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_SoTrang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_TomTat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_KhoSach)
-        </td>
-        @if (item.TL_TrangThai == 0)
+            <th>
+                Số đăng ký cá biệt
+            </th>
+            <th>
+                Chủ đề
+            </th>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                Tác giả
+            </th>
+            <th>
+                Nhà sản xuất
+            </th>
+            <th>
+                Năm sản xuất
+            </th>
+            <th>
+                Số trang
+            </th>
+            <th>
+                Tóm tắt
+            </th>
+            <th>
+                Khổ sách
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Ngày nhập
+            </th>
+            @*<th></th>*@
+        </tr>
+
+        @foreach (var item in Model)
         {
-            <td>Được mượn</td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_ChuDe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_TieuDe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_TacGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_NhaXuatBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_NamSanXuat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_SoTrang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_TomTat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_KhoSach)
+                </td>
+                @if (item.TL_TrangThai == 1)
+                {
+                    <td>Được mượn</td>
+                }
+                else
+                {
+                    <td>Không được mượn</td>
+                }
+                <td>
+                    <img src="@Url.Content("~/Content/Image/" + item.TL_HinhAnh)" width="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_NgayNhap)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TL_SoDangKyCaBiet }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.TL_SoDangKyCaBiet }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TL_SoDangKyCaBiet })
+                    </td>*@
+            </tr>
         }
-        else
-        {
-            <td>Không được mượn</td>
-        }
-        <td>
-            <img src="@Url.Content("~/Content/Image/" + item.TL_HinhAnh)" width="100" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TL_NgayNhap)
-        </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.TL_SoDangKyCaBiet }) |
-            @Html.ActionLink("Details", "Details", new { id = item.TL_SoDangKyCaBiet }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.TL_SoDangKyCaBiet })
-        </td>*@
-    </tr>
-    }
 
-</table>
+    </table>
+
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))

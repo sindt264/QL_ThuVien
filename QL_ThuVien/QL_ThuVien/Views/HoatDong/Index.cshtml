@@ -12,26 +12,28 @@
 <header id="header" class="alt skel-layers-fixed">
     <nav id="nav">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li>
-                <a href="" class="icon fa-angle-down">Thao tác</a>
-                <ul>
-                    <li><a href="~/Bandoc/">Bạn đọc</a></li>
-                    <li><a href="~/PhieuYeuCaus/">Mượn sách</a></li>
-                    <li><a href="~/Tailieux/">Sách</a></li>
-                    @*<li>
-                        <a href="">Hoạt động</a>
-                        <ul>
-                            <li><a href="/HoatDong/Create">Thêm Hoạt Động</a></li>
-                            <li><a href="#">Option 2</a></li>
-                            <li><a href="#">Option 3</a></li>
-                            <li><a href="#">Option 4</a></li>
-                        </ul>
-                    </li>*@ 
-                    
-                </ul>
-            </li>
-            <li><a href="~/RegisterBanDoc/dangky">Đăng ký</a></li>
+            @*<li><a href="index.html">Home</a></li>
+        <li>
+            <a href="" class="icon fa-angle-down">Thao tác</a>
+            <ul>
+                @*<li><a href="~/Bandoc/">Bạn đọc</a></li>
+                <li><a href="~/PhieuYeuCaus/">Mượn sách</a></li>
+                <li><a href="~/Tailieux/">Sách</a></li>
+                <li>
+                    <a href="">Hoạt động</a>
+                    <ul>
+                        <li><a href="/HoatDong/Create">Thêm Hoạt Động</a></li>
+                        <li><a href="#">Option 2</a></li>
+                        <li><a href="#">Option 3</a></li>
+                        <li><a href="#">Option 4</a></li>
+                    </ul>
+                </li>*@
+
+            <li><a href="~/TaiLieux/">Tìm sách</a></li>
+            <li><a href="~/RegisterBanDoc/dangky">Đăng ký thành viên</a></li>
+            
+                <li><a href="~/admin/Login/">Nhân viên đăng nhập</a></li>
+            
         </ul>
     </nav>
 </header>
@@ -225,7 +227,7 @@
             {
                 <div class="4u 6u(2) 12u$(3)">
                     <article class="box post">
-                        <a href="#" class="image fit"><img src="@item.TL_HinhAnh" alt="" /></a>
+                        <a href="#" class="image fit"><img src="~/Content/Image/@item.TL_HinhAnh" alt="" /></a>
                         <h3>@item.TL_ChuDe</h3>
                         <p>@item.TL_TomTat</p>
                         <ul class="actions">

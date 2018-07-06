@@ -2,17 +2,17 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
 
-<h2>Create</h2>
+<h2 class="khonghinhnen">Create</h2>
 
 
-@using (Html.BeginForm("Create", "TaiLieux", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "TaiLieux", FormMethod.Post, new { @enctype = "multipart/form-data", @class="khonghinhnen"}))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal khonghinhnen">
         <h4>TaiLieu</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -126,9 +126,6 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { @class="Khonghinhnen" })
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

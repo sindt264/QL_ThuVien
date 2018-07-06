@@ -2,9 +2,9 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
-
+<div class="khonghinhnen">
 <h2>Admin Nhân viên</h2>
 
 <p>
@@ -22,10 +22,10 @@
             Giới tính
         </th>
         <th>
-           Email
+            Email
         </th>
         <th>
-         SDT
+            SDT
         </th>
         <th>
             Quê quán
@@ -39,38 +39,40 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_HOTEN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_NGAYSINH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_GIOITINH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_EMAIL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_SDT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_QUEQUAN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_MATKHAU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NV_HINHANH)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NV_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NV_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NV_ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_HOTEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_NGAYSINH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_GIOITINH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_EMAIL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_QUEQUAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_MATKHAU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NV_HINHANH)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.NV_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.NV_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.NV_ID })
+            </td>
+        </tr>
+    }
 
 </table>
+</div>

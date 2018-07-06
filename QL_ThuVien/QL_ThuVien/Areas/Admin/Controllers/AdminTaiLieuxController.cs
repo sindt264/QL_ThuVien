@@ -71,7 +71,7 @@ namespace QL_ThuVien.Areas.Admin.Controllers
                         fileUpload.SaveAs(path);
                     }
                     //Them Sach Moi
-                    tailieu.TL_HinhAnh = fileUpload.FileName;
+                    tailieu.TL_HinhAnh = "~/Content/Image/"+fileUpload.FileName;
                     db.TaiLieux.Add(tailieu);
                     db.SaveChanges();
                 }

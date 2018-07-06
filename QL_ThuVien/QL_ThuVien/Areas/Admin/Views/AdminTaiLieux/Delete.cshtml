@@ -2,106 +2,108 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
+<div class="khonghinhnen">
+    <h2>Delete Tài Liệu</h2>
 
-<h2>Delete Tài Liệu</h2>
+    <h3>Bạn có chắc chắn muốn xóa mục này không?</h3>
+    <div>
 
-<h3>Bạn có chắc chắn muốn xóa mục này không?</h3>
-<div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Chủ đề
+            </dt>
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Chủ đề
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_ChuDe)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_ChuDe)
-        </dd>
+            <dt>
+                Tiêu đề
+            </dt>
 
-        <dt>
-            Tiêu đề
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_TieuDe)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_TieuDe)
-        </dd>
+            <dt>
+                Tác giả
+            </dt>
 
-        <dt>
-            Tác giả
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_TacGia)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_TacGia)
-        </dd>
+            <dt>
+                Nhà xuất bản
+            </dt>
 
-        <dt>
-            Nhà xuất bản
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_NhaXuatBan)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_NhaXuatBan)
-        </dd>
+            <dt>
+                Năm xuất bản
+            </dt>
 
-        <dt>
-            Năm xuất bản
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_NamSanXuat)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_NamSanXuat)
-        </dd>
+            <dt>
+                Số trang
+            </dt>
 
-        <dt>
-            Số trang
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_SoTrang)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_SoTrang)
-        </dd>
+            <dt>
+                Tóm tắt
+            </dt>
 
-        <dt>
-            Tóm tắt
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_TomTat)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_TomTat)
-        </dd>
+            <dt>
+                Khổ sách
+            </dt>
 
-        <dt>
-            Khổ sách
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_KhoSach)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_KhoSach)
-        </dd>
+            <dt>
+                Trạng thái
+            </dt>
 
-        <dt>
-            Trạng thái
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TL_TrangThai)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_TrangThai)
-        </dd>
 
-       
 
-        <dt>
-            Ngày nhập
-        </dt>
+            <dt>
+                Ngày nhập
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TL_NgayNhap)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TL_NgayNhap)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
 </div>
