@@ -340,6 +340,7 @@ namespace QL_ThuVien.Controllers
             if (result != null)
             {
                 Session["SDKCB"] = id;
+                
                 return View(result);
             }
             else
@@ -347,6 +348,12 @@ namespace QL_ThuVien.Controllers
                 ViewBag.info = "Không tìm thấy mã đăng ký cá biệt !";
                 return View();
             }
+        }
+
+        public string nguoidangmuon(string Ma)
+        {
+            string a = db.Database.SqlQuery<string>("select BD_SoThe from PhieuYeuCau where TL_SoDangKyCaBiet ='"+Ma +"' and PYC_TrangThai =1").SingleOrDefault();
+            return a;
         }
         public ActionResult SearchSoThe(string id)
         {
@@ -426,7 +433,7 @@ namespace QL_ThuVien.Controllers
 
             if (MaTT == 1)
             {
-                return "Sách đã được mượn.";
+                return "Sách đã được mượn bởi "+nguoidangmuon(MaSach);
 
             }
             else { return "Sách có thể mượn"; }
