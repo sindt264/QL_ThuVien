@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -125,16 +126,49 @@ namespace QL_ThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BD_SoThe,BD_HoVaTen,BD_NgaySinh,BD_SoCMND,BD_CapNgay,BD_NoiCap,BD_TrinhDo,BD_NoiCongTacHocTap,BD_NgheNghiep,BD_HopDongLaoDong,BD_DiaChiNoiLamViec,BD_DTDIDong,BD_Email,BD_ChoOHienTai,BD_GioiHanMuon,BD_HinhAnh,BD_NgayCapThe,BD_THSDThe,BD_ThoiGianMuon")] BanDoc banDoc)
+        public ActionResult Edit([Bind(Include = "BD_SoThe,BD_HoVaTen,BD_NgaySinh,BD_SoCMND,BD_CapNgay,BD_NoiCap,BD_TrinhDo,BD_NoiCongTacHocTap,BD_NgheNghiep,BD_HopDongLaoDong,BD_DiaChiNoiLamViec,BD_DTDIDong,BD_Email,BD_ChoOHienTai,BD_GioiHanMuon,BD_HinhAnh,BD_NgayCapThe,BD_THSDThe,BD_ThoiGianMuon")] BanDoc banDoc, HttpPostedFileBase fileUpload)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(banDoc).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var fileimg = Request.Files["fileUpload"];
+                    string ha = fileimg.FileName;
+                    if (fileimg.FileName.Length != 0)
+                    {
+                        //Upload file
+                        var fileName = Path.GetFileName(fileUpload.FileName);
+                        //Lưu đường dẫn file ảnh 
+                        var path = Path.Combine(Server.MapPath("~/Content/AvtBanDoc"), fileName);
+                        //Kiểm tra file đã tồn tại
+                        if (System.IO.File.Exists(path))
+                        {
+                            ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+                        }
+                        else
+                        {
+                            fileUpload.SaveAs(path);
+                        }
+                        banDoc.BD_HinhAnh = fileUpload.FileName;
+                        db.Entry(banDoc).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        db.Entry(banDoc).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                }
+            }
+            }
+            catch (RetryLimitExceededException)
+            {
+                ModelState.AddModelError("", "Error Save Data");
             }
             return View(banDoc);
         }
+        
 
         // POST: BanDoc/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -146,6 +180,8 @@ namespace QL_ThuVien.Controllers
             if (banDoc != null)
             {
                 banDoc.BD_NgayCapThe = DateTime.Now;
+                banDoc.BD_THSDThe = DateTime.Now.AddYears(+1);
+                banDoc.BD_ThoiGianMuon = DateTime.Now.AddMonths(+2);
                 db.SaveChanges();
             }
             return RedirectToAction("");

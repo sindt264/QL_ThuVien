@@ -33,6 +33,7 @@
         public Nullable<System.DateTime> BD_NgaySinh { get; set; }
 
         [Display(Name = "CMND")]
+        
         public decimal? BD_SoCMND { get; set; }
 
         [Display(Name = "Ngày cấp")]
