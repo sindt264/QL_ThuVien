@@ -22,9 +22,9 @@
         <!--Html.ValidationSummary(false, "", new { class = "text-danger" }) -->
         <div class="row">
             <div class="form-group col-xs-6  ">
-                @Html.LabelFor(model => model.BD_SoThe, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.BD_SoThe, htmlAttributes: new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    <input name="BD_SoThe" id="BD_SoThe" class="form-control" placeholder="Số thẻ" />
+                    <input name="BD_SoThe" id="BD_SoThe" class="form-control" placeholder="Số thẻ"  required />
                     <!--Html.EditorFor(model => model.BD_SoThe, new { htmlAttributes = new { class = "form-control", placeholder = "Số thẻ", name = "SoThe" } }) -->
                     @Html.Raw(ViewBag.kq)
                     @Html.ValidationMessageFor(model => model.BD_SoThe, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
             <div class="form-group col-xs-6  ">
                 @Html.LabelFor(model => model.BD_HoVaTen, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BD_HoVaTen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Họ và tên" } })
+                    @Html.EditorFor(model => model.BD_HoVaTen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Họ và tên", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.BD_HoVaTen, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <div class="form-group col-xs-6 ">
                 @Html.LabelFor(model => model.BD_NgaySinh, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BD_NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.BD_NgaySinh, new { htmlAttributes = new { @class = "form-control" , @required = "required" } })
                     @Html.ValidationMessageFor(model => model.BD_NgaySinh, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -74,7 +74,7 @@
             <div class="form-group col-xs-6">
                 @Html.LabelFor(model => model.BD_TrinhDo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BD_TrinhDo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Trình độ" } })
+                    @Html.EditorFor(model => model.BD_TrinhDo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Trình độ", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.BD_TrinhDo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="form-group col-xs-6">
                 @Html.LabelFor(model => model.BD_NgheNghiep, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BD_NgheNghiep, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nghề nghiệp" } })
+                    @Html.EditorFor(model => model.BD_NgheNghiep, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nghề nghiệp" , @required = "required" } })
                     @Html.ValidationMessageFor(model => model.BD_NgheNghiep, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -114,7 +114,7 @@
             <div class="form-group col-xs-6">
                 @Html.LabelFor(model => model.BD_DTDIDong, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BD_DTDIDong, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điên thoại di dộng" } })
+                    @Html.EditorFor(model => model.BD_DTDIDong, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điên thoại di dộng" , @required = "required" } })
                     @Html.ValidationMessageFor(model => model.BD_DTDIDong, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -130,7 +130,7 @@
             <div class="form-group col-xs-6">
                 @Html.LabelFor(model => model.BD_ChoOHienTai, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BD_ChoOHienTai, new { htmlAttributes = new { @class = "form-control", @placeholder = "Chỗ ở hiện tại" } })
+                    @Html.EditorFor(model => model.BD_ChoOHienTai, new { htmlAttributes = new { @class = "form-control", @placeholder = "Chỗ ở hiện tại" , @required = "required" } })
                     @Html.ValidationMessageFor(model => model.BD_ChoOHienTai, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -149,7 +149,7 @@
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.BD_GioiHanMuon, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BD_GioiHanMuon, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số lượng sách được mượn" } })
+                    @Html.EditorFor(model => model.BD_GioiHanMuon, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số lượng sách được mượn" , @required = "required" } })
                     @Html.ValidationMessageFor(model => model.BD_GioiHanMuon, "", new { @class = "text-danger" })
                 </div>
             </div>

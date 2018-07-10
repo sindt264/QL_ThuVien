@@ -100,9 +100,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.BD_NgaySinh)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BD_SoCMND)
-                </td>
+                @if (item.BD_SoCMND != null)
+                {
+                    <td>
+                        @Convert.ToInt32(item.BD_SoCMND)
+                    </td>
+                }
+                else { <td></td>}
                 <td>
                     @Html.DisplayFor(modelItem => item.BD_CapNgay)
                 </td>
@@ -158,8 +162,17 @@
                     <img src="@Url.Content("~/Content/AvtBanDoc/" + item.BD_HinhAnh)" height="40" width="40" />
                 </td>
                 <td>
-                    <button type="button" class="btn btn-default btn-md " style="width:100px "><a href="/BanDoc/Edit/@item.BD_SoThe" style="text-decoration:none;font-size:15px; ">Sửa</a></button>
-                    <button class="btn btn-default" style="width:100px "><a href="/BanDoc/Details/@item.BD_SoThe" style="text-decoration:none; font-size:15px;">Chi tiết</a></button>
+                    @if (@item.BD_NgayCapThe == null)
+                    {
+                        <button disabled class="btn btn-default" style="width:100px; text-decoration-color:red">Sửa</button>
+                        <button class="btn btn-default" disabled style="width:100px ; text-decoration-color:red">Chi tiết</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-default btn-md " style="width:100px  "><a href="/BanDoc/Edit/@item.BD_SoThe" style="text-decoration:none;font-size:15px; ">Sửa</a></button>
+                        <button class="btn btn-default" style="width:100px "><a href="/BanDoc/Details/@item.BD_SoThe" style="text-decoration:none; font-size:15px;">Chi tiết</a></button>
+                    }
+
                     <button class="btn btn-default" style="width:100px "><a href="/BanDoc/Delete/@item.BD_SoThe" style="text-decoration:none; font-size:15px;">Xóa</a></button>
                 </td>
             </tr>
