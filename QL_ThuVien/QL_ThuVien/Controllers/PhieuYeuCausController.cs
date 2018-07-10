@@ -23,7 +23,6 @@ namespace QL_ThuVien.Controllers
         // GET: PhieuYeuCaus
         public ActionResult getList(string searchTerm, int page = 1, int pageSize = 11)
         {
-
             var phieuYeuCaus = new PhieuYeuCausController();
             var mode = phieuYeuCaus.ListAllPaging(searchTerm, page, pageSize);
             ViewBag.SearchTerm = searchTerm;
@@ -40,8 +39,67 @@ namespace QL_ThuVien.Controllers
 
             return model.OrderByDescending(x => x.PYC_NgayMuon).ToPagedList(page, pageSize);
         }
+        public ActionResult thongkesach(string searchTerm, int page = 1, int pageSize = 11)
+        {
 
-   
+            var phieuYeuCaus = new PhieuYeuCausController();
+            var mode = phieuYeuCaus.ListAllPaging1(searchTerm, page, pageSize);
+            ViewBag.SearchTerm = searchTerm;
+            return View(mode);
+        }
+        public IEnumerable<TaiLieu> ListAllPaging1(string searchTerm, int page, int pageSize)
+        {
+            IQueryable<TaiLieu> model = db.TaiLieux;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                model = model.Where(x => x.TL_SoDangKyCaBiet.Contains(searchTerm) || x.TL_ChuDe.Contains(searchTerm));
+
+            }
+
+            return model.OrderByDescending(x => x.TL_NgayNhap).ToPagedList(page, pageSize);
+        }
+         public ActionResult thongkebandoc(string searchTerm, int page = 1, int pageSize = 11)
+        {
+
+            var phieuYeuCaus = new PhieuYeuCausController();
+            var mode = phieuYeuCaus.ListAllPaging2(searchTerm, page, pageSize);
+            ViewBag.SearchTerm = searchTerm;
+            return View(mode);
+        }
+        public IEnumerable<BanDoc> ListAllPaging2(string searchTerm, int page, int pageSize)
+        {
+            IQueryable<BanDoc> model = db.BanDocs;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                model = model.Where(x => x.BD_SoThe.Contains(searchTerm) || x.BD_HoVaTen.Contains(searchTerm));
+
+            }
+
+            return model.OrderByDescending(x => x.BD_NgayCapThe).ToPagedList(page, pageSize);
+        }
+
+        public int bandocdatra(string id)
+        {
+            int a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id && p.PYC_TrangThai == 0 select p).Count();
+                return a;
+        }
+          public int bandocchuatra(string id)
+        {
+            int a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id && p.PYC_TrangThai == 1 select p).Count();
+                return a;
+        }
+
+        public int bandocdamuon(string id)
+        {
+            int a = (from p in db.PhieuYeuCaus where p.BD_SoThe == id select p).Count();
+            return a;
+        }
+
+        public int sachdamuon(string id)
+        {
+            int a = (from p in db.PhieuYeuCaus where p.TL_SoDangKyCaBiet == id select p).Count();
+                return a;
+        }
 
         //public ActionResult GetList(string searchTerm)
         //{
@@ -214,7 +272,7 @@ namespace QL_ThuVien.Controllers
                     {
                         phieuYeuCau.NV_ID = Comand.NV_ID;
                         phieuYeuCau.PYC_NgayMuon = DateTime.Now;
-                        phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
+                        phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);                        
                         phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
                         phieuYeuCau.BD_SoThe = SoThe;
                         phieuYeuCau.TL_SoDangKyCaBiet = SDKKB;
@@ -240,6 +298,9 @@ namespace QL_ThuVien.Controllers
             }
             return sl;
         }
+
+
+
 
 
         // GET: PhieuYeuCaus/Edit/5

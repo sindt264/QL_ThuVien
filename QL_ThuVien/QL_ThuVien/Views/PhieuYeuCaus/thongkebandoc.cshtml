@@ -1,0 +1,68 @@
+﻿@model IEnumerable<QL_ThuVien.Models.BanDoc>
+@using PagedList
+@using PagedList.Mvc
+@{
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
+    QL_ThuVien.Controllers.PhieuYeuCausController yeuCausController = new QL_ThuVien.Controllers.PhieuYeuCausController();
+}
+
+<h2>Thống kê sách</h2>
+@using (Html.BeginForm("GetList", "PhieuYeuCaus", FormMethod.Get, new { @class = "navbar-form navbar-right", role = "search", id = "search-form", onsubmit = "return empty();" }))
+{
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Tìm kiếm sách" name="SearchTerm" value="@ViewBag.SearchTerm" id="search-box">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success hidden-xs">Tìm</button>
+    </div>
+}
+
+
+<table class="table khonghinhnen">
+    <tr>
+        <th>
+            @Html.DisplayName("Số thẻ")
+        </th>
+
+        <th>
+            @Html.DisplayName("Họ và tên")
+        </th>
+        <th>
+            @Html.DisplayName("Tổng lần mượn")
+        </th>
+         <th>
+            @Html.DisplayName("Đã trả")
+        </th>
+         <th>
+            @Html.DisplayName("Chưa trả")
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BD_SoThe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BD_HoVaTen)
+            </td>
+            <td>
+                @yeuCausController.bandocdamuon(item.BD_SoThe)
+            </td>
+             <td>
+                @yeuCausController.bandocdatra(item.BD_SoThe)
+            </td>
+             <td>
+                @yeuCausController.bandocchuatra(item.BD_SoThe)
+            </td>
+
+
+        </tr>
+    }
+
+</table>

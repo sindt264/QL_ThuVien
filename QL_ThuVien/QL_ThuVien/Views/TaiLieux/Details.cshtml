@@ -5,12 +5,18 @@
     Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Thông tin tài liệu</h2>
 
 <div class="khonghinhnen">
-    <h4>TaiLieu</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TL_SoDangKyCaBiet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TL_SoDangKyCaBiet)
+        </dd> 
         <dt>
             @Html.DisplayNameFor(model => model.TL_ChuDe)
         </dt>
@@ -88,7 +94,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TL_HinhAnh)
+            <img src="~/Content/Image/@Model.TL_HinhAnh" alt="" />
         </dd>
 
         <dt>
@@ -102,6 +108,5 @@
     </dl>
 </div>
 <p class="khonghinhnen">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TL_SoDangKyCaBiet }) |
-    @Html.ActionLink("Back to List", "Index")
+<a href="~/HoatDong/">Trở về</a>
 </p>

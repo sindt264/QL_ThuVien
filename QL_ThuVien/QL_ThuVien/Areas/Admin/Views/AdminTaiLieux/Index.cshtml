@@ -8,47 +8,49 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table khonghinhnen">
-    <tr>
-        <th>
-            Số đăng ký cá biệt
-        <th>
-            Chủ đề
-        </th>
-        <th>
-            Tiêu đề
-        </th>
-        <th>
-            Tác giả
-        </th>
-        <th>
-            Nhà sản xuất
-        </th>
-        <th>
-            Năm sản xuất
-        </th>
-        <th>
-            Số trang
-        </th>
-        <th>
-            Tóm tắt
-        </th>
-        <th>
-            Khổ sách
-        </th>
-        <th>
-            Trạng thái
-        </th>
-        <th>
-            Hình ảnh
-        </th>
-        <th>
-            Ngày nhập
-        </th>
-        @*<th></th>*@
-    </tr>
-    @foreach (var item in Model)
-    {
+
+    
+    <table class="table khonghinhnen">
+        <tr>
+            <th>
+                Số đăng ký cá biệt
+            <th>
+                Chủ đề
+            </th>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                Tác giả
+            </th>
+            <th>
+                Nhà sản xuất
+            </th>
+            <th>
+                Năm sản xuất
+            </th>
+            <th>
+                Số trang
+            </th>
+            <th class="td">
+                Tóm tắt
+            </th>
+            <th>
+                Khổ sách
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Ngày nhập
+            </th>
+            @*<th></th>*@
+        </tr>
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TL_SoDangKyCaBiet)
@@ -71,31 +73,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TL_SoTrang)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TL_TomTat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TL_KhoSach)
-            </td>
-            @if (item.TL_TrangThai == 0)
-            {
-                <td>Không được mượn</td>
-            }
-            else
-            {
-                <td>Được mượn</td>
-            }
-            <td>
-                <img src="@Url.Content("~/Content/Image/" + item.TL_HinhAnh)" width="100" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TL_NgayNhap)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TL_SoDangKyCaBiet }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TL_SoDangKyCaBiet }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TL_SoDangKyCaBiet })
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_TomTat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_KhoSach)
+                </td>
+                @if (item.TL_TrangThai == 0)
+                {
+                    <td>Không được mượn</td>
+                }
+                else
+                {
+                    <td>Được mượn</td>
+                }
+                <td>
+                    <img src="@Url.Content("~/Content/Image/" + item.TL_HinhAnh)" width="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TL_NgayNhap)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TL_SoDangKyCaBiet }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TL_SoDangKyCaBiet }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TL_SoDangKyCaBiet })
+                </td>
         </tr>
-    }
-</table>
+        }
+    </table>

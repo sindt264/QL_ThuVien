@@ -854,6 +854,8 @@
     <Content Include="Views\TaiLieux\Details.cshtml" />
     <Content Include="Views\TaiLieux\Edit.cshtml" />
     <Content Include="Views\TaiLieux\Index.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\thongkesach.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\thongkebandoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

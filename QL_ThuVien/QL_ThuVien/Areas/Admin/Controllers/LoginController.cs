@@ -18,7 +18,8 @@ namespace QL_ThuVien.Areas.Admin.Controllers
         // GET: Admin/Login
         public ActionResult Index()
         {
-            Session["MaNV"] = "";
+            Comand.NV_Level = 0;
+            
             return View();
         }
         public string Insert(NhanVien entity)

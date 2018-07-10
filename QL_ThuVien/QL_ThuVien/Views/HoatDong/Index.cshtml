@@ -13,26 +13,46 @@
     <nav id="nav">
         <ul>
             @*<li><a href="index.html">Home</a></li>
+        <li>
+            <a href="" class="icon fa-angle-down">Thao tác</a>
+            <ul>
+                @*<li><a href="~/Bandoc/">Bạn đọc</a></li>
+                <li><a href="~/PhieuYeuCaus/">Mượn sách</a></li>
+                <li><a href="~/Tailieux/">Sách</a></li>
                 <li>
-                    <a href="" class="icon fa-angle-down">Thao tác</a>
+                    <a href="">Hoạt động</a>
                     <ul>
-                        @*<li><a href="~/Bandoc/">Bạn đọc</a></li>
-                        <li><a href="~/PhieuYeuCaus/">Mượn sách</a></li>
-                        <li><a href="~/Tailieux/">Sách</a></li>
-                        <li>
-                            <a href="">Hoạt động</a>
-                            <ul>
-                                <li><a href="/HoatDong/Create">Thêm Hoạt Động</a></li>
-                                <li><a href="#">Option 2</a></li>
-                                <li><a href="#">Option 3</a></li>
-                                <li><a href="#">Option 4</a></li>
-                            </ul>
-                        </li>*@
+                        <li><a href="/HoatDong/Create">Thêm Hoạt Động</a></li>
+                        <li><a href="#">Option 2</a></li>
+                        <li><a href="#">Option 3</a></li>
+                        <li><a href="#">Option 4</a></li>
+                    </ul>
+                </li>*@
 
             <li><a href="~/TaiLieux/">Tìm sách</a></li>
-            <li><a href="~/RegisterBanDoc/dangky">Làm thẻ Online</a></li>
+            <li><a href="~/RegisterBanDoc/dangky">Đăng ký làm thẻ bạn đọc Online</a></li>
+            @if (QL_ThuVien.Models.Comand.NV_Level == 1)
+            {
+                <li><a href="~/admin/NhanViens/">Quản lý</a></li>
+            }
+            else if (QL_ThuVien.Models.Comand.NV_Level == 2)
+            {
+                <li><a href="~/PhieuYeuCaus/">Quản lý lưu thông</a></li>
 
-            <li><a href="~/admin/Login/">Nhân viên đăng nhập</a></li>
+            }
+            else if (QL_ThuVien.Models.Comand.NV_Level == 3)
+            {
+                <li><a href="~/Admin/AdminTaiLieux">Quản lý sách</a></li>
+
+            }
+            else if (QL_ThuVien.Models.Comand.NV_Level == 4)
+            {
+                <li><a href="~/BanDoc/">Quản lý bạn đọc</a></li>
+            }
+            else
+            {
+                <li><a href="~/admin/Login/">Nhân viên đăng nhập</a></li>
+            }
 
         </ul>
     </nav>

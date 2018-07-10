@@ -108,21 +108,30 @@
                                     <li><a href="/HinhAnhHoatDongs/">Hình ảnh cho hoạt động</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown magz-dropdown">
 
-                                <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
+                            <li class="dropdown magz-dropdown">
+                                <a href="#">Quản lý lưu thông sách<i class="ion-ios-arrow-right"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
                                     <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown magz-dropdown">
+                                <a href="#">Thống kê<i class="ion-ios-arrow-right"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/PhieuYeuCaus/thongkesach">Sách</a></li>
+                                    <li><a href="/PhieuYeuCaus/thongkebandoc">Bạn đọc</a></li>
                                 </ul>
                             </li>
                             <li><a href="/Admin/Login/">Đăng xuất</a></li>
                         }
                         else if (QL_ThuVien.Models.Comand.NV_Level == 2)
                         {
+                            <li><a href="~/HoatDong/">Home</a></li>
                             <li class="dropdown magz-dropdown">
 
-                                <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
+                                <a href="#">Quản lý lưu thông sách<i class="ion-ios-arrow-right"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
                                     <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
@@ -132,35 +141,37 @@
                         }
                         else if (QL_ThuVien.Models.Comand.NV_Level == 3)
                         {
+                            <li><a href="~/HoatDong/">Home</a></li>
                             <li><a href="/Admin/Admintailieux/">Sách</a></li>
                             <li><a href="/Admin/Login/">Đăng xuất</a></li>
                         }
                         else if (QL_ThuVien.Models.Comand.NV_Level == 4)
                         {
+                            <li><a href="~/HoatDong/">Home</a></li>
                             <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
                             <li><a href="/Admin/Login/">Đăng xuất</a></li>
                         }
                         @*<li><a href="~/HoatDong/">Home</a></li>
-                            <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
-                            <li><a href="/Admin/Admintailieux/">Sách</a></li>
-                            <li class="dropdown magz-dropdown">
+        <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
+        <li><a href="/Admin/Admintailieux/">Sách</a></li>
+        <li class="dropdown magz-dropdown">
 
-                                <a href="#">Hoạt động<i class="ion-ios-arrow-right"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/HoatDong/getlist">Thêm hoạt động</a></li>
-                                    <li><a href="/HinhAnhHoatDongs/">Hình ảnh cho hoạt động</a></li>
-                                </ul>
-                            </li>
+            <a href="#">Hoạt động<i class="ion-ios-arrow-right"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="/HoatDong/getlist">Thêm hoạt động</a></li>
+                <li><a href="/HinhAnhHoatDongs/">Hình ảnh cho hoạt động</a></li>
+            </ul>
+        </li>
 
-                            <li class="dropdown magz-dropdown">
+        <li class="dropdown magz-dropdown">
 
-                                <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
-                                    <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/Admin/Login/">Đăng xuất</a></li>*@
+            <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
+                <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
+            </ul>
+        </li>
+        <li><a href="/Admin/Login/">Đăng xuất</a></li>*@
                     </ul>
                 </div>
             </div>
