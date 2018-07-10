@@ -14,15 +14,18 @@
         {
             PhieuYeuCaus = new HashSet<PhieuYeuCau>();
         }
-
+       
         [Key]
+        [Required(ErrorMessage = "Tiêu đề không được trống")]
         [StringLength(200)]
         [Display(Name = "Số đăng ký cá biệt")]
         public string TL_SoDangKyCaBiet { get; set; }
 
+
         [StringLength(500)]
         [Display(Name = "Chủ đề")]
         public string TL_ChuDe { get; set; }
+
 
         [StringLength(250)]
         [Display(Name = "Tiêu đề")]

@@ -18,7 +18,7 @@ namespace QL_ThuVien.Controllers
         private DataContext db = new DataContext();
 
         // GET: TaiLieux
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 2)
         {
             var tailieu = new TaiLieuxController();
             var mode = tailieu.ListAllPaging(searchString, page, pageSize);
@@ -33,7 +33,7 @@ namespace QL_ThuVien.Controllers
             IQueryable<TaiLieu> model = db.TaiLieux;
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.TL_ChuDe.Contains(searchString) || x.TL_TieuDe.Contains(searchString) || x.TL_TacGia.Contains(searchString) || x.TL_TomTat.Contains(searchString) || x.TL_NhaXuatBan.Contains(searchString));
+                model = model.Where(x => x.TL_ChuDe.Contains(searchString) || x.TL_TieuDe.Contains(searchString) || x.TL_TacGia.Contains(searchString) || x.TL_TomTat.Contains(searchString) || x.TL_NhaXuatBan.Contains(searchString) || x.TL_SoDangKyCaBiet.Contains(searchString));
 
             }
             return model.OrderByDescending(x => x.TL_SoDangKyCaBiet).ToPagedList(page, pageSize);
