@@ -41,41 +41,7 @@ namespace QL_ThuVien.Controllers
             return model.OrderByDescending(x => x.PYC_NgayMuon).ToPagedList(page, pageSize);
         }
 
-        public int datra(string id)
-        {
-            var result = db.PhieuYeuCaus.Where(m=>m.TL_SoDangKyCaBiet == id).Where(m=>m.PYC_TrangThai == 0).Count();
-
-            return result;
-        }
-        public int chuatra(string id)
-        {
-            var result = db.PhieuYeuCaus.Where(m => m.TL_SoDangKyCaBiet == id).Where(m => m.PYC_TrangThai == 1).Count();
-
-            return result;
-        }
-         public int tong(string id)
-        {
-            var result = db.PhieuYeuCaus.Where(m => m.TL_SoDangKyCaBiet == id).Count();
-
-            return result;
-        }
-        public int tongnguoimuon(string id)
-        {
-            var result = db.PhieuYeuCaus.Where(m => m.BD_SoThe == id).Count();
-
-            return result;
-        }
-
-
-      
-        public ActionResult thongke()
-        {
-            var result = (from s in db.PhieuYeuCaus
-                          select s.BD_SoThe
-                          );
-            ViewBag.view = result;
-            return View();
-        }
+   
 
         //public ActionResult GetList(string searchTerm)
         //{

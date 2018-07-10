@@ -51,38 +51,53 @@ namespace QL_ThuVien.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Create")]
         [ValidateInput(false)]
-        public ActionResult Create(TaiLieu tailieu, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "TL_SoDangKyCaBiet,TL_ChuDe,TL_TieuDe,TL_TacGia,TL_NhaXuatBan,TL_NamSanXuat,TL_SoTrang,TL_TomTat,TL_KhoSach,TL_TrangThai,TL_HinhAnh,TL_NgayNhap")]TaiLieu tailieu, HttpPostedFileBase fileUpload)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //Upload file
-                    var fileName = Path.GetFileName(fileUpload.FileName);
-                    //Lưu đường dẫn file ảnh 
-                    var path = Path.Combine(Server.MapPath("~/Content/Image"), fileName);
-                    //Kiểm tra file đã tồn tại
-                    if (System.IO.File.Exists(path))
+                    var fileimg = Request.Files["fileUpload"];
+                    string sodangkycabiet = Request["TL_SoDangKyCaBiet"];
+                    var listsodangkycabiet = from s in db.TaiLieux select s.TL_SoDangKyCaBiet;
+                    bool kq = listsodangkycabiet.Contains(sodangkycabiet);
+                    //bool success = false;
+                    if (kq == true)
                     {
-                        ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+                        ViewBag.kq = "Số đăng ký cá biệt đã tồn tại!";
                     }
                     else
                     {
-                        fileUpload.SaveAs(path);
+                        if (fileimg.FileName.Length != 0)
+                        {
+                            //Upload file
+                            var fileName = Path.GetFileName(fileUpload.FileName);
+                            //Lưu đường dẫn file ảnh 
+                            var path = Path.Combine(Server.MapPath("~/Content/Image"), fileName);
+                            //Kiểm tra file đã tồn tại
+                            if (System.IO.File.Exists(path))
+                            {
+                                ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+                            }
+                            else
+                            {
+                                fileUpload.SaveAs(path);
+                            }
+                            tailieu.TL_HinhAnh = fileUpload.FileName;
+                        }
+                        db.TaiLieux.Add(tailieu);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "AdminTaiLieux");
+
                     }
-                    //Them Sach Moi
-                    tailieu.TL_HinhAnh = "~/Content/Image/"+fileUpload.FileName;
-                    db.TaiLieux.Add(tailieu);
-                    db.SaveChanges();
                 }
             }
             catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Error Save Data");
             }
-            //Cập nhật lại danh sách hiển thị
-            var listBook = from s in db.TaiLieux select s;
-            return View("Index", listBook);
+            var list = from s in db.TaiLieux select s;
+            return View();
         }
 
 

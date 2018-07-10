@@ -5,7 +5,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayOut.cshtml";
+    Layout = "~/Views/Shared/_LayOutPhieuYeuCau.cshtml";
 }
 
 <br />
@@ -25,7 +25,7 @@
                                     <input type="text" value="@ViewBag.SearchString" name="searchString" new { placeholder="Mời nhập từ khoá" } />
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit">Tìm kiếm</button>
+                                    <button type="submit" class="btn btn-facebook">Tìm kiếm</button>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
     @*<p>
             @Html.ActionLink("Create New", "Create")
         </p>*@
-    <table class="table">
+    <table class="table khonghinhnen">
         <tr>
 
             <th>
@@ -133,5 +133,4 @@
         }
 
     </table>
-
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
