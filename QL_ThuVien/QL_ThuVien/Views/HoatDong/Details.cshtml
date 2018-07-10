@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_LayoutHoatDong.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Hoạt động</h2>
 
 <div>
-    <h4>HoatDong</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -46,6 +45,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.HD_IDHoatDong }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Trở về", "Index", new { @class="btn btn-block" })
 </p>

@@ -1,5 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+<html>@{ 
+    QL_ThuVien.Areas.Admin.Controllers.LoginController login = new QL_ThuVien.Areas.Admin.Controllers.LoginController();
+    QL_ThuVien.Areas.Admin.Controllers.LoginController.UserLogin userLogin = new QL_ThuVien.Areas.Admin.Controllers.LoginController.UserLogin();
+}
+<a href="~/Areas/Admin/Controllers/LoginController.cs">~/Areas/Admin/Controllers/LoginController.cs</a>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,12 +23,12 @@
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/ionicons/css/ionicons.min.css">
     <!-- Toast -->
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/toast/jquery.toast.min.css">
-        <!-- OwlCarousel -->
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
-        <!-- Magnific Popup -->
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/magnific-popup/dist/magnific-popup.css">
-        <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/sweetalert/dist/sweetalert.css">
+    <!-- OwlCarousel -->
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/magnific-popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/PhieuYeuCau/scripts/sweetalert/dist/sweetalert.css">
     <!-- Custom style -->
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/style.css">
     <link rel="stylesheet" href="~/Content/PhieuYeuCau/css/skins/all.css">
@@ -34,6 +38,7 @@
     <link href="~/Content/PhieuYeuCau/css/cssprivate.css" rel="stylesheet" />
 </head>
 <body class="skin-orange canhle">
+
     <header class="primary">
         @*<div class="firstbar">
                 <div class="container">
@@ -78,7 +83,7 @@
             <div class="container">
                 <div class="brand">
                     <a href="#">
-                        <img src="images/logo.png" alt="Magz Logo">
+                        @*<img src="images/logo.png" alt="Magz Logo">*@
                     </a>
                 </div>
                 <div class="mobile-toggle">
@@ -90,38 +95,84 @@
                 <div id="menu-list">
                     <ul class="nav-list">
                         <li class="for-tablet nav-title"><a>Menu</a></li>
-                        <li><a href="~/HoatDong/">Home</a></li>
-                        <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
-                        <li><a href="/Admin/Admintailieux/">Sách</a></li>
-                        <li><a href="/HoatDong/getlist">Hoạt động</a></li>
-                        @*<li class="dropdown magz-dropdown">
+                        @if (QL_ThuVien.Models.Comand.NV_Level == 1)
+                        {
+                            <li><a href="~/HoatDong/">Home</a></li>
+                            <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
+                            <li><a href="/Admin/Admintailieux/">Sách</a></li>
+                            <li class="dropdown magz-dropdown">
 
-        <a href="category.html">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
-        <ul class="dropdown-menu">*@
+                                <a href="#">Hoạt động<i class="ion-ios-arrow-right"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/HoatDong/getlist">Thêm hoạt động</a></li>
+                                    <li><a href="/HinhAnhHoatDongs/">Hình ảnh cho hoạt động</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown magz-dropdown">
 
-                        <li class="dropdown magz-dropdown">
+                                <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
+                                    <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/Admin/Login/">Đăng xuất</a></li>
+                        }
+                        else if (QL_ThuVien.Models.Comand.NV_Level == 2)
+                        {
+                            <li class="dropdown magz-dropdown">
 
-                            <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
-                                <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
-                            </ul>
-                        </li>
-                        @*</ul>
-        </li>*@
-                      
-                        <li><a href="/Admin/Login/">Đăng xuất</a></li>
+                                <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
+                                    <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/Admin/Login/">Đăng xuất</a></li>
+                        }
+                        else if (QL_ThuVien.Models.Comand.NV_Level == 3)
+                        {
+                            <li><a href="/Admin/Admintailieux/">Sách</a></li>
+                            <li><a href="/Admin/Login/">Đăng xuất</a></li>
+                        }
+                        else if (QL_ThuVien.Models.Comand.NV_Level == 4)
+                        {
+                            <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
+                            <li><a href="/Admin/Login/">Đăng xuất</a></li>
+                        }
+                        @*<li><a href="~/HoatDong/">Home</a></li>
+                            <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
+                            <li><a href="/Admin/Admintailieux/">Sách</a></li>
+                            <li class="dropdown magz-dropdown">
+
+                                <a href="#">Hoạt động<i class="ion-ios-arrow-right"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/HoatDong/getlist">Thêm hoạt động</a></li>
+                                    <li><a href="/HinhAnhHoatDongs/">Hình ảnh cho hoạt động</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown magz-dropdown">
+
+                                <a href="#">Phiếu yêu cầu<i class="ion-ios-arrow-right"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/PhieuYeuCaus/">Lập phiếu mới</a></li>
+                                    <li><a href="/PhieuYeuCaus/getList">Xem danh sách phiếu đã lập</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/Admin/Login/">Đăng xuất</a></li>*@
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- End nav -->
     </header>
+
     <section class="home">
         <div class="container">
             <div class="row">
                 <span id="View9">
-                    
+
                     @RenderBody()
                 </span>
             </div>
@@ -156,7 +207,7 @@
                 $.ajax({
                     type: "GET",
                     url: '/PhieuYeuCaus/TimKiemSearch/',
-                    data: { 'id': cmb.value,'id2':2 },
+                    data: { 'id': cmb.value, 'id2': 2 },
                     success: function (result) {
                         $('#ViewList').html(result)
                     }
@@ -194,7 +245,7 @@
                     alert("Vui lòng chọn tìm bằng gì trước :)");
                 } else if (cmb.value <= 0) {
                     alert("Vui lòng nhập giá trị tìm kiếm :D");
-                }else
+                } else
                     $.ajax({
                         type: "GET",
                         url: '/PhieuYeuCaus/TimKiemSearch/',
@@ -202,16 +253,15 @@
                         success: function (result) {
                             $('#ViewList').html(result)
                         }
-                    
-                })
+
+                    })
 
             })
 
-          
+
             $('#Muon').click(function () {
                 var cmb1 = document.getElementById("SDKCB");
                 var cmb = document.getElementById("SoThe");
-                
                 $.ajax({
                     type: "GET",
                     url: '/PhieuYeuCaus/CreatePYC/',

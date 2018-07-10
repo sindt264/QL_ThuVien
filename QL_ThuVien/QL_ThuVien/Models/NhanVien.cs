@@ -26,6 +26,8 @@ namespace QL_ThuVien.Models
 
         public int? NV_GIOITINH { get; set; }
 
+        public int? NV_Level { get; set; }
+
         [StringLength(50)]
         public string NV_EMAIL { get; set; }
 

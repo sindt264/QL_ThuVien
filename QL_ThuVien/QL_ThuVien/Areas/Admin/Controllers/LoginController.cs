@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using QL_ThuVien.Models;
 
 namespace QL_ThuVien.Areas.Admin.Controllers
 {
@@ -43,7 +44,8 @@ namespace QL_ThuVien.Areas.Admin.Controllers
                 //    }
                 //    else
                 {
-                    if (result.NV_MATKHAU == password) { 
+                    if (result.NV_MATKHAU == password) {
+                       
                     return 1;
                     }
                     else
@@ -86,6 +88,7 @@ namespace QL_ThuVien.Areas.Admin.Controllers
         {
 
             public string NV_EMAIL { get; set; }
+            public int? NV_Level { get; set; }
             public string NV_MATKHAU { get; set; }
         }
         public static class CommonConstants
@@ -105,14 +108,35 @@ namespace QL_ThuVien.Areas.Admin.Controllers
                 {
                     var NHANVIEN = dao.GetById(model.UserName);
                     Session["MaNV"] = model.UserName;
+                    var getlevel = (from p in db.NhanViens where p.NV_EMAIL == model.UserName select p).SingleOrDefault();
+                    Session["QuyenNV"] = getlevel.NV_Level;
                     var userSession = new UserLogin();
 
                     userSession.NV_MATKHAU = NHANVIEN.NV_MATKHAU;
 
                     userSession.NV_EMAIL = NHANVIEN.NV_EMAIL;
 
+                    userSession.NV_Level = NHANVIEN.NV_Level;
+
+                     Comand.NV_MATKHAU = NHANVIEN.NV_MATKHAU;
+
+                    Comand.NV_EMAIL = NHANVIEN.NV_EMAIL;
+
+                    Comand.NV_ID = NHANVIEN.NV_ID;
+
+                    Comand.NV_Level = NHANVIEN.NV_Level;
+
+                    int? level = NHANVIEN.NV_Level;
+
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return RedirectToAction("Index", "NhanViens");
+                    if (level == 1)
+                    {
+                        return RedirectToAction("Index", "NhanViens");
+                    }
+                    else if (level == 2) {return Redirect("~/PhieuYeuCaus/"); }
+                    else if (level == 3) {return RedirectToAction("","AdminTaiLieux"); }
+                    else if (level == 4) {return Redirect("~/BanDoc/"); }
+                        
                 }
                 else if (result == 0)
                 {

@@ -20,11 +20,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (Convert.ToInt32(@Session["QuyenNV"]) == 1) { }
                     <li><a href="/BanDoc">Quản lý bạn đọc</a></li>
                     <li><a href="/Admin/Admintailieux/">Sách</a></li>
+
                     <li><a href="~/PhieuYeuCaus/Index">Phiếu yêu cầu</a></li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
             </div>
         </div>

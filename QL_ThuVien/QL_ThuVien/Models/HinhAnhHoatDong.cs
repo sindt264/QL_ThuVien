@@ -1,4 +1,4 @@
-namespace QL_ThuVien.Models
+﻿namespace QL_ThuVien.Models
 {
     using System;
     using System.Collections.Generic;
@@ -11,14 +11,18 @@ namespace QL_ThuVien.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "ID")]
         public int HA_IDHinhAnh { get; set; }
 
+        [Display(Name = "ID hoạt động")]
         public int? HD_IDHoatDong { get; set; }
 
         [StringLength(255)]
+        [Display(Name = "Chú thích")]
         public string HA_ChuThich { get; set; }
 
         [StringLength(500)]
+        [Display(Name = "Nội dung")]
         public string HA_NoiDung { get; set; }
 
         public virtual HoatDong HoatDong { get; set; }

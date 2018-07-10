@@ -173,6 +173,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BanDoc.cs" />
+    <Compile Include="Models\Comand.cs" />
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\HinhAnhHoatDong.cs" />
     <Compile Include="Models\HoatDong.cs" />
@@ -853,6 +854,7 @@
     <Content Include="Views\TaiLieux\Details.cshtml" />
     <Content Include="Views\TaiLieux\Edit.cshtml" />
     <Content Include="Views\TaiLieux\Index.cshtml" />
+    <Content Include="Views\PhieuYeuCaus\thongke.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

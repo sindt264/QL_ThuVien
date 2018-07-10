@@ -40,6 +40,43 @@ namespace QL_ThuVien.Controllers
 
             return model.OrderByDescending(x => x.PYC_NgayMuon).ToPagedList(page, pageSize);
         }
+
+        public int datra(string id)
+        {
+            var result = db.PhieuYeuCaus.Where(m=>m.TL_SoDangKyCaBiet == id).Where(m=>m.PYC_TrangThai == 0).Count();
+
+            return result;
+        }
+        public int chuatra(string id)
+        {
+            var result = db.PhieuYeuCaus.Where(m => m.TL_SoDangKyCaBiet == id).Where(m => m.PYC_TrangThai == 1).Count();
+
+            return result;
+        }
+         public int tong(string id)
+        {
+            var result = db.PhieuYeuCaus.Where(m => m.TL_SoDangKyCaBiet == id).Count();
+
+            return result;
+        }
+        public int tongnguoimuon(string id)
+        {
+            var result = db.PhieuYeuCaus.Where(m => m.BD_SoThe == id).Count();
+
+            return result;
+        }
+
+
+      
+        public ActionResult thongke()
+        {
+            var result = (from s in db.PhieuYeuCaus
+                          select s.BD_SoThe
+                          );
+            ViewBag.view = result;
+            return View();
+        }
+
         //public ActionResult GetList(string searchTerm)
         //{
         //    var phieuYeuCaus = from p in db.PhieuYeuCaus select p;
@@ -201,7 +238,7 @@ namespace QL_ThuVien.Controllers
                     {
                         ModelState.AddModelError("", "Bạn đã đạt giới hạn mượn");
                     }
-                    string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
+                    //string selectIDNV = db.Database.SqlQuery<string>("select NV_ID FROM NHANVIEN WHERE NV_EMAIL = '" + Session["MaNV"] + "'").FirstOrDefault();
 
 
 
@@ -209,7 +246,7 @@ namespace QL_ThuVien.Controllers
                     var sl = from p in db.PhieuYeuCaus select p;
                     if (ModelState.IsValid)
                     {
-                        phieuYeuCau.NV_ID = selectIDNV;
+                        phieuYeuCau.NV_ID = Comand.NV_ID;
                         phieuYeuCau.PYC_NgayMuon = DateTime.Now;
                         phieuYeuCau.PYC_NgayTra = DateTime.Now.AddDays(+7);
                         phieuYeuCau.PYC_IDPhieuYeuCau = autoMaPYC(sl.Count());
